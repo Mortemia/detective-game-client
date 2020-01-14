@@ -9,6 +9,9 @@ const useStyles = makeStyles(theme => ({
   },
   header: {
     padding: theme.spacing(1)
+  },
+  description: {
+    position: "absolute"
   }
 }));
 
