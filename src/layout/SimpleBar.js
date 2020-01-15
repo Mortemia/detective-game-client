@@ -12,7 +12,10 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    textDecoration: 'none',
+    color: 'white',
+    outline: 'none'
   }
 }));
 
@@ -20,7 +23,7 @@ const SimpleBar = () => {
   const classes = useStyles();
 
   return (
-    <div>
+    <>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title} component={Link} to="/" >
@@ -29,7 +32,7 @@ const SimpleBar = () => {
           <Button color="inherit">Zaloguj się</Button>
         </Toolbar>
       </AppBar>
-    </div>
+    </>
   );
 };
 

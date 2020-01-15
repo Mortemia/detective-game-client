@@ -1,5 +1,4 @@
 import React from "react";
-import SimpleBar from "./SimpleBar";
 import Banner from "./Banner";
 import InfoGrid from "./InfoGrid";
 import Divider from '@material-ui/core/Divider';
@@ -16,11 +15,11 @@ const Home = props => {
   const classes = useStyles();
 
   return (
-    <div>
+    <>
       <Banner />
       <Divider />
       <InfoGrid />
-    </div>
+    </>
   );
 };
 

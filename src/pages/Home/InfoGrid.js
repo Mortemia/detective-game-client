@@ -1,6 +1,5 @@
 import React from "react";
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
-import ComputerIcon from "@material-ui/icons/Computer";
 import MapIcon from "@material-ui/icons/Map";
 import ForumIcon from '@material-ui/icons/Forum';
 import ExtensionIcon from '@material-ui/icons/Extension';
@@ -41,9 +40,9 @@ const InfoGrid = () => {
   return (
     <div className={classes.root}>
       <Grid container spacing={6}>
-        {infos.map(info => (
-          <Grid item xs={12} sm={12} md={3} >
-            <InfoTile icon={info.icon} header={info.header} />
+        {infos.map((info, index) => (
+          <Grid item xs={12} sm={12} md={3} key={index}>
+            <InfoTile icon={info.icon} header={info.header}/>
           </Grid>
         ))}
       </Grid>

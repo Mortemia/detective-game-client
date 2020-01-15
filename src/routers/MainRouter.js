@@ -1,11 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GameplayRouter from ".//GameplayRouter";
 import CreatorRouter from ".//CreatorRouter";
 import Home from '../pages/Home'
 import HowToPlay from "../pages/HowToPlay";
 import Dashboard from '../pages/Dashboard'
-import SimpleBar from "../pages/Home/SimpleBar";
+import SimpleBar from "../layout/SimpleBar";
 
 const MainRouter = () => {
   return (

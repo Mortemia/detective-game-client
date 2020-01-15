@@ -12,7 +12,7 @@ const InfoTile = props => {
   const classes = useStyles();
 
   return (
-    <div>
+    <>
       <div className={classes.root}>
         <props.icon fontSize="large" />
         <div className="info-header">
@@ -21,7 +21,6 @@ const InfoTile = props => {
             {" "}
             {props.header}
           </Typography>
-          <br />
         </div>
       </div>
       <Typography variant="subtitle1">
@@ -31,7 +30,7 @@ const InfoTile = props => {
         consectetur, neque doloribus, cupiditate numquam dignissimos laborum
         fugiat deleniti? Eum quasi quidem quibusdam.
       </Typography>
-    </div>
+    </>
   );
 };
 

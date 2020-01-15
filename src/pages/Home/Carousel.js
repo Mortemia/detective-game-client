@@ -24,8 +24,8 @@ const Carousel = () => {
   return (<div className={classes.root}>
       <CarouselUI indicators="false"  >
           {
-              text.map((item) => (
-                  <Typography>
+              text.map((item, index) => (
+                  <Typography key={index}>
                       {item}
                   </Typography>
               ))
