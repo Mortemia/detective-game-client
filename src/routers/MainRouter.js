@@ -2,13 +2,18 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import GameplayRouter from ".//GameplayRouter";
 import CreatorRouter from ".//CreatorRouter";
-import Home from "../Home/index"
+import Home from '../Home'
+import HowToPlay from "../pages/HowToPlay";
+import Dashboard from '../pages/Dashboard'
 
 const MainRouter = () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/howtoplay" component={HowToPlay} />
+        <Route path="/dashboard" component={Dashboard} />
+
         <Route path="/play" component={GameplayRouter} />
         <Route path="/creator" component={CreatorRouter} />
       </Switch>
