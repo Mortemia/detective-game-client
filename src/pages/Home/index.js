@@ -17,7 +17,6 @@ const Home = props => {
 
   return (
     <div>
-      <SimpleBar />
       <Banner />
       <Divider />
       <InfoGrid />

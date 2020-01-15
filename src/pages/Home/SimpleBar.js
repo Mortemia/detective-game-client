@@ -4,6 +4,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,7 +23,7 @@ const SimpleBar = () => {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} component={Link} to="/" >
             Gra detektywistyczna
           </Typography>
           <Button color="inherit">Zaloguj się</Button>

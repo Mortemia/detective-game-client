@@ -1,11 +1,44 @@
-import React from 'react'
+import React from "react";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+
+import Container from "@material-ui/core/Container";
+import GamesProgress from "./GamesProgress";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    margin: theme.spacing(4)
+    //display: 'flex'
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4)
+  },
+  paper: {
+    margin: theme.spacing(2),
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column"
+  }
+}));
 
 const Dashboard = () => {
-     return (
-         <div>
-             TODO: Czesc wspolna
-         </div>
-     )
-}
+  const classes = useStyles();
+
+  return (
+    <div>
+      <Container className={classes.container}>
+        <Paper className={classes.paper}>
+          <GamesProgress />
+        </Paper>
+        <Paper className={classes.paper}>
+          <GamesProgress />
+        </Paper>
+      </Container>
+    </div>
+  );
+};
 
 export default Dashboard;
