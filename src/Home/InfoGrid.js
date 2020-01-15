@@ -1,8 +1,9 @@
 import React from "react";
-import NavigationIcon from "@material-ui/icons/Navigation";
+import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import ComputerIcon from "@material-ui/icons/Computer";
 import MapIcon from "@material-ui/icons/Map";
-import ChatIcon from "@material-ui/icons/SmsOutlined";
+import ForumIcon from '@material-ui/icons/Forum';
+import ExtensionIcon from '@material-ui/icons/Extension';
 import Grid from "@material-ui/core/Grid";
 import InfoTile from "./InfoTile";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,11 +11,11 @@ import { makeStyles } from "@material-ui/core/styles";
 const infos = [
   {
     header: "Badaj",
-    icon: ComputerIcon
+    icon: FingerprintIcon
   },
   {
     header: "Przesłuchuj",
-    icon: ChatIcon
+    icon: ForumIcon
   },
   {
     header: "Podróżuj",
@@ -22,7 +23,7 @@ const infos = [
   },
   {
     header: "Łącz fakty",
-    icon: NavigationIcon
+    icon: ExtensionIcon
   }
 ];
 
@@ -30,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: theme.spacing(6),
     marginRight: theme.spacing(6),
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(6)
   }
 }));
 

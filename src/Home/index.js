@@ -1,7 +1,10 @@
 import React from "react";
 import SimpleBar from "./SimpleBar";
+import Banner from "./Banner";
 import InfoGrid from "./InfoGrid";
+import Divider from '@material-ui/core/Divider';
 import { makeStyles } from "@material-ui/core/styles";
+import './home.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,8 +18,9 @@ const Home = props => {
   return (
     <div>
       <SimpleBar />
-    
-        <InfoGrid />
+      <Banner />
+      <Divider />
+      <InfoGrid />
     </div>
   );
 };
