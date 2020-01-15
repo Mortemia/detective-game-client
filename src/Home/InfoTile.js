@@ -4,18 +4,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    textAlign: "center",
-    paddingTop: theme.spacing(4)
-  },
-  header: {
-    padding: theme.spacing(1)
-  },
-  description: {
-    position: "absolute"
+    textAlign: "center"
   }
 }));
 
- const InfoTile = (props) => {
+const InfoTile = props => {
   const classes = useStyles();
 
   return (
@@ -24,14 +17,14 @@ const useStyles = makeStyles(theme => ({
         <props.icon fontSize="large" />
         <div className="info-header">
           {" "}
-          <Typography variant="h6" className={classes.header}>
+          <Typography variant="h6">
             {" "}
             {props.header}
           </Typography>
           <br />
         </div>
       </div>
-      <Typography className={classes.description} variant="subtitle1">
+      <Typography variant="subtitle1">
         {" "}
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
         blanditiis tenetur unde suscipit, quam beatae rerum inventore
@@ -40,7 +33,6 @@ const useStyles = makeStyles(theme => ({
       </Typography>
     </div>
   );
-}
-
+};
 
 export default InfoTile;
