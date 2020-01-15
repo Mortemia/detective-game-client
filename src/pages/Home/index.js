@@ -1,18 +1,17 @@
-import React from "react";
-import Banner from "./Banner";
-import InfoGrid from "./InfoGrid";
+import React from 'react';
+import Banner from './Banner';
+import InfoGrid from './InfoGrid';
 import Divider from '@material-ui/core/Divider';
-import { makeStyles } from "@material-ui/core/styles";
-import './home.css';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
     //marginLeft: theme.spacing(4)
-  }
+  },
 }));
 
-const Home = props => {
-  const classes = useStyles();
+const Home = () => {
+  // const classes = useStyles();
 
   return (
     <>

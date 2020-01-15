@@ -27,7 +27,7 @@ const Banner = () => {
         className={classes.button}
         startIcon={<EmojiObjectsOutlinedIcon/>}
         component={Link}
-        to="/howtoplay"
+        to="/play"
       >
         Dowiedz się więcej
       </Button>

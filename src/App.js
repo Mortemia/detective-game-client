@@ -1,15 +1,15 @@
-import React from "react";
-import "./App.css";
-import MainRouter from "./routers/MainRouter";
+import React from 'react';
+import AppRouter from './routers/AppRouter';
 import { ThemeProvider } from '@material-ui/core/styles';
-import theme from './theme'
+import { BrowserRouter } from 'react-router-dom';
+import theme from './theme';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-    <div className="App">
-      <MainRouter />
-    </div>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

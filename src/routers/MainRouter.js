@@ -1,26 +1,20 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import GameplayRouter from ".//GameplayRouter";
-import CreatorRouter from ".//CreatorRouter";
-import Home from '../pages/Home'
-import HowToPlay from "../pages/HowToPlay";
-import Dashboard from '../pages/Dashboard'
-import SimpleBar from "../layout/SimpleBar";
+import React from 'react';
+import Home from '../pages/Home';
+import { Route, Switch } from 'react-router-dom';
 
-const MainRouter = () => {
+import HowToPlay from '../pages/HowToPlay';
+import Dashboard from '../pages/Dashboard';
+
+const HomeRouter = () => {
   return (
-    <Router>
-    <SimpleBar/>
+    <>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/howtoplay" component={HowToPlay} />
-        <Route path="/dashboard" component={Dashboard} />
-
-        <Route path="/play" component={GameplayRouter} />
-        <Route path="/creator" component={CreatorRouter} />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/howtoplay' component={HowToPlay} />
+        <Route exact path='/dashboard' component={Dashboard} />
       </Switch>
-    </Router>
+    </>
   );
 };
 
-export default MainRouter;
+export default HomeRouter;
