@@ -1,0 +1,39 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+}));
+
+const Banner = () => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Paper className={classes.paper}>
+        <div className={classes.root}>
+          <Typography component='h2' variant='h6' color='primary' gutterBottom>
+            Cześć, Aldonka!
+          </Typography>
+        </div>
+        <Button variant='contained' color='primary' component={Link} to='/play'>
+          NOWA GRA
+        </Button>
+      </Paper>
+    </div>
+  );
+};
+
+export default Banner;
