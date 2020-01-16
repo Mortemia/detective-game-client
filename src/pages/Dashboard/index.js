@@ -1,9 +1,5 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-
-import Container from '@material-ui/core/Container';
-import GamesProgress from './GamesProgress';
 import PaperList from '../../components/PaperList';
 import Banner from './Banner';
 import { gamesInProgress, casesInProgress } from '../../fakedata';

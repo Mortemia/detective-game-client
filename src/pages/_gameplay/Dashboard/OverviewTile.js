@@ -2,13 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -17,9 +11,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-  },
-  paperDashboard: {
-    height: theme.spacing(23),
+    height: '100%',
   },
 }));
 
@@ -28,9 +20,7 @@ const OverviewTile = props => {
   const items = props.items;
 
   return (
-    <Paper
-      className={clsx(classes.paper, props.dashboard && classes.paperDashboard)}
-    >
+    <Paper className={classes.paper}>
       <div className={classes.root}>
         <Typography component='h2' variant='h6' color='primary' gutterBottom>
           Dzień 1

@@ -31,29 +31,19 @@ const Dashboard = () => {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={4}>
-          <OverviewTile dashboard />
+          <OverviewTile />
         </Grid>
         <Grid item xs={12} sm={12} md={8}>
           <PaperList listName='Możliwe akcje' items={actions} />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
-          <PaperList
-            listName='Miejsca'
-            items={places}
-            icon={CommuteIcon}
-            dashboard
-          />
+          <PaperList listName='Miejsca' items={places} icon={CommuteIcon} />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
-          <PaperList
-            listName='Przedmioty'
-            items={items}
-            icon={ZoomInIcon}
-            dashboard
-          />
+          <PaperList listName='Przedmioty' items={items} icon={ZoomInIcon} />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
-          <PaperList listName='Ostatnio wyświetleni' items={people} dashboard />
+          <PaperList listName='Ostatnio wyświetleni' items={people} />
         </Grid>
       </Grid>
     </div>

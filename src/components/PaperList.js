@@ -17,9 +17,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-  },
-  paperDashboard: {
-    height: theme.spacing(40),
+    height: '100%',
   },
 }));
 
@@ -28,9 +26,7 @@ const PaperList = props => {
   const items = props.items;
 
   return (
-    <Paper
-      className={clsx(classes.paper, props.dashboard && classes.paperDashboard)}
-    >
+    <Paper className={classes.paper}>
       <div className={classes.root}>
         <Typography component='h2' variant='h6' color='primary' gutterBottom>
           {props.listName}
