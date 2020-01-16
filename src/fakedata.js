@@ -62,3 +62,12 @@ export const people = [
     primary: 'Joanna Kowal',
   },
 ];
+
+export const actions = [
+  {
+    primary: 'Przeszukaj dom Kowalskiego',
+  },
+  {
+    primary: 'Poszukaj w internecie informacji na temat firmy Abackiego',
+  },
+];

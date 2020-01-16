@@ -40,7 +40,7 @@ const PaperList = props => {
             <ListItem button key={index}>
               <ListItemText primary={item.primary} secondary={item.secondary} />
               <ListItemSecondaryAction>
-                <IconButton edge='end' aria-label='play'>
+                <IconButton edge='end'>
                   {props.icon ? <props.icon /> : <KeyboardArrowRightIcon />}
                 </IconButton>
               </ListItemSecondaryAction>

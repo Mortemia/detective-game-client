@@ -7,7 +7,7 @@ import CommuteIcon from '@material-ui/icons/Commute';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 
 import PaperList from '../../../components/PaperList';
-import { places, items, people } from '../../../fakedata';
+import { places, items, people, actions } from '../../../fakedata';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +28,17 @@ const Dashboard = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={4}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={12} md={4}>
+          <PaperList
+            listName='Tymczasowy komponent'
+            items={items}
+            icon={ZoomInIcon}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={8}>
+          <PaperList listName='Możliwe akcje' items={actions} />
+        </Grid>
         <Grid item xs={12} sm={12} md={4}>
           <PaperList
             listName='Miejsca'
