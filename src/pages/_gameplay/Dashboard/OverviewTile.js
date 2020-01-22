@@ -1,17 +1,23 @@
 import React from 'react';
-import clsx from 'clsx';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
-  root: {},
-  paper: {
+  root: {
     padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
     height: '100%',
+  },
+  container: {
+    display: 'flex',
+  },
+  typography: {
+    flexGrow: 1,
+  },
+  innerContainer: {
+    padding: theme.spacing(2),
   },
 }));
 
@@ -20,11 +26,22 @@ const OverviewTile = props => {
   const items = props.items;
 
   return (
-    <Paper className={classes.paper}>
-      <div className={classes.root}>
-        <Typography component='h2' variant='h6' color='primary' gutterBottom>
+    <Paper className={classes.root}>
+      <div className={classes.container}>
+        <Typography
+          component='h2'
+          variant='h6'
+          color='primary'
+          gutterBottom
+          className={classes.typography}
+        >
           Dzień 1
         </Typography>
+        <Button variant='contained' color='primary' className={classes.button}>
+          ZAKOŃCZ DZIEŃ
+        </Button>
+      </div>
+      <div className={classes.innerContainer}>
         <Typography component='h2' gutterBottom>
           Posterunek
         </Typography>
