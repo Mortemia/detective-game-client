@@ -7,7 +7,7 @@ const GameplayRouter = () => {
   return (
     <>
       <Switch>
-        <Route path='/play' component={Dashboard} />
+        <Route exact path='/play' component={Dashboard} />
       </Switch>
     </>
   );

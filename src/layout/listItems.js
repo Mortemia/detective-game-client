@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -12,31 +13,31 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItem button component={Link} to='/play'>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary='Dashboard' />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to='/play/actions'>
       <ListItemIcon>
         <WatchLaterIcon />
       </ListItemIcon>
       <ListItemText primary='Akcje' />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to='/play/locations'>
       <ListItemIcon>
         <MapIcon />
       </ListItemIcon>
       <ListItemText primary='Lokacje' />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to='/play/people'>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary='Osoby' />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to='/play/items'>
       <ListItemIcon>
         <FingerprintIcon />
       </ListItemIcon>
