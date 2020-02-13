@@ -23,7 +23,7 @@ const SimpleBar = () => {
           ROZGRYWKA
         </Button>
         <Button color='inherit'>KREATOR</Button>
-        <Button color='inherit'>Zaloguj się</Button>
+        <Button color='inherit' component={Link} to='/login'>Zaloguj się</Button>
       </Toolbar>
     </AppBar>
   );
