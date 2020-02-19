@@ -15,7 +15,6 @@ const Dashboard = () => {
 
   return (
     <>
-      {' '}
       <div className={classes.paper}>
         <Banner />
       </div>
