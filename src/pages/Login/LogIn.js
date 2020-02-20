@@ -14,6 +14,11 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
   const classes = useStyles();
+  const [state, setState] = React.useState({ username: '', password: '' });
+
+  const handleChange = name => value => {
+    setState({ ...state, [name]: value });
+  };
 
   return (
     <Grid
@@ -24,7 +29,12 @@ const Login = () => {
       direction='column'
     >
       <Grid item>
-        <IconInput id='username' label='Użytkownik' icon={AccountCircleIcon} />
+        <IconInput
+          id='username'
+          label='Użytkownik'
+          icon={AccountCircleIcon}
+          change={handleChange('username')}
+        />
       </Grid>
       <Grid item>
         <IconInput
@@ -32,6 +42,8 @@ const Login = () => {
           label='Hasło'
           type='password'
           icon={LockIcon}
+          value={state.password}
+          change={handleChange('password')}
         />
       </Grid>
       <Grid item>

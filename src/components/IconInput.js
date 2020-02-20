@@ -11,6 +11,13 @@ const useStyles = makeStyles(theme => ({
 
 const IconInput = props => {
   const classes = useStyles();
+  const [state, setState] = React.useState({ value: '', error: '' });
+
+  const handleChange = event => {
+    const value = event.target.value;
+    setState({ ...state, value: value });
+    props.change(value);
+  };
 
   return (
     <div className={classes.margin}>
@@ -19,7 +26,13 @@ const IconInput = props => {
           <props.icon />
         </Grid>
         <Grid item>
-          <TextField id={props.id} label={props.label} type={props.type} />
+          <TextField
+            id={props.id}
+            label={props.label}
+            type={props.type}
+            onChange={handleChange}
+            value={state.value}
+          />
         </Grid>
       </Grid>
     </div>
