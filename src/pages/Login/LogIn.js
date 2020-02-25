@@ -14,10 +14,15 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
   const classes = useStyles();
-  const [state, setState] = React.useState({ username: '', password: '' });
+  const [state, setState] = React.useState({
+    username: '',
+    email: '',
+    password: '',
+  });
 
-  const handleChange = name => value => {
+  const handleChange = (name, value) => {
     setState({ ...state, [name]: value });
+    return value;
   };
 
   return (
@@ -33,7 +38,17 @@ const Login = () => {
           id='username'
           label='Użytkownik'
           icon={AccountCircleIcon}
-          change={handleChange('username')}
+          change={handleChange}
+          type='username'
+        />
+      </Grid>
+      <Grid item>
+        <IconInput
+          id='email'
+          label='Adres e-mail'
+          icon={AccountCircleIcon}
+          change={handleChange}
+          type='email'
         />
       </Grid>
       <Grid item>
@@ -43,7 +58,7 @@ const Login = () => {
           type='password'
           icon={LockIcon}
           value={state.password}
-          change={handleChange('password')}
+          change={handleChange}
         />
       </Grid>
       <Grid item>

@@ -19,6 +19,17 @@ const useStyles = makeStyles(theme => ({
 
 const Register = () => {
   const classes = useStyles();
+  const [state, setState] = React.useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleChange = (name, value) => {
+    setState({ ...state, [name]: value });
+    return value;
+  };
 
   return (
     <Grid
@@ -29,7 +40,22 @@ const Register = () => {
       direction='column'
     >
       <Grid item>
-        <IconInput id='username' label='Użytkownik' icon={AccountCircleIcon} />
+        <IconInput
+          id='username'
+          label='Użytkownik'
+          icon={AccountCircleIcon}
+          change={handleChange}
+          type='username'
+        />
+      </Grid>
+      <Grid item>
+        <IconInput
+          id='email'
+          label='Adres e-mail'
+          icon={AccountCircleIcon}
+          change={handleChange}
+          type='email'
+        />
       </Grid>
       <Grid item>
         <IconInput
@@ -37,14 +63,17 @@ const Register = () => {
           label='Hasło'
           type='password'
           icon={LockIcon}
+          change={handleChange}
         />
       </Grid>
       <Grid item>
         <IconInput
-          id='password'
+          id='confirmPassword'
           label='Powtórz hasło'
           type='password'
           icon={LockIcon}
+          change={handleChange}
+          fieldName='confirmPassword'
         />
       </Grid>
       <Grid item>
