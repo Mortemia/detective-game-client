@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br />
+This is frontend for a detective game web application. <br />
+Backend: https://github.com/nataemi/detective-game-server 
 
 ## Available Scripts
 
