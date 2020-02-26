@@ -23,12 +23,12 @@ const IconInput = ({ id, label, type, fieldName, change, ...props }) => {
     const status = validate[type] && validate[type](value);
     const error = status ? status.validateStatus === 'error' : false;
 
-    setState({
+    setState(prevState => ({
       ...state,
       error,
-      value: !error ? change(type || fieldName, value) : state.value,
+      value: !error ? change(type || fieldName, value) : prevState.value,
       helperText: status && status.errorMsg,
-    });
+    }));
   };
 
   return (
