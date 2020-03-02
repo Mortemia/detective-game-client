@@ -20,7 +20,8 @@ const IconInput = ({ id, label, type, fieldName, change, ...props }) => {
 
   const handleChange = event => {
     const value = event.target.value;
-    const status = validate[type] && validate[type](value);
+    const validateValue = validate(value);
+    const status = validateValue[type] && validateValue[type]();
     const error = status ? status.validateStatus === 'error' : false;
 
     setState(prevState => ({
