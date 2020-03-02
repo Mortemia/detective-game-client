@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import LockIcon from '@material-ui/icons/Lock';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 import IconInput from '../../components/IconInput';
+import { UserContext } from '../../context/userContext';
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -14,15 +15,25 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
   const classes = useStyles();
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     username: '',
     email: '',
     password: '',
   });
 
+  const { dispatch } = useContext(UserContext);
+
   const handleChange = (name, value) => {
     setState({ ...state, [name]: value });
     return value;
+  };
+
+  const handleLogin = () => {
+    const user = {
+      username: state.username,
+      email: state.email,
+    };
+    dispatch({ type: 'LOGIN', user });
   };
 
   return (
@@ -62,7 +73,12 @@ const Login = () => {
         />
       </Grid>
       <Grid item>
-        <Button variant='contained' color='primary' className={classes.margin}>
+        <Button
+          variant='contained'
+          color='primary'
+          className={classes.margin}
+          onClick={handleLogin}
+        >
           Zaloguj się
         </Button>
       </Grid>
