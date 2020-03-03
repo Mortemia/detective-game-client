@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
+import { GameContext } from '../../../context/gameContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles(theme => ({
 const OverviewTile = props => {
   const classes = useStyles();
   const items = props.items;
+  const { game } = React.useContext(GameContext);
 
   return (
     <Paper className={classes.root}>
@@ -43,13 +45,13 @@ const OverviewTile = props => {
       </div>
       <div className={classes.innerContainer}>
         <Typography component='h2' gutterBottom>
-          Posterunek
+          {game.location}
         </Typography>
         <Typography component='h2' gutterBottom>
-          24.06.1997
+          {game.date}
         </Typography>
         <Typography component='h2' gutterBottom>
-          Punkty Ruchu: 40
+          {`Punkty Ruchu: ${game.movement_points}`}
         </Typography>
       </div>
     </Paper>

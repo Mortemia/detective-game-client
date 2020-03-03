@@ -1,0 +1,109 @@
+{
+  "location": "Posterunek",
+  "date": "24.06.1997",
+  "movement_points": "40",
+  "actions": [
+    {
+      "id": 1,
+      "name": "Przeszukaj dom Kowalskiego",
+      "successors": []
+    },
+    {
+      "id": 2,
+      "name": "Poszukaj w internecie informacji na temat firmy Abackiego",
+      "successors": []
+    }
+  ],
+  "locations": [
+    {
+      "id": 4,
+      "name": "Posterunek",
+      "description": "Bardzo fajne laboratorium",
+      "discovered": true
+    },
+    {
+      "id": 1,
+      "name": "Laboratorium",
+      "description": "Bardzo fajne laboratorium",
+      "discovered": true
+    },
+    {
+      "id": 2,
+      "name": "Działka",
+      "description": "Bardzo fajne laboratorium",
+      "discovered": true
+    },
+    {
+      "id": 3,
+      "name": "Dom Kowalskiego",
+      "description": "Bardzo fajne laboratorium",
+      "discovered": false
+    }
+  ],
+  "paths": [
+    { "location1": "Posterunek", "location2": "Laboratorium", "cost": 3 },
+    { "location1": "Posterunek", "location2": "Działka", "cost": 2 },
+    { "location1": "Posterunek", "location2": "Dom Kowalskiego", "cost": 1 },
+    { "location1": "Dom Kowalskiego", "location2": "Działka", "cost": 3 },
+    { "location1": "Dom Kowalskiego", "location2": "Laboratorium", "cost": 2 },
+    { "location1": "Działka", "location2": "Laboratorium", "cost": 1 }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "name": "Odłamek szkła",
+      "description": "Całkiem spory kawałek szkła, może zabić",
+      "examineInfo": "Znaleziono odciski Jana Kowalskiego",
+      "examined": false
+    },
+    {
+      "id": 2,
+      "name": "Chusteczka znaleziona w koszu",
+      "description": "Chusteczka znaleziona w koszu",
+      "examineInfo": "Chusteczka właściwie nie ma żadnego znaczenia",
+      "examined": false
+    }
+  ],
+  "people": [
+    {
+      "id": 1,
+      "fullname": "Jan Kowalski",
+      "description": "54 lata\n emerytowany policjant",
+      "known": true
+    },
+    {
+      "id": 2,
+      "fullname": "Kamil Nowak",
+      "description": "",
+      "known": true
+    },
+    {
+      "id": 3,
+      "fullname": "Andrzej Abacki",
+      "description": "",
+      "known": true
+    },
+    {
+      "id": 4,
+      "fullname": "Joanna Kowal",
+      "description": "24 lata",
+      "known": false
+    }
+  ],
+  "bookmarks": [
+    {
+      "name": "Kowalski",
+      "notes": [
+        {
+          "title": "Czy jest winny?",
+          "linkedComponents": [
+            {
+              "type": "item",
+              "id": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

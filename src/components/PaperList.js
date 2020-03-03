@@ -21,27 +21,38 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PaperList = props => {
+const PaperList = ({
+  listName,
+  items,
+  primary,
+  secondary,
+  onClick,
+  ...props
+}) => {
   const classes = useStyles();
-  const items = props.items;
 
   return (
     <Paper className={classes.paper}>
       <div className={classes.root}>
         <Typography component='h2' variant='h6' color='primary' gutterBottom>
-          {props.listName}
+          {listName}
         </Typography>
         <List>
-          {items.map((item, index) => (
-            <ListItem button key={index}>
-              <ListItemText primary={item.primary} secondary={item.secondary} />
-              <ListItemSecondaryAction>
-                <IconButton edge='end'>
-                  {props.icon ? <props.icon /> : <KeyboardArrowRightIcon />}
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
+          {items
+            .sort((a, b) => a[primary].localeCompare(b[primary]))
+            .map((item, index) => (
+              <ListItem button key={index} onClick={() => onClick(item)}>
+                <ListItemText
+                  primary={item[primary]}
+                  secondary={item[secondary]}
+                />
+                <ListItemSecondaryAction>
+                  <IconButton edge='end' onClick={() => onClick(item)}>
+                    {props.icon ? <props.icon /> : <KeyboardArrowRightIcon />}
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
         </List>
       </div>
     </Paper>

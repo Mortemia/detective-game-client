@@ -19,10 +19,18 @@ const Dashboard = () => {
         <Banner />
       </div>
       <div className={classes.paper}>
-        <PaperList listName='Sprawy w toku' items={gamesInProgress} />
+        <PaperList
+          listName='Sprawy w toku'
+          primary='primary'
+          items={gamesInProgress}
+        />
       </div>
       <div className={classes.paper}>
-        <PaperList listName='Własne sprawy' items={casesInProgress} />
+        <PaperList
+          listName='Własne sprawy'
+          primary='primary'
+          items={casesInProgress}
+        />
       </div>
     </>
   );
