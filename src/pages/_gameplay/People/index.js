@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { GameContext } from '../../../context/gameContext';
 import PaperList from '../../../components/PaperList';
@@ -6,17 +7,22 @@ import PersonCard from './PersonCard';
 
 const People = _ => {
   const { game, dispatch } = React.useContext(GameContext);
-  const [person, setPerson] = React.useState(null);
+  const { id } = useParams();
+
+  const [person, setPerson] = React.useState(
+    game.people.find(x => x.id == id && x.known) || null
+  );
+  const history = useHistory();
 
   const handleClick = person => {
     setPerson(person);
-
-    console.log(person);
+    let path = `/play/people/${person.id}`;
+    history.push(path);
   };
 
   return (
     <Grid container>
-      <Grid item xs={12} sm={6} md={6}>
+      <Grid item xs={12} sm={4} md={4}>
         <PaperList
           listName='Ludzie'
           primary='fullname'
@@ -24,7 +30,7 @@ const People = _ => {
           onClick={handleClick}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={6}>
+      <Grid item xs={12} sm={8} md={8}>
         <PersonCard person={person} />
       </Grid>
     </Grid>

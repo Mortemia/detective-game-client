@@ -9,7 +9,8 @@ const GameplayRouter = () => {
     <>
       <Switch>
         <Route exact path='/play' component={Dashboard} />
-        <Route exact path='/play/people' component={People} />
+        <Route exact path='/play/people/:id' component={People} />
+        <Route path='/play/people' component={People} />
       </Switch>
     </>
   );

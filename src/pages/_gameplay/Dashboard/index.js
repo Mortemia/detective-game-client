@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CommuteIcon from '@material-ui/icons/Commute';
@@ -27,6 +28,7 @@ const Dashboard = () => {
   const classes = useStyles();
   const { game, dispatch } = React.useContext(GameContext);
   const { appDispatch } = React.useContext(AppContext);
+  const history = useHistory();
 
   const handleTravel = destination => {
     game.movement_points - destination.cost >= 0
@@ -36,6 +38,12 @@ const Dashboard = () => {
           errorMsg: 'Niewystarczająca liczba punktów ruchu',
         });
   };
+
+  const handleClick = type => component => {
+    let path = `play/${type}/${component.id}`;
+    history.push(path);
+  };
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12} md={4}>
@@ -71,6 +79,7 @@ const Dashboard = () => {
           listName='Ostatnio wyświetleni'
           items={game.people}
           primary='fullname'
+          onClick={handleClick('people')}
         />
       </Grid>
     </Grid>
