@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +15,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import GameplayRouter from '../routers/GameplayRouter';
 import { mainListItems, secondaryListItems } from './listItems';
+import CustomizedSnackbars from '../components/Snackbar';
 import Logo from './Logo';
+import { AppContext } from '../context/appContext';
 
 const drawerWidth = 240;
 
@@ -101,7 +103,7 @@ const useStyles = makeStyles(theme => ({
 
 const Gameplay = () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -109,6 +111,7 @@ const Gameplay = () => {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const { appState, appDispatch } = useContext(AppContext);
 
   return (
     <>
@@ -159,6 +162,11 @@ const Gameplay = () => {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <GameplayRouter />
+          <CustomizedSnackbars
+            open={appState.error}
+            errorMsg={appState.errorMsg}
+            onClick={() => appDispatch({ type: 'CLOSE_ERROR', errorMsg: '' })}
+          />
         </main>
       </div>
     </>

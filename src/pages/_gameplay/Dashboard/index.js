@@ -1,16 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
 import CommuteIcon from '@material-ui/icons/Commute';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
-
 import PaperList from '../../../components/PaperList';
 import OverviewTile from './OverviewTile';
-import { places, items, people, actions } from '../../../fakedata';
 import { GameContext } from '../../../context/gameContext';
-import { getLocationById } from '../../../utils/gameUtils';
 import { fastTravelLocations } from '../../../utils/gameUtils';
+import { AppContext } from '../../../context/appContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,11 +26,16 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
   const { game, dispatch } = React.useContext(GameContext);
+  const { appDispatch } = React.useContext(AppContext);
 
   const handleTravel = destination => {
-    dispatch({ type: 'TRAVEL', destination });
+    game.movement_points - destination.cost >= 0
+      ? dispatch({ type: 'TRAVEL', destination })
+      : appDispatch({
+          type: 'ERROR',
+          errorMsg: 'Niewystarczająca liczba punktów ruchu',
+        });
   };
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12} md={4}>

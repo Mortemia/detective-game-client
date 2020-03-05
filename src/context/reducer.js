@@ -11,6 +11,17 @@ export const reducer = (state, action) => {
         location: action.destination.name,
         movement_points: state.movement_points - action.destination.cost,
       };
+    case 'ERROR':
+      return {
+        ...state,
+        error: true,
+        errorMsg: action.errorMsg,
+      };
+    case 'CLOSE_ERROR':
+      return {
+        ...state,
+        error: false,
+      };
     default:
       return state;
   }
