@@ -34,9 +34,21 @@ const Dashboard = () => {
     game.movement_points - destination.cost >= 0
       ? dispatch({ type: 'TRAVEL', destination })
       : appDispatch({
-          type: 'ERROR',
-          errorMsg: 'Niewystarczająca liczba punktów ruchu',
+          type: 'OPEN_SNACKBAR',
+          severity: 'error',
+          message: 'Niewystarczająca liczba punktów ruchu',
         });
+  };
+
+  const handleExamine = item => {
+    console.log(item);
+    dispatch({ type: 'EXAMINE', item });
+    appDispatch({
+      type: 'OPEN_SNACKBAR',
+      severity: 'success',
+      message: 'Przedmiot został zbadany',
+    });
+    console.log(item);
   };
 
   const handleClick = type => component => {
@@ -63,7 +75,7 @@ const Dashboard = () => {
           primary='name'
           secondary='costMP'
           icon={CommuteIcon}
-          onClick={handleTravel}
+          action={handleTravel}
         />
       </Grid>
       <Grid item xs={12} sm={12} md={4}>
@@ -72,6 +84,8 @@ const Dashboard = () => {
           items={game.items}
           icon={ZoomInIcon}
           primary='name'
+          navigate={handleClick('items')}
+          action={handleExamine}
         />
       </Grid>
       <Grid item xs={12} sm={12} md={4}>
@@ -79,7 +93,7 @@ const Dashboard = () => {
           listName='Ostatnio wyświetleni'
           items={game.people}
           primary='fullname'
-          onClick={handleClick('people')}
+          navigate={handleClick('people')}
         />
       </Grid>
     </Grid>

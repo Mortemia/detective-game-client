@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CustomizedSnackbars = ({ open, onClick, errorMsg }) => {
+const CustomizedSnackbars = ({ open, onClick, message, severity }) => {
   const classes = useStyles();
 
   const handleClose = (event, reason) => {
@@ -31,8 +31,8 @@ const CustomizedSnackbars = ({ open, onClick, errorMsg }) => {
   return (
     <div className={classes.root}>
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='error'>
-          {errorMsg}
+        <Alert onClose={handleClose} severity={severity}>
+          {message}
         </Alert>
       </Snackbar>
     </div>

@@ -1,22 +1,23 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import { GameContext } from '../../../context/gameContext';
 import PaperList from '../../../components/PaperList';
-import PersonCard from './PersonCard';
+import ItemCard from './ItemCard';
 
-const People = _ => {
+const Items = _ => {
   const { game, dispatch } = React.useContext(GameContext);
   const { id } = useParams();
 
-  const [person, setPerson] = React.useState(
-    game.people.find(x => x.id == id && x.known) || null
+  const [item, setItem] = React.useState(
+    game.items.find(x => x.id == id) || null
   );
   const history = useHistory();
 
-  const handleClick = person => {
-    setPerson(person);
-    let path = `/play/people/${person.id}`;
+  const handleClick = item => {
+    setItem(item);
+    let path = `/play/items/${item.id}`;
     history.push(path);
   };
 
@@ -24,17 +25,18 @@ const People = _ => {
     <Grid container spacing={3}>
       <Grid item xs={12} sm={4} md={4}>
         <PaperList
-          listName='Ludzie'
-          primary='fullname'
-          items={game.people.filter(x => x.known)}
+          listName='Przedmioty'
+          primary='name'
+          items={game.items}
           navigate={handleClick}
+          icon={ZoomInIcon}
         />
       </Grid>
       <Grid item xs={12} sm={8} md={8}>
-        <PersonCard person={person} />
+        <ItemCard item={item} />
       </Grid>
     </Grid>
   );
 };
 
-export default People;
+export default Items;

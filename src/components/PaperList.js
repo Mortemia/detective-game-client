@@ -26,7 +26,8 @@ const PaperList = ({
   items,
   primary,
   secondary,
-  onClick,
+  navigate,
+  action,
   ...props
 }) => {
   const classes = useStyles();
@@ -41,16 +42,26 @@ const PaperList = ({
           {items
             .sort((a, b) => a[primary].localeCompare(b[primary]))
             .map((item, index) => (
-              <ListItem button key={index} onClick={() => onClick(item)}>
+              <ListItem
+                button
+                key={index}
+                onClick={() => navigate && navigate(item)}
+              >
                 <ListItemText
                   primary={item[primary]}
                   secondary={item[secondary]}
                 />
-                <ListItemSecondaryAction>
-                  <IconButton edge='end' onClick={() => onClick(item)}>
-                    {props.icon ? <props.icon /> : <KeyboardArrowRightIcon />}
-                  </IconButton>
-                </ListItemSecondaryAction>
+
+                {action && (
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      edge='end'
+                      onClick={() => action && action(item)}
+                    >
+                      {props.icon ? <props.icon /> : <KeyboardArrowRightIcon />}
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                )}
               </ListItem>
             ))}
         </List>

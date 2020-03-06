@@ -1,3 +1,5 @@
+import { items } from '../fakedata';
+
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
@@ -11,16 +13,24 @@ export const reducer = (state, action) => {
         location: action.destination.name,
         movement_points: state.movement_points - action.destination.cost,
       };
-    case 'ERROR':
+    case 'OPEN_SNACKBAR':
       return {
         ...state,
-        error: true,
-        errorMsg: action.errorMsg,
+        visible: true,
+        severity: action.severity,
+        message: action.message,
       };
-    case 'CLOSE_ERROR':
+    case 'CLOSE_SNACKBAR':
       return {
         ...state,
-        error: false,
+        visible: false,
+      };
+    case 'EXAMINE':
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.id == action.item.id ? { ...item, examined: true } : item
+        ),
       };
     default:
       return state;

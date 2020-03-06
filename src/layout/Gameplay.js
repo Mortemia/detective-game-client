@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
-    margin: theme.spacing(4),
+    padding: theme.spacing(4),
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -163,9 +163,10 @@ const Gameplay = () => {
           <div className={classes.appBarSpacer} />
           <GameplayRouter />
           <CustomizedSnackbars
-            open={appState.error}
-            errorMsg={appState.errorMsg}
-            onClick={() => appDispatch({ type: 'CLOSE_ERROR', errorMsg: '' })}
+            open={appState.visible}
+            message={appState.message}
+            severity={appState.severity}
+            onClick={() => appDispatch({ type: 'CLOSE_SNACKBAR', message: '' })}
           />
         </main>
       </div>
