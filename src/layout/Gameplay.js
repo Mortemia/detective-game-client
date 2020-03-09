@@ -6,14 +6,15 @@ import Drawer from './Drawer';
 
 const Gameplay = () => {
   const { appState, appDispatch } = useContext(AppContext);
+  const snackbar = appState.snackbar;
 
   return (
     <Drawer>
       <GameplayRouter />
       <CustomizedSnackbars
-        open={appState.visible}
-        message={appState.message}
-        severity={appState.severity}
+        open={snackbar && snackbar.visible}
+        message={snackbar && snackbar.message}
+        severity={snackbar && snackbar.severity}
         onClick={() => appDispatch({ type: 'CLOSE_SNACKBAR', message: '' })}
       />
     </Drawer>

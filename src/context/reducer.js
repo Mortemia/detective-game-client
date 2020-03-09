@@ -4,8 +4,8 @@ export const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
       return {
-        username: action.user.username,
-        email: action.user.email,
+        ...state,
+        user: action.user,
       };
     case 'TRAVEL':
       return {
@@ -16,14 +16,12 @@ export const reducer = (state, action) => {
     case 'OPEN_SNACKBAR':
       return {
         ...state,
-        visible: true,
-        severity: action.severity,
-        message: action.message,
+        snackbar: action.snackbar,
       };
     case 'CLOSE_SNACKBAR':
       return {
         ...state,
-        visible: false,
+        snackbar: { ...state.snackbar, visible: false },
       };
     case 'EXAMINE':
       return {

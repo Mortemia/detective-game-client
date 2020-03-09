@@ -4,7 +4,9 @@ import jsonData from '../save.json';
 export const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [appState, appDispatch] = useReducer(reducer, {});
+  const [appState, appDispatch] = useReducer(reducer, {
+    snackbar: { visible: false },
+  });
 
   return (
     <AppContext.Provider value={{ appState, appDispatch }}>

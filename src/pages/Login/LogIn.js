@@ -5,7 +5,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 import IconInput from '../../components/IconInput';
-import { UserContext } from '../../context/userContext';
+import { AppContext } from '../../context/appContext';
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -21,11 +21,10 @@ const Login = () => {
     password: '',
   });
 
-  const { dispatch } = useContext(UserContext);
+  const { appDispatch } = useContext(AppContext);
 
   const handleChange = (name, value) => {
     setState({ ...state, [name]: value });
-    return value;
   };
 
   const handleLogin = () => {
@@ -33,7 +32,7 @@ const Login = () => {
       username: state.username,
       email: state.email,
     };
-    dispatch({ type: 'LOGIN', user });
+    appDispatch({ type: 'LOGIN', user });
   };
 
   return (
@@ -68,7 +67,6 @@ const Login = () => {
           label='Hasło'
           type='password'
           icon={LockIcon}
-          value={state.password}
           change={handleChange}
         />
       </Grid>

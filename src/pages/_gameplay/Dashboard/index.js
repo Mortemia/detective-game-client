@@ -35,20 +35,26 @@ const Dashboard = () => {
       ? dispatch({ type: 'TRAVEL', destination })
       : appDispatch({
           type: 'OPEN_SNACKBAR',
-          severity: 'error',
-          message: 'Niewystarczająca liczba punktów ruchu',
+          snackbar: {
+            visible: true,
+            severity: 'error',
+            message: 'Niewystarczająca liczba punktów ruchu',
+          },
         });
   };
 
   const handleExamine = item => {
-    console.log(item);
     dispatch({ type: 'EXAMINE', item });
-    appDispatch({
-      type: 'OPEN_SNACKBAR',
+    const snackbar = {
+      visible: true,
       severity: 'success',
       message: 'Przedmiot został zbadany',
+    };
+    appDispatch({
+      type: 'OPEN_SNACKBAR',
+      snackbar,
     });
-    console.log(item);
+    handleClick('items')(item);
   };
 
   const handleClick = type => component => {

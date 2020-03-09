@@ -3,7 +3,6 @@ import AppRouter from './routers/AppRouter';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter } from 'react-router-dom';
 import theme from './theme';
-import UserProvider from './context/userContext';
 import GameProvider from './context/gameContext';
 import AppProvider from './context/appContext';
 
@@ -12,11 +11,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <AppProvider>
         <GameProvider>
-          <UserProvider>
-            <BrowserRouter>
-              <AppRouter />
-            </BrowserRouter>
-          </UserProvider>
+          <BrowserRouter>
+            <AppRouter />
+          </BrowserRouter>
         </GameProvider>
       </AppProvider>
     </ThemeProvider>
