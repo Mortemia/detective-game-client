@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CommuteIcon from '@material-ui/icons/Commute';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
@@ -10,22 +9,7 @@ import { GameContext } from '../../../context/gameContext';
 import { fastTravelLocations } from '../../../utils/gameUtils';
 import { AppContext } from '../../../context/appContext';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    margin: theme.spacing(4),
-    //display: 'flex'
-  },
-  paper: {
-    margin: theme.spacing(2),
-    padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-}));
-
 const Dashboard = () => {
-  const classes = useStyles();
   const { game, dispatch } = React.useContext(GameContext);
   const { appDispatch } = React.useContext(AppContext);
   const history = useHistory();

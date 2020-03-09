@@ -1,5 +1,4 @@
 import React from 'react';
-import Home from '../pages/Home';
 import { Route, Switch } from 'react-router-dom';
 import Dashboard from '../pages/_gameplay/Dashboard';
 import People from '../pages/_gameplay/People';

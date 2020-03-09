@@ -6,11 +6,11 @@ import PaperList from '../../../components/PaperList';
 import PersonCard from './PersonCard';
 
 const People = _ => {
-  const { game, dispatch } = React.useContext(GameContext);
+  const { game } = React.useContext(GameContext);
   const { id } = useParams();
 
   const [person, setPerson] = React.useState(
-    game.people.find(x => x.id == id && x.known) || null
+    game.people.find(x => x.id === parseInt(id) && x.known) || null
   );
   const history = useHistory();
 

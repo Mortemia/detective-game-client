@@ -1,5 +1,3 @@
-import { items } from '../fakedata';
-
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
@@ -27,7 +25,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         items: state.items.map(item =>
-          item.id == action.item.id ? { ...item, examined: true } : item
+          item.id === action.item.id ? { ...item, examined: true } : item
         ),
       };
     default:

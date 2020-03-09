@@ -1,6 +1,5 @@
 import React, { createContext, useReducer } from 'react';
 import { reducer } from './reducer';
-import jsonData from '../save.json';
 export const AppContext = createContext();
 
 const AppProvider = ({ children }) => {

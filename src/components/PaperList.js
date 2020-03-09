@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';

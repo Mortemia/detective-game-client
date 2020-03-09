@@ -7,11 +7,11 @@ import PaperList from '../../../components/PaperList';
 import ItemCard from './ItemCard';
 
 const Items = _ => {
-  const { game, dispatch } = React.useContext(GameContext);
+  const { game } = React.useContext(GameContext);
   const { id } = useParams();
 
   const [item, setItem] = React.useState(
-    game.items.find(x => x.id == id) || null
+    game.items.find(x => x.id === parseInt(id)) || null
   );
   const history = useHistory();
 

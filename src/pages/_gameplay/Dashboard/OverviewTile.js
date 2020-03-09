@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { Link } from 'react-router-dom';
 import { GameContext } from '../../../context/gameContext';
 
 const useStyles = makeStyles(theme => ({
@@ -24,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 
 const OverviewTile = props => {
   const classes = useStyles();
-  const items = props.items;
   const { game } = React.useContext(GameContext);
 
   return (

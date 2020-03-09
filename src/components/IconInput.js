@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 
 const IconInput = ({ id, label, type, fieldName, change, ...props }) => {
   const classes = useStyles();
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     value: '',
     error: false,
     helperText: '',
