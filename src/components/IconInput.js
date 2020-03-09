@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -27,10 +27,19 @@ const IconInput = ({ id, label, type, fieldName, change, ...props }) => {
     setState(prevState => ({
       ...state,
       error,
-      value: !error ? change(type || fieldName, value) : prevState.value,
+      value: !error ? value : prevState.value,
       helperText: status && status.errorMsg,
     }));
   };
+
+  const updateParent = useCallback(() => {
+    change(type || fieldName, state.value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.value]);
+
+  useEffect(() => {
+    updateParent();
+  }, [updateParent]);
 
   return (
     <div className={classes.margin}>
