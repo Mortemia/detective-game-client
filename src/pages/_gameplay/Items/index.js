@@ -3,22 +3,32 @@ import { useParams, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import { GameContext } from '../../../context/gameContext';
+import { AppContext } from '../../../context/appContext';
 import PaperList from '../../../components/PaperList';
 import ItemCard from './ItemCard';
+import { examineItem } from '../../../context/actions';
 
 const Items = _ => {
-  const { game } = React.useContext(GameContext);
-  const { id } = useParams();
-
-  const [item, setItem] = React.useState(
-    game.items.find(x => x.id === parseInt(id)) || null
-  );
+  const { game, dispatch } = React.useContext(GameContext);
+  const { appDispatch } = React.useContext(AppContext);
   const history = useHistory();
+  const dispatchers = {
+    dispatch,
+    appDispatch,
+  };
 
-  const handleClick = item => {
-    setItem(item);
-    let path = `/play/items/${item.id}`;
+  const { id } = useParams();
+  let item = game.items.find(x => x.id === parseInt(id)) || null;
+
+  const handleNavigate = newItem => {
+    item = newItem;
+    let path = `/play/items/${newItem.id}`;
     history.push(path);
+  };
+
+  const handleAction = item => {
+    examineItem(dispatchers, item);
+    handleNavigate(item);
   };
 
   return (
@@ -28,7 +38,8 @@ const Items = _ => {
           listName='Przedmioty'
           primary='name'
           items={game.items}
-          navigate={handleClick}
+          navigate={handleNavigate}
+          action={handleAction}
           icon={ZoomInIcon}
         />
       </Grid>

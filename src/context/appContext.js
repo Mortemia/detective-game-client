@@ -1,10 +1,15 @@
 import React, { createContext, useReducer } from 'react';
 import { reducer } from './reducer';
+
 export const AppContext = createContext();
+
+const initialState = {
+  snackbar: { visible: false },
+};
 
 const AppProvider = ({ children }) => {
   const [appState, appDispatch] = useReducer(reducer, {
-    snackbar: { visible: false },
+    initialState,
   });
 
   return (
