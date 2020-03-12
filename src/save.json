@@ -6,38 +6,62 @@
     {
       "id": 1,
       "name": "Przeszukaj dom Kowalskiego",
-      "successors": []
+      "revealed": true,
+      "done": false,
+      "location": "Dom Kowalskiego",
+      "successors": [{ "id": 3, "type": "location" }]
     },
     {
       "id": 2,
-      "name": "Poszukaj w internecie informacji na temat firmy Abackiego",
-      "successors": []
+      "name": "Poszukaj w bazie informacji na temat firmy Abackiego",
+      "revealed": true,
+      "done": false,
+      "location": "Posterunek",
+      "successors": [
+        { "id": 5, "type": "location" },
+        { "id": 3, "type": "location" },
+        { "id": 3, "type": "action" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Zadzwoń pod znaleziony numer",
+      "revealed": false,
+      "done": false,
+      "location": "",
+      "successors": [{ "id": 4, "type": "person" }]
     }
   ],
   "locations": [
     {
       "id": 4,
       "name": "Posterunek",
-      "description": "Bardzo fajne laboratorium",
-      "discovered": true
+      "description": "Bardzo fajny posterunek",
+      "revealed": true
     },
     {
       "id": 1,
       "name": "Laboratorium",
       "description": "Bardzo fajne laboratorium",
-      "discovered": true
+      "revealed": true
     },
     {
       "id": 2,
       "name": "Działka",
-      "description": "Bardzo fajne laboratorium",
-      "discovered": true
+      "description": "Bardzo fajna działka",
+      "revealed": true
     },
     {
       "id": 3,
       "name": "Dom Kowalskiego",
-      "description": "Bardzo fajne laboratorium",
-      "discovered": false
+      "description": "Bardzo fajny dom",
+      "revealed": false
+    },
+    {
+      "id": 5,
+      "name": "Inna ciekawa lokalizacja",
+      "description": "Czy można ją odkryć?",
+      "revealed": false
     }
   ],
   "paths": [
@@ -46,7 +70,12 @@
     { "location1": "Posterunek", "location2": "Dom Kowalskiego", "cost": 1 },
     { "location1": "Dom Kowalskiego", "location2": "Działka", "cost": 3 },
     { "location1": "Dom Kowalskiego", "location2": "Laboratorium", "cost": 2 },
-    { "location1": "Działka", "location2": "Laboratorium", "cost": 1 }
+    { "location1": "Działka", "location2": "Laboratorium", "cost": 1 },
+    {
+      "location1": "Posterunek",
+      "location2": "Inna ciekawa lokalizacja",
+      "cost": 5
+    }
   ],
   "items": [
     {
@@ -54,6 +83,7 @@
       "name": "Odłamek szkła",
       "description": "Całkiem spory kawałek szkła, może zabić",
       "examineInfo": "Znaleziono odciski Jana Kowalskiego",
+      "revealed": true,
       "examined": false
     },
     {
@@ -61,6 +91,7 @@
       "name": "Chusteczka znaleziona w koszu",
       "description": "Chusteczka znaleziona w koszu",
       "examineInfo": "Chusteczka właściwie nie ma żadnego znaczenia",
+      "revealed": true,
       "examined": false
     }
   ],
@@ -69,25 +100,25 @@
       "id": 1,
       "fullname": "Jan Kowalski",
       "description": "54 lata\n emerytowany policjant",
-      "known": true
+      "revealed": true
     },
     {
       "id": 2,
       "fullname": "Kamil Nowak",
       "description": "",
-      "known": true
+      "revealed": true
     },
     {
       "id": 3,
       "fullname": "Andrzej Abacki",
       "description": "",
-      "known": true
+      "revealed": true
     },
     {
       "id": 4,
       "fullname": "Joanna Kowal",
       "description": "24 lata",
-      "known": false
+      "revealed": false
     }
   ],
   "bookmarks": [

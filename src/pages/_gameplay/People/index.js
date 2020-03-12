@@ -4,13 +4,14 @@ import Grid from '@material-ui/core/Grid';
 import { GameContext } from '../../../context/gameContext';
 import PaperList from '../../../components/PaperList';
 import PersonCard from './PersonCard';
+import { getPossiblePeople } from '../../../utils/gameUtils';
 
 const People = _ => {
   const { game } = React.useContext(GameContext);
   const { id } = useParams();
 
   const [person, setPerson] = React.useState(
-    game.people.find(x => x.id === parseInt(id) && x.known) || null
+    game.people.find(x => x.id === parseInt(id) && x.revealed) || null
   );
   const history = useHistory();
 
@@ -26,7 +27,7 @@ const People = _ => {
         <PaperList
           listName='Ludzie'
           primary='fullname'
-          items={game.people.filter(x => x.known)}
+          items={getPossiblePeople(game)}
           navigate={handleClick}
         />
       </Grid>

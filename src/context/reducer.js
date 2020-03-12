@@ -21,6 +21,16 @@ export const reducer = (state, action) => {
         ...state,
         snackbar: { ...state.snackbar, visible: false },
       };
+    case 'EXECUTE_ACTION':
+      return {
+        ...state,
+        actions: action.updatedComponents.actions.map(x =>
+          x.id === action.action.id ? { ...x, done: true } : x
+        ),
+        locations: action.updatedComponents.locations,
+        items: action.updatedComponents.items,
+        people: action.updatedComponents.people,
+      };
     case 'EXAMINE':
       return {
         ...state,
