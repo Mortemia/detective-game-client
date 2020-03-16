@@ -3,5 +3,18 @@
   "actions": "Akcje",
   "locations": "Lokacje",
   "people": "Osoby",
-  "items": "Przedmioty"
+  "items": "Przedmioty",
+  "examine": "Badaj",
+  "interrogate": "Przesłuchuj",
+  "travel": "Podróżuj",
+  "combineTheFacts": "Łącz fakty",
+  "findOutMore": "Dowiedz się więcej",
+  "start": "Rozpocznij",
+  "detectiveGame": "Gra detektywistyczna",
+  "gameplay": "Rozgrywka",
+  "creator": "Kreator",
+  "login": "Zaloguj się",
+  "createYourOwnUniqueDetectiveCase": "STWÓRZ WŁASNĄ UNIKALNĄ SPRAWĘ DETEKTYWISTYCZNĄ",
+  "solveTheCaseWithFriends": "WCIEL SIĘ WRAZ Z ZNAJOMYMI W DETEKTYWOW I WSPÓLNIE ROZWIĄŻCIE SPRAWĘ",
+  "playTheCasesCreatedByOthers": "ROZGRYWAJ HISTORIE STWORZONE PRZEZ INNYCH GRACZY"
 }
