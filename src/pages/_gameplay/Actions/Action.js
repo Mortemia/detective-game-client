@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Action = _ => {
+const Action = props => {
   const classes = useStyles();
   const { game, dispatch } = React.useContext(GameContext);
   const { id } = useParams();
@@ -54,7 +54,6 @@ const Action = _ => {
     revealedItems = getMoreInfo(revealedComponents[3]);
   }
 
-  console.log(components);
   return (
     action && (
       <Card className={classes.root}>

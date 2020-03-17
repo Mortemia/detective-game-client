@@ -18,5 +18,8 @@ const getDestination = (start, a, b) =>
 export const getPossibleActions = game =>
   game.actions.filter(action => action.revealed && !action.done);
 
+export const getDoneActions = game =>
+  game.actions.filter(action => action.done);
+
 export const getPossiblePeople = game =>
   game.people.filter(person => person.revealed);

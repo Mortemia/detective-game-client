@@ -18,6 +18,7 @@ const GameplayRouter = () => {
         <Route exact path='/play/people/:id' component={People} />
         <Route path='/play/people' component={People} />
 
+        <Route exact path='/play/actions/:id' component={Actions} />
         <Route exact path='/play/action/:id' component={Action} />
         <Route path='/play/actions' component={Actions} />
       </Switch>
