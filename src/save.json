@@ -6,30 +6,33 @@
     {
       "id": 1,
       "name": "Przeszukaj dom Kowalskiego",
+      "description": "Bedąc na miejscu, wchodzisz do mieszkania niejakiego Kowalskiego",
       "revealed": true,
       "done": false,
       "location": "Dom Kowalskiego",
-      "successors": [{ "id": 3, "type": "location" }]
+      "successors": [{ "id": 3, "type": "locations" }]
     },
     {
       "id": 2,
       "name": "Poszukaj w bazie informacji na temat firmy Abackiego",
+      "description": "Stukasz Abacki w googlach i wchodzisz w pierwszy link.",
       "revealed": true,
       "done": false,
       "location": "Posterunek",
       "successors": [
-        { "id": 5, "type": "location" },
-        { "id": 3, "type": "location" },
-        { "id": 3, "type": "action" }
+        { "id": 5, "type": "locations" },
+        { "id": 3, "type": "locations" },
+        { "id": 3, "type": "actions" }
       ]
     },
     {
       "id": 3,
       "name": "Zadzwoń pod znaleziony numer",
+      "description": "Słyszysz głos kobiety...",
       "revealed": false,
       "done": false,
       "location": "",
-      "successors": [{ "id": 4, "type": "person" }]
+      "successors": [{ "id": 4, "type": "people" }]
     }
   ],
   "locations": [

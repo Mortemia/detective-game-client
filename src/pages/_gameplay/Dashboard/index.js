@@ -33,11 +33,11 @@ const Dashboard = () => {
   };
 
   const handleActionExcecution = action => {
-    executeAction(dispatchers, game, action);
+    executeAction(dispatchers, game, action) && handleClick('action')(action);
   };
 
   const handleClick = type => component => {
-    let path = `play/${type}/${component.id}`;
+    let path = `/play/${type}/${component.id}`;
     history.push(path);
   };
 

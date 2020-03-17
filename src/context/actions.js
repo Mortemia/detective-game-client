@@ -1,26 +1,4 @@
-const errorTravelSnackbar = {
-  visible: true,
-  severity: 'error',
-  message: 'Niewystarczająca liczba punktów ruchu',
-};
-
-const successExamineSnackbar = {
-  visible: true,
-  severity: 'success',
-  message: 'Przedmiot został zbadany',
-};
-
-const errorExamineSnackbar = {
-  visible: true,
-  severity: 'error',
-  message: 'Przedmiot został zbadany już wcześniej',
-};
-
-const errorDifferentActionLocation = {
-  visible: true,
-  severity: 'error',
-  message: 'Musisz być w innej lokacji, aby wykonać akcję',
-};
+import { snackbars } from '../constants/snackbars';
 
 export const travel = (dispatchers, game, destination) => {
   const { dispatch, appDispatch } = dispatchers;
@@ -28,7 +6,7 @@ export const travel = (dispatchers, game, destination) => {
     ? dispatch({ type: 'TRAVEL', destination })
     : appDispatch({
         type: 'OPEN_SNACKBAR',
-        snackbar: errorTravelSnackbar,
+        snackbar: snackbars.errorTravel,
       });
 };
 
@@ -38,12 +16,12 @@ export const examineItem = (dispatchers, item) => {
     dispatch({ type: 'EXAMINE', item });
     appDispatch({
       type: 'OPEN_SNACKBAR',
-      snackbar: successExamineSnackbar,
+      snackbar: snackbars.successExamine,
     });
   } else
     appDispatch({
       type: 'OPEN_SNACKBAR',
-      snackbar: errorExamineSnackbar,
+      snackbar: snackbars.errorExamine,
     });
 };
 
@@ -51,10 +29,10 @@ export const executeAction = (dispatchers, game, action) => {
   const { dispatch, appDispatch } = dispatchers;
 
   const components = [
-    { s: 'location', m: 'locations' },
-    { s: 'action', m: 'actions' },
-    { s: 'item', m: 'items' },
-    { s: 'person', m: 'people' },
+    { s: 'locations', m: 'locations' },
+    { s: 'actions', m: 'actions' },
+    { s: 'items', m: 'items' },
+    { s: 'people', m: 'people' },
   ];
 
   let updatedComponents = {};
@@ -74,16 +52,23 @@ export const executeAction = (dispatchers, game, action) => {
       );
     });
 
-  action.location === game.location || !action.location
-    ? dispatch({
-        type: 'EXECUTE_ACTION',
-        action,
-        updatedComponents,
-      })
-    : appDispatch({
-        type: 'OPEN_SNACKBAR',
-        snackbar: errorDifferentActionLocation,
-      });
+  if (action.location === game.location || !action.location) {
+    dispatch({
+      type: 'EXECUTE_ACTION',
+      action,
+      updatedComponents,
+    });
+    appDispatch({
+      type: 'OPEN_SNACKBAR',
+      snackbar: snackbars.successActionExecution,
+    });
+  } else
+    appDispatch({
+      type: 'OPEN_SNACKBAR',
+      snackbar: snackbars.errorDifferentActionLocation,
+    });
+
+  return action.location === game.location || !action.location;
 };
 
 const updateComponents = (succesiveComponents, componentsList) => {
