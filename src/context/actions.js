@@ -1,7 +1,21 @@
 import { snackbars } from '../constants/snackbars';
 
+export const actionByType = (dispatchers, game, component, type) => {
+  switch (type) {
+    case 'actions': {
+      return executeAction(dispatchers, game, component);
+    }
+    case 'items': {
+      return examineItem(dispatchers, component);
+    }
+    default: {
+    }
+  }
+};
+
 export const travel = (dispatchers, game, destination) => {
   const { dispatch, appDispatch } = dispatchers;
+  console.log(destination);
   game.movement_points - destination.cost >= 0
     ? dispatch({ type: 'TRAVEL', destination })
     : appDispatch({

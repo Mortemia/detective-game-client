@@ -10,7 +10,10 @@
       "revealed": true,
       "done": false,
       "location": "Dom Kowalskiego",
-      "successors": [{ "id": 3, "type": "locations" }]
+      "successors": [
+        { "id": 3, "type": "locations" },
+        { "id": 2, "type": "items" }
+      ]
     },
     {
       "id": 2,

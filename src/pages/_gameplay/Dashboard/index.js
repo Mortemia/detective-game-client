@@ -33,7 +33,7 @@ const Dashboard = () => {
   };
 
   const handleActionExcecution = action => {
-    executeAction(dispatchers, game, action) && handleClick('action')(action);
+    executeAction(dispatchers, game, action) && handleClick('actions')(action);
   };
 
   const handleClick = type => component => {
