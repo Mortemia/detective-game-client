@@ -4,6 +4,7 @@ import Dashboard from '../pages/_gameplay/Dashboard';
 import People from '../pages/_gameplay/People';
 import Items from '../pages/_gameplay/Items';
 import Actions from '../pages/_gameplay/Actions';
+import Locations from '../pages/_gameplay/Locations';
 const GameplayRouter = () => {
   return (
     <Switch>
@@ -17,6 +18,8 @@ const GameplayRouter = () => {
 
       <Route exact path='/play/actions/:id' component={Actions} />
       <Route path='/play/actions' component={Actions} />
+
+      <Route path='/play/locations' component={Locations} />
     </Switch>
   );
 };
