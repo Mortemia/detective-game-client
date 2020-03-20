@@ -42,8 +42,8 @@ const InfoGrid = () => {
     <div className={classes.root}>
       <Grid container spacing={6}>
         {infos.map((info, index) => (
-          <Grow in timeout={500 * (index + 1)}>
-            <Grid item xs={12} sm={12} md={3} key={index}>
+          <Grow key={index} in timeout={500 * (index + 1)}>
+            <Grid item xs={12} sm={12} md={3}>
               <InfoTile icon={info.icon} header={info.header} />
             </Grid>
           </Grow>
