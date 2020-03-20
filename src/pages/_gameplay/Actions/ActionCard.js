@@ -1,34 +1,22 @@
 import React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { GameContext } from '../../../context/gameContext';
 import { AppContext } from '../../../context/appContext';
 import { actionByType } from '../../../context/actions';
+import ComponentCard from '../../../components/ComponentCard';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    //maxWidth: 345,
-  },
-}));
-
-const Action = props => {
-  const classes = useStyles();
+const ActionCard = ({ action }) => {
   const { appDispatch } = React.useContext(AppContext);
   const { game, dispatch } = React.useContext(GameContext);
   const history = useHistory();
-  const { id } = useParams();
   const dispatchers = {
     dispatch,
     appDispatch,
   };
-
-  let action = game.actions.find(x => x.id === parseInt(id) && x.done) || null;
 
   const components = [
     { name: 'locations', revealedText: 'Odkryte miejsca' },
@@ -93,18 +81,11 @@ const Action = props => {
 
   return (
     action && (
-      <Card className={classes.root}>
-        <CardHeader title={action.name} subheader={action.location} />
-        <CardContent>
-          <Typography variant='body2' color='textSecondary' component='p'>
-            {action.description}
-          </Typography>
-        </CardContent>
-
+      <ComponentCard component={action} title='name' subheader='location'>
         {components.map(component => reveleadComponentsContent(component))}
-      </Card>
+      </ComponentCard>
     )
   );
 };
 
-export default Action;
+export default ActionCard;

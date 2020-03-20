@@ -6,7 +6,7 @@ import { AppContext } from '../../../context/appContext';
 import PaperList from '../../../components/PaperList';
 import { executeAction } from '../../../context/actions';
 import { getPossibleActions, getDoneActions } from '../../../utils/gameUtils';
-import Action from './Action';
+import ActionCard from './ActionCard';
 
 const Actions = _ => {
   const { game, dispatch } = React.useContext(GameContext);
@@ -18,7 +18,7 @@ const Actions = _ => {
   };
 
   const { id } = useParams();
-  let action = game.actions.find(x => x.id === parseInt(id)) || null;
+  let action = game.actions.find(x => x.id === parseInt(id) && x.done) || null;
 
   const handleNavigate = newAction => {
     action = newAction;
@@ -63,7 +63,7 @@ const Actions = _ => {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={8} md={8}>
-          <Action action={action} />
+          <ActionCard action={action} />
         </Grid>
       </Grid>
     </>
