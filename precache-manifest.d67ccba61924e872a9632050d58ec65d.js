@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "06b9f31b085e4b49f111474b7098cdff",
+    "revision": "752fc8f87b5985161f88967b8b2a645b",
     "url": "/detective-game-client/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/detective-game-client/static/css/2.14bb1e62.chunk.css"
   },
   {
-    "revision": "0be5a95e58d2523532ec",
+    "revision": "e1b38bc899249831350e",
     "url": "/detective-game-client/static/css/main.ff3e0b43.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/detective-game-client/static/js/2.75dfa72e.chunk.js.LICENSE"
   },
   {
-    "revision": "0be5a95e58d2523532ec",
-    "url": "/detective-game-client/static/js/main.a39b6967.chunk.js"
+    "revision": "e1b38bc899249831350e",
+    "url": "/detective-game-client/static/js/main.a7623b0e.chunk.js"
   },
   {
     "revision": "f591b4187c536d2a0069",

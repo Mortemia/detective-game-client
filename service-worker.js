@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/detective-game-client/precache-manifest.fcfe135a1798aad8b1f72bcb0435d49f.js"
+  "/detective-game-client/precache-manifest.d67ccba61924e872a9632050d58ec65d.js"
 );
 
 self.addEventListener('message', (event) => {

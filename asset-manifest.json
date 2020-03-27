@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/detective-game-client/static/css/main.ff3e0b43.chunk.css",
-    "main.js": "/detective-game-client/static/js/main.a39b6967.chunk.js",
-    "main.js.map": "/detective-game-client/static/js/main.a39b6967.chunk.js.map",
+    "main.js": "/detective-game-client/static/js/main.a7623b0e.chunk.js",
+    "main.js.map": "/detective-game-client/static/js/main.a7623b0e.chunk.js.map",
     "runtime-main.js": "/detective-game-client/static/js/runtime-main.d2122551.js",
     "runtime-main.js.map": "/detective-game-client/static/js/runtime-main.d2122551.js.map",
     "static/css/2.14bb1e62.chunk.css": "/detective-game-client/static/css/2.14bb1e62.chunk.css",
     "static/js/2.75dfa72e.chunk.js": "/detective-game-client/static/js/2.75dfa72e.chunk.js",
     "static/js/2.75dfa72e.chunk.js.map": "/detective-game-client/static/js/2.75dfa72e.chunk.js.map",
     "index.html": "/detective-game-client/index.html",
-    "precache-manifest.fcfe135a1798aad8b1f72bcb0435d49f.js": "/detective-game-client/precache-manifest.fcfe135a1798aad8b1f72bcb0435d49f.js",
+    "precache-manifest.d67ccba61924e872a9632050d58ec65d.js": "/detective-game-client/precache-manifest.d67ccba61924e872a9632050d58ec65d.js",
     "service-worker.js": "/detective-game-client/service-worker.js",
     "static/css/2.14bb1e62.chunk.css.map": "/detective-game-client/static/css/2.14bb1e62.chunk.css.map",
     "static/css/main.ff3e0b43.chunk.css.map": "/detective-game-client/static/css/main.ff3e0b43.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.14bb1e62.chunk.css",
     "static/js/2.75dfa72e.chunk.js",
     "static/css/main.ff3e0b43.chunk.css",
-    "static/js/main.a39b6967.chunk.js"
+    "static/js/main.a7623b0e.chunk.js"
   ]
 }
