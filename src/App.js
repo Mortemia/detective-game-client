@@ -11,7 +11,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <AppProvider>
         <GameProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={process.env.PUBLIC_URL}>
             <AppRouter />
           </BrowserRouter>
         </GameProvider>
