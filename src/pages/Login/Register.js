@@ -5,8 +5,11 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LockIcon from '@material-ui/icons/Lock';
 import Button from '@material-ui/core/Button';
 import IconInput from '../../components/IconInput';
+import UserAPI from '../../api/UserAPI';
 
-const useStyles = makeStyles(theme => ({
+const API = new UserAPI();
+
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     padding: theme.spacing(2),
@@ -20,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 const Register = () => {
   const classes = useStyles();
   const [state, setState] = React.useState({
+    name: '',
     username: '',
     email: '',
     password: '',
@@ -29,6 +33,10 @@ const Register = () => {
   const handleChange = (name, value) => {
     setState({ ...state, [name]: value });
     return value;
+  };
+
+  const signUp = () => {
+    API.signUp(state);
   };
 
   return (
@@ -42,7 +50,16 @@ const Register = () => {
       <Grid item>
         <IconInput
           id='username'
-          label='Użytkownik'
+          label='Twoje imię'
+          icon={AccountCircleIcon}
+          change={handleChange}
+          type='name'
+        />
+      </Grid>
+      <Grid item>
+        <IconInput
+          id='username'
+          label='Nazwa użytkownika'
           icon={AccountCircleIcon}
           change={handleChange}
           type='username'
@@ -77,7 +94,12 @@ const Register = () => {
         />
       </Grid>
       <Grid item>
-        <Button variant='contained' color='primary' className={classes.margin}>
+        <Button
+          variant='contained'
+          color='primary'
+          className={classes.margin}
+          onClick={signUp}
+        >
           Zarejestruj się
         </Button>
       </Grid>

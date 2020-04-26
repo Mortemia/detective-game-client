@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import { validate } from '../utils/validators';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   margin: {
     //  margin: theme.spacing(1),
   },
@@ -18,13 +18,13 @@ const IconInput = ({ id, label, type, fieldName, change, ...props }) => {
     helperText: '',
   });
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const value = event.target.value;
     const validateValue = validate(value);
     const status = validateValue[type] && validateValue[type]();
     const error = status ? status.validateStatus === 'error' : false;
 
-    setState(prevState => ({
+    setState((prevState) => ({
       ...state,
       error,
       value: !error ? value : prevState.value,

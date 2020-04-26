@@ -28,10 +28,24 @@ const errorDifferentActionLocation = {
   message: 'Musisz być w innej lokacji, aby wykonać akcję',
 };
 
+const successLogin = {
+  visible: true,
+  severity: 'success',
+  message: 'Zalogowano pomyślnie',
+};
+
+const errorLogin = {
+  visible: true,
+  severity: 'error',
+  message: 'Błędny login lub hasło',
+};
+
 export const snackbars = {
   errorTravel,
   successExamine,
   errorExamine,
   successActionExecution,
   errorDifferentActionLocation,
+  successLogin,
+  errorLogin,
 };
