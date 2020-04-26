@@ -2,8 +2,6 @@ import React from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Badge from '@material-ui/core/Badge';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MenuIcon from '@material-ui/icons/Menu';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -12,11 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { GameContext } from '../context/gameContext';
+import AccountMenuIcon from '../layout/AccountMenuIcon';
 import Logo from './Logo';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
@@ -115,12 +114,12 @@ const GameplayBar = ({ open, handleDrawerOpen }) => {
           <Typography className={classes.barContent}>
             Punkty ruchu: {game.movement_points}
           </Typography>
-
-          <IconButton color='inherit'>
+          <AccountMenuIcon />
+          {/* <IconButton color='inherit'>
             <Badge badgeContent={4} color='secondary'>
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
       <CssBaseline />
