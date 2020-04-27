@@ -5,6 +5,8 @@ import People from '../pages/_gameplay/People';
 import Items from '../pages/_gameplay/Items';
 import Actions from '../pages/_gameplay/Actions';
 import Locations from '../pages/_gameplay/Locations';
+import FinalTest from '../pages/_gameplay/FinalTest';
+
 import { AppContext } from '../context/appContext';
 
 const GameplayRouter = () => {
@@ -26,6 +28,8 @@ const GameplayRouter = () => {
         <Route path='/play/actions' component={Actions} />
 
         <Route path='/play/locations' component={Locations} />
+
+        <Route path='/play/finalTest' component={FinalTest} />
       </Switch>
     </>
   );

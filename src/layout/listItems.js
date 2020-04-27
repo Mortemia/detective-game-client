@@ -10,6 +10,7 @@ import MapIcon from '@material-ui/icons/Map';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import ExtensionIcon from '@material-ui/icons/Extension';
 
 export const mainListItems = (
   <div>
@@ -68,4 +69,16 @@ export const secondaryListItems = (
       <ListItemText primary='Ogólne' />
     </ListItem>
   </div>
+);
+
+export const finalTestListItem = (
+  <>
+    <ListSubheader inset>Rozwiąż sprawę</ListSubheader>
+    <ListItem button component={Link} to='/play/finalTest'>
+      <ListItemIcon>
+        <ExtensionIcon />
+      </ListItemIcon>
+      <ListItemText primary='Test końcowy' />
+    </ListItem>
+  </>
 );

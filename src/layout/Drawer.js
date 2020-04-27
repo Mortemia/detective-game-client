@@ -7,7 +7,11 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems, secondaryListItems } from './listItems';
+import {
+  mainListItems,
+  secondaryListItems,
+  finalTestListItem,
+} from './listItems';
 import { GameContext } from '../context/gameContext';
 
 const drawerWidth = 240;
@@ -116,6 +120,8 @@ const ComplexDrawer = ({ open, handleDrawerClose, children }) => {
         <List>{mainListItems}</List>
         <Divider />
         <List>{secondaryListItems}</List>
+        <Divider />
+        <List>{finalTestListItem}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
