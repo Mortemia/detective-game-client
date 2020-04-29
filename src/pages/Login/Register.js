@@ -39,8 +39,16 @@ const Register = () => {
   };
 
   const getCookieValue = a => {
-    let b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
-    return b ? b.pop() : '';
+    let i, x, y;
+    let ARRcookies = document.cookie.split(';');
+    for (i = 0; i < ARRcookies.length; i++) {
+      x = ARRcookies[i].substr(0, ARRcookies[i].indexOf('='));
+      y = ARRcookies[i].substr(ARRcookies[i].indexOf('=') + 1);
+      x = x.replace(/^\s+|\s+$/g, '');
+      if (x == a) {
+        return unescape(y);
+      }
+    }
   };
 
   const classes = useStyles();
