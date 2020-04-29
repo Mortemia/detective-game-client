@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
-  const [activeCases, setActiveCases] = React.useState(null);
+  const [activeCases, setActiveCases] = React.useState([]);
   const { appState } = React.useContext(AppContext);
   const loggedUser = appState.user;
 
@@ -41,12 +41,15 @@ const Dashboard = () => {
   return (
     <>
       <div className={classes.paper}>
-        {console.log(loggedUser)}
         <Banner name={loggedUser && loggedUser.name} />
       </div>
       <div className={classes.paper}>
         <PaperList
-          listName='Sprawy w toku'
+          listName={
+            !activeCases.length
+              ? 'Nie masz żadnych spraw w toku'
+              : 'Sprawy w toku'
+          }
           primary='name'
           secondary='modified'
           items={activeCases || []}

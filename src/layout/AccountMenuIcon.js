@@ -13,14 +13,14 @@ import Logo from './Logo';
 import { AppContext } from '../context/appContext';
 import { snackbars } from '../constants/snackbars';
 
-const AccountMenuIcon = (_) => {
+const AccountMenuIcon = _ => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
   const { appState, appDispatch } = React.useContext(AppContext);
   const history = useHistory();
 
-  const handleProfileMenuOpen = (event) => {
+  const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -46,7 +46,7 @@ const AccountMenuIcon = (_) => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose} disabled={true}>
-        Zalogowano jako {appState.user && appState.user.usernameOrEmail}
+        Zalogowano jako {appState.user && appState.user.username}
       </MenuItem>
       <MenuItem
         onClick={() => {

@@ -9,14 +9,13 @@ import Logo from './Logo';
 import AccountMenuIcon from '../layout/AccountMenuIcon';
 import { AppContext } from '../context/appContext';
 
-const SimpleBar = (props) => {
+const SimpleBar = props => {
   const { appState } = React.useContext(AppContext);
 
   return (
     <AppBar position='static'>
       <Toolbar>
         <Logo />
-        <Typography>{appState.user && appState.user.username}</Typography>
         <Button color='inherit' component={Link} to='/play'>
           ROZGRYWKA
         </Button>
