@@ -11,6 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Logo from './Logo';
 import { AppContext } from '../context/appContext';
+import { snackbars } from '../constants/snackbars';
 
 const AccountMenuIcon = (_) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -51,6 +52,10 @@ const AccountMenuIcon = (_) => {
         onClick={() => {
           handleLogout();
           handleMenuClose();
+          appDispatch({
+            type: 'OPEN_SNACKBAR',
+            snackbar: snackbars.successLogout,
+          });
         }}
       >
         Wyloguj się
