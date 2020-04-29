@@ -40,6 +40,31 @@ const errorLogin = {
   message: 'Błędny login lub hasło',
 };
 
+const successLogout = {
+  visible: true,
+  severity: 'success',
+  message: 'Wylogowano',
+};
+
+const successSignUp = {
+  visible: true,
+  severity: 'success',
+  message: 'Zarejestrowano i zalogowano pomyślnie',
+};
+
+const errorSignUpUserAlreadyExists = {
+  visible: true,
+  severity: 'error',
+  message: 'Błąd w rejestracji, użytkownik o podanej nazwie już istnieje',
+};
+
+const errorSignUpFieldsFilledCorrectly = {
+  visible: true,
+  severity: 'error',
+  message:
+    'Błąd w rejestracji, upewnij się, że wypełniłeś poprawnie wszystkie pola',
+};
+
 export const snackbars = {
   errorTravel,
   successExamine,
@@ -48,4 +73,8 @@ export const snackbars = {
   errorDifferentActionLocation,
   successLogin,
   errorLogin,
+  successLogout,
+  successSignUp,
+  errorSignUpUserAlreadyExists,
+  errorSignUpFieldsFilledCorrectly,
 };

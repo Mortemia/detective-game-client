@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LockIcon from '@material-ui/icons/Lock';
 import Button from '@material-ui/core/Button';
 import IconInput from '../../components/IconInput';
+import { AppContext } from '../../context/appContext';
 import UserAPI from '../../api/UserAPI';
+import { snackbars } from '../../constants/snackbars';
+import { validateOnBlur } from '../../utils/validators';
 
 const API = new UserAPI();
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     padding: theme.spacing(2),
@@ -21,22 +25,72 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Register = () => {
+  const { appDispatch } = useContext(AppContext);
+  const history = useHistory();
+
+  const loadData = fieldName => {
+    let data = localStorage.getItem(fieldName);
+    localStorage.removeItem(fieldName);
+    return data;
+  };
+
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    name: '',
-    username: '',
-    email: '',
+  const [state, setState] = useState({
+    name: loadData('name') || '',
+    username: loadData('username') || '',
+    email: loadData('email') || '',
     password: '',
     confirmPassword: '',
   });
 
-  const handleChange = (name, value) => {
-    setState({ ...state, [name]: value });
-    return value;
+  const handleChange = name => event => {
+    setState({ ...state, [name]: event.target.value });
+  };
+
+  const handleRegister = _ => {
+    localStorage.setItem('name', state.name);
+    localStorage.setItem('username', state.username);
+    localStorage.setItem('email', state.email);
+
+    const possibleErrors = Object.keys(state).map(key => {
+      const validateValue = validateOnBlur(state[key]);
+      const status = validateValue[key] && validateValue[key]();
+      return status;
+    });
+    let isValid = true;
+    possibleErrors.forEach(possibleError => {
+      if (possibleError && possibleError.validateStatus === 'error')
+        isValid = false;
+    });
+    isValid
+      ? signUp()
+      : appDispatch({
+          type: 'OPEN_SNACKBAR',
+          snackbar: snackbars.errorSignUpFieldsFilledCorrectly,
+        });
   };
 
   const signUp = () => {
-    API.signUp(state);
+    API.signUp(state)
+      .then(response => {
+        const user = {
+          usernameOrEmail: state.username,
+        };
+        appDispatch({ type: 'LOGIN', user });
+        appDispatch({
+          type: 'OPEN_SNACKBAR',
+          snackbar: snackbars.successSignUp,
+        });
+        let path = '/dashboard';
+        history.push(path);
+      })
+      .catch(errors => {
+        console.log(errors.response);
+        appDispatch({
+          type: 'OPEN_SNACKBAR',
+          snackbar: snackbars.errorSignUpUserAlreadyExists,
+        });
+      });
   };
 
   return (
@@ -52,8 +106,8 @@ const Register = () => {
           id='username'
           label='Twoje imię'
           icon={AccountCircleIcon}
-          change={handleChange}
-          type='name'
+          change={handleChange('name')}
+          value={state.name}
         />
       </Grid>
       <Grid item>
@@ -61,8 +115,8 @@ const Register = () => {
           id='username'
           label='Nazwa użytkownika'
           icon={AccountCircleIcon}
-          change={handleChange}
-          type='username'
+          change={handleChange('username')}
+          value={state.username}
         />
       </Grid>
       <Grid item>
@@ -70,8 +124,8 @@ const Register = () => {
           id='email'
           label='Adres e-mail'
           icon={AccountCircleIcon}
-          change={handleChange}
-          type='email'
+          change={handleChange('email')}
+          value={state.email}
         />
       </Grid>
       <Grid item>
@@ -80,7 +134,8 @@ const Register = () => {
           label='Hasło'
           type='password'
           icon={LockIcon}
-          change={handleChange}
+          change={handleChange('password')}
+          value={state.password}
         />
       </Grid>
       <Grid item>
@@ -89,8 +144,8 @@ const Register = () => {
           label='Powtórz hasło'
           type='password'
           icon={LockIcon}
-          change={handleChange}
-          fieldName='confirmPassword'
+          change={handleChange('confirmPassword')}
+          value={state.confirmPassword}
         />
       </Grid>
       <Grid item>
@@ -98,7 +153,7 @@ const Register = () => {
           variant='contained'
           color='primary'
           className={classes.margin}
-          onClick={signUp}
+          onClick={handleRegister}
         >
           Zarejestruj się
         </Button>

@@ -12,7 +12,7 @@ import { snackbars } from '../../constants/snackbars';
 
 const API = new UserAPI();
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   margin: {
     marginTop: 20,
   },
@@ -28,8 +28,8 @@ const Login = () => {
   const { appDispatch } = useContext(AppContext);
   const history = useHistory();
 
-  const handleChange = (name, value) => {
-    setState({ ...state, [name]: value });
+  const handleChange = name => event => {
+    setState({ ...state, [name]: event.target.value });
   };
 
   const handleLogin = () => {
@@ -38,7 +38,7 @@ const Login = () => {
     };
 
     API.signIn(state)
-      .then((response) => {
+      .then(response => {
         appDispatch({ type: 'LOGIN', user });
         appDispatch({
           type: 'OPEN_SNACKBAR',
@@ -47,7 +47,7 @@ const Login = () => {
         let path = '/dashboard';
         history.push(path);
       })
-      .catch((error) => {
+      .catch(error => {
         appDispatch({
           type: 'OPEN_SNACKBAR',
           snackbar: snackbars.errorLogin,
@@ -64,13 +64,14 @@ const Login = () => {
       alignItems='center'
       direction='column'
     >
+      {console.log(state)}
       <Grid item>
         <IconInput
           id='username'
           label='Login'
           icon={AccountCircleIcon}
-          change={handleChange}
-          type='usernameOrEmail'
+          change={handleChange('usernameOrEmail')}
+          value={state.usernameOrEmail}
         />
       </Grid>
       <Grid item>
@@ -79,7 +80,8 @@ const Login = () => {
           label='Hasło'
           type='password'
           icon={LockIcon}
-          change={handleChange}
+          change={handleChange('password')}
+          value={state.password}
         />
       </Grid>
       <Grid item>
