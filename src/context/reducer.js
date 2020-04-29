@@ -1,5 +1,7 @@
 export const reducer = (state, action) => {
   switch (action.type) {
+    case 'LOAD_SAVE':
+      return action.save;
     case 'LOGIN':
       return {
         ...state,
@@ -29,7 +31,7 @@ export const reducer = (state, action) => {
     case 'EXECUTE_ACTION':
       return {
         ...state,
-        actions: action.updatedComponents.actions.map((x) =>
+        actions: action.updatedComponents.actions.map(x =>
           x.id === action.action.id ? { ...x, done: true } : x
         ),
         locations: action.updatedComponents.locations,
@@ -39,7 +41,7 @@ export const reducer = (state, action) => {
     case 'EXAMINE':
       return {
         ...state,
-        items: state.items.map((item) =>
+        items: state.items.map(item =>
           item.id === action.item.id ? { ...item, examined: true } : item
         ),
       };

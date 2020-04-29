@@ -6,6 +6,7 @@ import { gamesInProgress, casesInProgress } from '../../fakedata';
 import UserAPI from '../../api/UserAPI';
 import GameAPI from '../../api/GameAPI';
 import { AppContext } from '../../context/appContext';
+import { GameContext } from '../../context/gameContext';
 
 const API = new UserAPI();
 const gameAPI = new GameAPI();
@@ -20,22 +21,28 @@ const Dashboard = () => {
   const classes = useStyles();
   const [activeCases, setActiveCases] = React.useState([]);
   const { appState } = React.useContext(AppContext);
+  const { game, dispatch } = React.useContext(GameContext);
+
   const loggedUser = appState.user;
 
   React.useEffect(() => {
     API.getActiveDetectiveCases(loggedUser.id).then(response => {
       setActiveCases(response.data.detectiveCaseList);
     });
-  }, []);
+  }, [loggedUser.id]);
 
   const handleCaseSelection = selectedCase => {
     const saveDetectiveCaseRequest = {
       caseId: selectedCase.id,
       userId: loggedUser.id,
     };
-    gameAPI
-      .getDetectiveCaseSave(saveDetectiveCaseRequest)
-      .then(response => console.log(response));
+    gameAPI.getDetectiveCaseSave(saveDetectiveCaseRequest).then(response => {
+      const save = JSON.parse(response.data.jsonSave);
+      dispatch({
+        type: 'LOAD_SAVE',
+        save: save,
+      });
+    });
   };
 
   return (
