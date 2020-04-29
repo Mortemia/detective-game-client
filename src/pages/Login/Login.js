@@ -64,7 +64,6 @@ const Login = () => {
       alignItems='center'
       direction='column'
     >
-      {console.log(state)}
       <Grid item>
         <IconInput
           id='username'

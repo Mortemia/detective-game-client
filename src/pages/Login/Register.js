@@ -28,17 +28,26 @@ const Register = () => {
   const { appDispatch } = useContext(AppContext);
   const history = useHistory();
 
-  const loadData = fieldName => {
-    let data = localStorage.getItem(fieldName);
-    localStorage.removeItem(fieldName);
-    return data;
+  const createExpiringCookie = (name, value, seconds) => {
+    const maxAge = '; max-age=' + seconds;
+    document.cookie =
+      encodeURI(name) +
+      '=' +
+      encodeURI(value) +
+      maxAge +
+      ';path=/;SameSite=Lax';
+  };
+
+  const getCookieValue = a => {
+    let b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
   };
 
   const classes = useStyles();
   const [state, setState] = useState({
-    name: loadData('name') || '',
-    username: loadData('username') || '',
-    email: loadData('email') || '',
+    name: getCookieValue('name') || '',
+    username: getCookieValue('username') || '',
+    email: getCookieValue('email') || '',
     password: '',
     confirmPassword: '',
   });
@@ -48,20 +57,22 @@ const Register = () => {
   };
 
   const handleRegister = _ => {
-    localStorage.setItem('name', state.name);
-    localStorage.setItem('username', state.username);
-    localStorage.setItem('email', state.email);
+    ['name', 'username', 'email'].forEach(field =>
+      createExpiringCookie(field, state[field], 5)
+    );
 
     const possibleErrors = Object.keys(state).map(key => {
       const validateValue = validateOnBlur(state[key]);
       const status = validateValue[key] && validateValue[key]();
       return status;
     });
+
     let isValid = true;
     possibleErrors.forEach(possibleError => {
       if (possibleError && possibleError.validateStatus === 'error')
         isValid = false;
     });
+
     isValid
       ? signUp()
       : appDispatch({
@@ -103,7 +114,7 @@ const Register = () => {
     >
       <Grid item>
         <IconInput
-          id='username'
+          type='name'
           label='Twoje imię'
           icon={AccountCircleIcon}
           change={handleChange('name')}
@@ -112,7 +123,7 @@ const Register = () => {
       </Grid>
       <Grid item>
         <IconInput
-          id='username'
+          type='username'
           label='Nazwa użytkownika'
           icon={AccountCircleIcon}
           change={handleChange('username')}
@@ -121,7 +132,7 @@ const Register = () => {
       </Grid>
       <Grid item>
         <IconInput
-          id='email'
+          type='email'
           label='Adres e-mail'
           icon={AccountCircleIcon}
           change={handleChange('email')}
@@ -130,22 +141,11 @@ const Register = () => {
       </Grid>
       <Grid item>
         <IconInput
-          id='password'
-          label='Hasło'
           type='password'
+          label='Hasło'
           icon={LockIcon}
           change={handleChange('password')}
           value={state.password}
-        />
-      </Grid>
-      <Grid item>
-        <IconInput
-          id='confirmPassword'
-          label='Powtórz hasło'
-          type='password'
-          icon={LockIcon}
-          change={handleChange('confirmPassword')}
-          value={state.confirmPassword}
         />
       </Grid>
       <Grid item>
