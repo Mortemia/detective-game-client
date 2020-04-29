@@ -91,17 +91,20 @@ const Register = () => {
 
   const signUp = () => {
     API.signUp(state)
-      .then(response => {
-        const user = {
+      .then(() => {
+        API.signIn({
           usernameOrEmail: state.username,
-        };
-        appDispatch({ type: 'LOGIN', user });
-        appDispatch({
-          type: 'OPEN_SNACKBAR',
-          snackbar: snackbars.successSignUp,
+          password: state.password,
+        }).then(response => {
+          const user = response.data.user;
+          appDispatch({ type: 'LOGIN', user });
+          appDispatch({
+            type: 'OPEN_SNACKBAR',
+            snackbar: snackbars.successSignUp,
+          });
+          let path = '/dashboard';
+          history.push(path);
         });
-        let path = '/dashboard';
-        history.push(path);
       })
       .catch(errors => {
         console.log(errors.response);
