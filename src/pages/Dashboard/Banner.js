@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Banner = () => {
+const Banner = ({ name }) => {
   const classes = useStyles();
 
   return (
@@ -24,7 +24,7 @@ const Banner = () => {
       <Paper className={classes.paper}>
         <div className={classes.root}>
           <Typography component='h2' variant='h6' color='primary' gutterBottom>
-            Cześć, Aldonka!
+            Cześć, {name || 'nieznajomy'}!
           </Typography>
         </div>
         <Button variant='contained' color='primary' component={Link} to='/play'>

@@ -33,12 +33,9 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    const user = {
-      usernameOrEmail: state.usernameOrEmail,
-    };
-
     API.signIn(state)
       .then(response => {
+        const user = response.data.user;
         appDispatch({ type: 'LOGIN', user });
         appDispatch({
           type: 'OPEN_SNACKBAR',
