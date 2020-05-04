@@ -4,8 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import ComponentCard from '../../../components/ComponentCard';
 
 const ItemCard = ({ item }) => {
-  console.log(item);
-
   return (
     item && (
       <ComponentCard component={item} title='name'>

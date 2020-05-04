@@ -1,8 +1,5 @@
 import Cookie from 'js-cookie';
 import { snackbars } from '../constants/snackbars';
-import GameAPI from '../api/GameAPI';
-
-const gameAPI = new GameAPI();
 
 export const login = (appDispatch, data) => {
   const user = data.user;
@@ -38,7 +35,7 @@ export const travel = (dispatchers, game, destination) => {
       });
 };
 
-export const examineItem = (dispatchers, game, item) => {
+export const examineItem = (dispatchers, item) => {
   const { dispatch, appDispatch } = dispatchers;
   if (!item.examined) {
     dispatch({ type: 'EXAMINE', item });

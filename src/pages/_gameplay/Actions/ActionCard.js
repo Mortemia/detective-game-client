@@ -52,15 +52,15 @@ const ActionCard = ({ action }) => {
     actionByType(dispatchers, game, component, type);
   };
 
-  const reveleadComponentsContent = component => {
+  const reveleadComponentsContent = (component, index) => {
     const { revealedText, revealed, name } = component;
     return (
       !!revealed.length && (
-        <CardContent>
+        <CardContent key={index}>
           <Typography variant='body2' component='p'>
             {revealedText}
-            {revealed.map(x => (
-              <li>
+            {revealed.map((x, index) => (
+              <li key={index}>
                 {x.name || x.fullname}
                 {((name === 'actions' && !x.done) || name === 'items') && (
                   <IconButton
@@ -82,7 +82,9 @@ const ActionCard = ({ action }) => {
   return (
     action && (
       <ComponentCard component={action} title='name' subheader='location'>
-        {components.map(component => reveleadComponentsContent(component))}
+        {components.map((component, index) =>
+          reveleadComponentsContent(component, index)
+        )}
       </ComponentCard>
     )
   );

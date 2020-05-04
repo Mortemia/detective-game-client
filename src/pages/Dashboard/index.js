@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import PaperList from '../../components/PaperList';
 import Banner from './Banner';
-import { gamesInProgress, casesInProgress } from '../../fakedata';
+import { casesInProgress } from '../../fakedata';
 import UserAPI from '../../api/UserAPI';
 import GameAPI from '../../api/GameAPI';
 import { AppContext } from '../../context/appContext';
