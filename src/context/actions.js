@@ -1,5 +1,17 @@
 import Cookie from 'js-cookie';
 import { snackbars } from '../constants/snackbars';
+import GameAPI from '../api/GameAPI';
+
+const gameAPI = new GameAPI();
+
+const saveGameData = game => {
+  const saveDetectiveCaseRequest = {
+    caseId: game.case_id,
+    playerId: game.player_id,
+    saveJson: game,
+  };
+  gameAPI.saveDetectiveCase(saveDetectiveCaseRequest);
+};
 
 export const login = (appDispatch, data) => {
   const user = data.user;
@@ -27,16 +39,17 @@ export const actionByType = (dispatchers, game, component, type) => {
 
 export const travel = (dispatchers, game, destination) => {
   const { dispatch, appDispatch } = dispatchers;
-  console.log(destination);
   game.movement_points - destination.cost >= 0
     ? dispatch({ type: 'TRAVEL', destination })
     : appDispatch({
         type: 'OPEN_SNACKBAR',
         snackbar: snackbars.errorTravel,
       });
+
+  saveGameData(game);
 };
 
-export const examineItem = (dispatchers, item) => {
+export const examineItem = (dispatchers, game, item) => {
   const { dispatch, appDispatch } = dispatchers;
   if (!item.examined) {
     dispatch({ type: 'EXAMINE', item });
@@ -49,6 +62,8 @@ export const examineItem = (dispatchers, item) => {
       type: 'OPEN_SNACKBAR',
       snackbar: snackbars.errorExamine,
     });
+
+  saveGameData(game);
 };
 
 export const executeAction = (dispatchers, game, action) => {
@@ -93,6 +108,8 @@ export const executeAction = (dispatchers, game, action) => {
       type: 'OPEN_SNACKBAR',
       snackbar: snackbars.errorDifferentActionLocation,
     });
+
+  saveGameData(game);
 
   return action.location === game.location || !action.location;
 };

@@ -29,8 +29,11 @@ const NewGame = _ => {
     const caseId = selectedCase.id;
 
     gameAPI.getNewDetectiveCase(caseId).then(response => {
-      console.log(response.data.newDetectiveCase);
-      const save = response.data.newDetectiveCase;
+      const save = {
+        ...response.data.newDetectiveCase,
+        player_id: loggedUser.id,
+        case_id: caseId,
+      };
       dispatch({
         type: 'LOAD_GAME',
         save: save,

@@ -28,7 +28,7 @@ const Dashboard = () => {
   };
 
   const handleExamine = item => {
-    examineItem(dispatchers, item);
+    examineItem(dispatchers, game, item);
     handleClick('items')(item);
   };
 

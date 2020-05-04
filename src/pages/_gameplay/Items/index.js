@@ -27,7 +27,7 @@ const Items = _ => {
   };
 
   const handleAction = item => {
-    examineItem(dispatchers, item);
+    examineItem(dispatchers, game, item);
     handleNavigate(item);
   };
 
