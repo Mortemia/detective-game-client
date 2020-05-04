@@ -9,6 +9,7 @@ import IconInput from '../../components/IconInput';
 import { AppContext } from '../../context/appContext';
 import UserAPI from '../../api/UserAPI';
 import { snackbars } from '../../constants/snackbars';
+import { login } from '../../context/actions';
 
 const API = new UserAPI();
 
@@ -35,12 +36,8 @@ const Login = () => {
   const handleLogin = () => {
     API.signIn(state)
       .then(response => {
-        const user = response.data.user;
-        appDispatch({ type: 'LOGIN', user });
-        appDispatch({
-          type: 'OPEN_SNACKBAR',
-          snackbar: snackbars.successLogin,
-        });
+        login(appDispatch, response.data);
+
         let path = '/dashboard';
         history.push(path);
       })

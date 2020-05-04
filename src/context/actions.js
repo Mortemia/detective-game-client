@@ -1,5 +1,15 @@
 import { snackbars } from '../constants/snackbars';
 
+export const login = (appDispatch, data) => {
+  const user = data.user;
+  localStorage.setItem('token', data.accessToken);
+  appDispatch({ type: 'LOGIN', user });
+  appDispatch({
+    type: 'OPEN_SNACKBAR',
+    snackbar: snackbars.successSignUp,
+  });
+};
+
 export const actionByType = (dispatchers, game, component, type) => {
   switch (type) {
     case 'actions': {

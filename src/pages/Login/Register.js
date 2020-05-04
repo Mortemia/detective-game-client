@@ -10,6 +10,7 @@ import { AppContext } from '../../context/appContext';
 import UserAPI from '../../api/UserAPI';
 import { snackbars } from '../../constants/snackbars';
 import { validateOnBlur } from '../../utils/validators';
+import { login } from '../../context/actions';
 
 const API = new UserAPI();
 
@@ -96,12 +97,7 @@ const Register = () => {
           usernameOrEmail: state.username,
           password: state.password,
         }).then(response => {
-          const user = response.data.user;
-          appDispatch({ type: 'LOGIN', user });
-          appDispatch({
-            type: 'OPEN_SNACKBAR',
-            snackbar: snackbars.successSignUp,
-          });
+          login(appDispatch, response.data);
           let path = '/dashboard';
           history.push(path);
         });
