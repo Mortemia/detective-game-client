@@ -3,14 +3,15 @@ import { reducer } from './reducer';
 
 export const AppContext = createContext();
 
+const user = JSON.parse(localStorage.getItem('user'));
+
 const initialState = {
   snackbar: { visible: false },
+  user: user || null,
 };
 
 const AppProvider = ({ children }) => {
-  const [appState, appDispatch] = useReducer(reducer, {
-    initialState,
-  });
+  const [appState, appDispatch] = useReducer(reducer, initialState);
 
   return (
     <AppContext.Provider value={{ appState, appDispatch }}>

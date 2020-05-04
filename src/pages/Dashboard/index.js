@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   React.useEffect(() => {
     API.getActiveDetectiveCases(loggedUser.id).then(response => {
-      setActiveCases(response.data.detectiveCaseList);
+      response && setActiveCases(response.data.detectiveCaseList);
     });
   }, [loggedUser.id]);
 
