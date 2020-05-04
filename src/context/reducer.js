@@ -1,6 +1,6 @@
 export const reducer = (state, action) => {
   switch (action.type) {
-    case 'LOAD_SAVE':
+    case 'LOAD_GAME':
       return action.save;
     case 'LOGIN':
       return {

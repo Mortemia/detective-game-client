@@ -23,3 +23,7 @@ export const getDoneActions = game =>
 
 export const getPossiblePeople = game =>
   game.people.filter(person => person.revealed);
+
+export const getActionById = (game, id) => {
+  return game.actions.find(action => action.id == id);
+};

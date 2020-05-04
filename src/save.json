@@ -1,16 +1,18 @@
 {
-  "location": "Posterunek",
+  "location": "Dom Kowalskiego",
   "date": "24.06.1997",
   "movement_points": "40",
+  "frst_action_id": "1",
   "actions": [
     {
       "id": 1,
       "name": "Przeszukaj dom Kowalskiego",
       "description": "Bedąc na miejscu, wchodzisz do mieszkania niejakiego Kowalskiego",
-      "revealed": true,
+      "revealed": false,
       "done": false,
       "location": "Dom Kowalskiego",
       "successors": [
+        { "id": 2, "type": "actions" },
         { "id": 3, "type": "locations" },
         { "id": 2, "type": "items" }
       ]
@@ -19,7 +21,7 @@
       "id": 2,
       "name": "Poszukaj w bazie informacji na temat firmy Abackiego",
       "description": "Stukasz Abacki w googlach i wchodzisz w pierwszy link.",
-      "revealed": true,
+      "revealed": false,
       "done": false,
       "location": "Posterunek",
       "successors": [

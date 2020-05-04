@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PaperList from '../../components/PaperList';
 import GameAPI from '../../api/GameAPI';
 import { AppContext } from '../../context/appContext';
+import { GameContext } from '../../context/gameContext';
 
 const gameAPI = new GameAPI();
 
@@ -18,13 +19,23 @@ const NewGame = _ => {
   const history = useHistory();
 
   const { appState } = React.useContext(AppContext);
+  const { game, dispatch } = React.useContext(GameContext);
+
   const [allCases, setAllCases] = React.useState([]);
 
   const loggedUser = appState.user;
 
   const handleCaseSelection = selectedCase => {
     const caseId = selectedCase.id;
-    gameAPI.getNewDetectiveCase(caseId).then(response => console.log(response));
+
+    gameAPI.getNewDetectiveCase(caseId).then(response => {
+      console.log(response.data.newDetectiveCase);
+      const save = response.data.newDetectiveCase;
+      dispatch({
+        type: 'LOAD_GAME',
+        save: save,
+      });
+    });
     let path = '/play/intro';
     history.push(path);
   };

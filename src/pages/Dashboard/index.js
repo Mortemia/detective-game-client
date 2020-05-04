@@ -39,7 +39,7 @@ const Dashboard = () => {
     gameAPI.getDetectiveCaseSave(saveDetectiveCaseRequest).then(response => {
       const save = JSON.parse(response.data.jsonSave);
       dispatch({
-        type: 'LOAD_SAVE',
+        type: 'LOAD_GAME',
         save: save,
       });
     });
