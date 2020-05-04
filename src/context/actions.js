@@ -4,15 +4,6 @@ import GameAPI from '../api/GameAPI';
 
 const gameAPI = new GameAPI();
 
-const saveGameData = game => {
-  const saveDetectiveCaseRequest = {
-    caseId: game.case_id,
-    playerId: game.player_id,
-    saveJson: game,
-  };
-  gameAPI.saveDetectiveCase(saveDetectiveCaseRequest);
-};
-
 export const login = (appDispatch, data) => {
   const user = data.user;
   localStorage.setItem('user', JSON.stringify(user));
@@ -45,8 +36,6 @@ export const travel = (dispatchers, game, destination) => {
         type: 'OPEN_SNACKBAR',
         snackbar: snackbars.errorTravel,
       });
-
-  saveGameData(game);
 };
 
 export const examineItem = (dispatchers, game, item) => {
@@ -62,8 +51,6 @@ export const examineItem = (dispatchers, game, item) => {
       type: 'OPEN_SNACKBAR',
       snackbar: snackbars.errorExamine,
     });
-
-  saveGameData(game);
 };
 
 export const executeAction = (dispatchers, game, action) => {
@@ -108,8 +95,6 @@ export const executeAction = (dispatchers, game, action) => {
       type: 'OPEN_SNACKBAR',
       snackbar: snackbars.errorDifferentActionLocation,
     });
-
-  saveGameData(game);
 
   return action.location === game.location || !action.location;
 };

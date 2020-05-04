@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import PaperList from '../../components/PaperList';
 import Banner from './Banner';
@@ -20,11 +21,12 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
   const [activeCases, setActiveCases] = React.useState([]);
+  const history = useHistory();
+
   const { appState } = React.useContext(AppContext);
   const { game, dispatch } = React.useContext(GameContext);
 
   const loggedUser = appState.user;
-
   React.useEffect(() => {
     API.getActiveDetectiveCases(loggedUser.id).then(response => {
       response && setActiveCases(response.data.detectiveCaseList);
@@ -42,6 +44,8 @@ const Dashboard = () => {
         type: 'LOAD_GAME',
         save: save,
       });
+      let path = '/play';
+      history.push(path);
     });
   };
 

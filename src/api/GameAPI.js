@@ -8,8 +8,12 @@ class GameAPI {
   getAllCases = _ => axios.get(apiURL + 'dashboard/getAllCases');
   getNewDetectiveCase = caseId =>
     axios.get(apiURL + 'play/getNewDetectiveCaseById/' + caseId);
-  saveDetectiveCase = saveDetectiveCaseRequest =>
-    axios.post(apiURL + 'play/saveDetectiveCase', saveDetectiveCaseRequest);
+  saveDetectiveCase = game =>
+    axios.post(apiURL + 'play/saveDetectiveCase', {
+      caseId: game.case_id,
+      playerId: game.player_id,
+      saveJson: game,
+    });
 }
 
 export default GameAPI;

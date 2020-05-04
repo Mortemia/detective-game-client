@@ -38,9 +38,9 @@ const NewGame = _ => {
         type: 'LOAD_GAME',
         save: save,
       });
+      let path = '/play/intro';
+      history.push(path);
     });
-    let path = '/play/intro';
-    history.push(path);
   };
 
   React.useEffect(() => {
