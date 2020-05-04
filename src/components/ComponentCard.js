@@ -4,13 +4,20 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-const ComponentCard = ({ component, title, subheader, children }) => {
+const ComponentCard = ({
+  component,
+  title,
+  subheader,
+  children,
+  additionalInfo,
+}) => {
   return (
     <Card>
       <CardHeader
         title={component[title] || title}
         subheader={component[subheader]}
       />
+      <CardHeader subheader={additionalInfo || ''} />
       <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
           {component.description}

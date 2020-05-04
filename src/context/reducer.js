@@ -37,6 +37,7 @@ export const reducer = (state, action) => {
         locations: action.updatedComponents.locations,
         items: action.updatedComponents.items,
         people: action.updatedComponents.people,
+        movement_points: action.updatedMovementPoints,
       };
     case 'EXAMINE':
       return {

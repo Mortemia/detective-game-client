@@ -81,7 +81,12 @@ const ActionCard = ({ action }) => {
 
   return (
     action && (
-      <ComponentCard component={action} title='name' subheader='location'>
+      <ComponentCard
+        component={action}
+        title='name'
+        subheader='location'
+        additionalInfo={`Koszt akcji:  ${action.time}`}
+      >
         {components.map((component, index) =>
           reveleadComponentsContent(component, index)
         )}

@@ -82,6 +82,7 @@ export const executeAction = (dispatchers, game, action) => {
       type: 'EXECUTE_ACTION',
       action,
       updatedComponents,
+      updatedMovementPoints: game.movement_points - action.time,
     });
     appDispatch({
       type: 'OPEN_SNACKBAR',
