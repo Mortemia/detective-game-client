@@ -7,7 +7,10 @@ import Typography from '@material-ui/core/Typography';
 const ComponentCard = ({ component, title, subheader, children }) => {
   return (
     <Card>
-      <CardHeader title={component[title]} subheader={component[subheader]} />
+      <CardHeader
+        title={component[title] || title}
+        subheader={component[subheader]}
+      />
       <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
           {component.description}
