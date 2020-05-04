@@ -27,7 +27,12 @@ const Banner = ({ name }) => {
             Cześć, {name || 'nieznajomy'}!
           </Typography>
         </div>
-        <Button variant='contained' color='primary' component={Link} to='/play'>
+        <Button
+          variant='contained'
+          color='primary'
+          component={Link}
+          to='/dashboard/newgame'
+        >
           NOWA GRA
         </Button>
       </Paper>
