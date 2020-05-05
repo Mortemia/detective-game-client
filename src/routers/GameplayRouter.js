@@ -17,7 +17,6 @@ const GameplayRouter = () => {
       {!appState.user && <Redirect to='/login' />}
       <Switch>
         <Route exact path='/play' component={Dashboard} />
-        <Route exact path='/play/:parameter' component={Dashboard} />
 
         <Route exact path='/play/items/:id' component={Items} />
         <Route path='/play/items' component={Items} />
@@ -31,6 +30,7 @@ const GameplayRouter = () => {
         <Route path='/play/locations' component={Locations} />
 
         <Route path='/play/finalTest' component={FinalTest} />
+        <Route exact path='/play/:parameter' component={Dashboard} />
       </Switch>
     </>
   );
