@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
     }),
     width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(8),
+      width: theme.spacing(7),
     },
   },
   appBarSpacer: theme.mixins.toolbar,
@@ -118,8 +118,6 @@ const ComplexDrawer = ({ open, handleDrawerClose, children }) => {
         </div>
         <Divider />
         <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
         <Divider />
         <List>{finalTestListItem}</List>
       </Drawer>

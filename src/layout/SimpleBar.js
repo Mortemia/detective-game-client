@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Logo from './Logo';
-import AccountMenuIcon from '../layout/AccountMenuIcon';
+import AccountMenu from '../layout/AccountMenu';
 import { AppContext } from '../context/appContext';
 
 const SimpleBar = props => {
@@ -19,7 +19,7 @@ const SimpleBar = props => {
         </Button>
         <Button color='inherit'>KREATOR</Button>
         {appState.user ? (
-          <AccountMenuIcon />
+          <AccountMenu />
         ) : (
           <Button color='inherit' component={Link} to='/login'>
             Zaloguj się

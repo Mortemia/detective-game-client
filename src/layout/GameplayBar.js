@@ -10,12 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { GameContext } from '../context/gameContext';
-import AccountMenuIcon from '../layout/AccountMenuIcon';
+import AccountMenu from '../layout/AccountMenu';
 import Logo from './Logo';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
@@ -114,7 +114,7 @@ const GameplayBar = ({ open, handleDrawerOpen }) => {
           <Typography className={classes.barContent}>
             Punkty ruchu: {game.movement_points}
           </Typography>
-          <AccountMenuIcon />
+          <AccountMenu />
           {/* <IconButton color='inherit'>
             <Badge badgeContent={4} color='secondary'>
               <NotificationsIcon />

@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { AppContext } from '../context/appContext';
 import { snackbars } from '../constants/snackbars';
 
-const AccountMenuIcon = _ => {
+const AccountMenu = _ => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -73,4 +73,4 @@ const AccountMenuIcon = _ => {
   );
 };
 
-export default AccountMenuIcon;
+export default AccountMenu;

@@ -47,33 +47,8 @@ export const mainListItems = (
   </div>
 );
 
-export const secondaryListItems = (
-  <div>
-    <ListSubheader inset>Twoje notatki</ListSubheader>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary='Kowalski' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary='O Abackim' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary='Ogólne' />
-    </ListItem>
-  </div>
-);
-
 export const finalTestListItem = (
   <>
-    <ListSubheader inset>Rozwiąż sprawę</ListSubheader>
     <ListItem button component={Link} to='/play/finalTest'>
       <ListItemIcon>
         <ExtensionIcon />
