@@ -1,6 +1,7 @@
 import React from 'react';
 import { Graph } from 'react-d3-graph';
 import { GameContext } from '../../../context/gameContext';
+import { getRevealedLocations } from '../../../utils/gameUtils';
 
 const myConfig = {
   nodeHighlightBehavior: true,
@@ -21,8 +22,28 @@ const myConfig = {
 const LocationGraph = ({ hoveredLocation, ...props }) => {
   const { game } = React.useContext(GameContext);
 
+  const createLinks = () => {
+    const links = [];
+    const revealedLocations = getRevealedLocations(game).map(
+      location => location.name
+    );
+
+    game.paths.forEach(path => {
+      if (
+        revealedLocations.includes(path.location1) &&
+        revealedLocations.includes(path.location2)
+      )
+        links.push({
+          source: path.location1,
+          target: path.location2,
+          label: `${path.cost} PR`,
+        });
+    });
+    return links;
+  };
+
   let data = {
-    nodes: game.locations.map(a => {
+    nodes: getRevealedLocations(game).map(a => {
       return {
         id: a.name,
         color: a.name === game.location && 'red',
@@ -30,13 +51,7 @@ const LocationGraph = ({ hoveredLocation, ...props }) => {
           hoveredLocation && a.name === hoveredLocation.name && 'blue',
       };
     }),
-    links: game.paths.map((a, index) => {
-      return {
-        source: a.location1,
-        target: a.location2,
-        label: `${a.cost} PR`,
-      };
-    }),
+    links: createLinks(),
   };
 
   return (

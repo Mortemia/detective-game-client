@@ -7,6 +7,7 @@ import { AppContext } from '../../../context/appContext';
 import PaperList from '../../../components/PaperList';
 import LocationGraph from './Graph';
 import LocationCard from './LocationCard';
+import { getRevealedLocations } from '../../../utils/gameUtils';
 
 const useStyles = makeStyles(theme => ({
   grid: {
@@ -51,7 +52,7 @@ const Locations = _ => {
           <PaperList
             listName='Lokacje'
             primary='name'
-            items={game.locations}
+            items={getRevealedLocations(game)}
             navigate={handleNavigate}
             hover={setHoveredLocation}
             className={classes.locationList}

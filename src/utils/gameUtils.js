@@ -27,9 +27,11 @@ export const getRevealedPeople = game =>
 export const getRevealedItems = game =>
   game.items.filter(item => item.revealed);
 
-export const getActionById = (game, id) => {
-  return game.actions.find(action => action.id == id);
-};
+export const getRevealedLocations = game =>
+  game.locations.filter(location => location.revealed);
+
+export const getActionById = (game, id) =>
+  game.actions.find(action => action.id == id);
 
 export const getLocationByName = (game, name) =>
   game.locations.find(location => location.name === name);
