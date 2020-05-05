@@ -7,6 +7,12 @@ export const reducer = (state, action) => {
         ...state,
         user: action.user,
       };
+    case 'FINISH_GAME':
+      return {
+        ...state,
+        finished_game: true,
+        score: action.score,
+      };
     case 'LOGOUT':
       return {
         ...state,
