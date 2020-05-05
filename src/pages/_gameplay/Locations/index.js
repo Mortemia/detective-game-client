@@ -1,24 +1,10 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { Graph } from 'react-d3-graph';
 import Grid from '@material-ui/core/Grid';
-import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import { GameContext } from '../../../context/gameContext';
 import { AppContext } from '../../../context/appContext';
 import PaperList from '../../../components/PaperList';
-
-const myConfig = {
-  nodeHighlightBehavior: true,
-  node: {
-    color: 'lightgreen',
-    size: 120,
-    highlightStrokeColor: 'blue',
-  },
-  link: {
-    highlightColor: 'lightblue',
-    renderLabel: true,
-  },
-};
+import LocationGraph from './Graph';
 
 const Locations = _ => {
   const { game, dispatch } = React.useContext(GameContext);
@@ -29,18 +15,7 @@ const Locations = _ => {
     appDispatch,
   };
 
-  const data = {
-    nodes: game.locations.map(a => {
-      return { id: a.name };
-    }),
-    links: game.paths.map(a => {
-      return {
-        source: a.location1,
-        target: a.location2,
-        label: `${a.cost} PR`,
-      };
-    }),
-  };
+  const [hoveredLocation, setHoveredLocation] = React.useState(null);
 
   const { id } = useParams();
   let Location = game.locations.find(x => x.id === parseInt(id)) || null;
@@ -59,14 +34,11 @@ const Locations = _ => {
           primary='name'
           items={game.locations}
           navigate={handleNavigate}
+          hover={setHoveredLocation}
         />
       </Grid>
       <Grid item xs={12} sm={8} md={8}>
-        <Graph
-          id='graph-id' // id is mandatory, if no id is defined rd3g will throw an error
-          data={data}
-          config={myConfig}
-        />
+        <LocationGraph hoveredLocation={hoveredLocation} />
       </Grid>
     </Grid>
   );

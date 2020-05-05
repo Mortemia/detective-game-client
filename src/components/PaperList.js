@@ -27,6 +27,7 @@ const PaperList = ({
   secondary,
   navigate,
   action,
+  hover,
   ...props
 }) => {
   const classes = useStyles();
@@ -45,6 +46,8 @@ const PaperList = ({
                 button
                 key={index}
                 onClick={() => navigate && navigate(item)}
+                onMouseEnter={() => hover && hover(item)}
+                onMouseLeave={() => hover && hover(null)}
               >
                 <ListItemText
                   primary={item[primary]}
