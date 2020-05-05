@@ -21,8 +21,11 @@ export const getPossibleActions = game =>
 export const getDoneActions = game =>
   game.actions.filter(action => action.done);
 
-export const getPossiblePeople = game =>
+export const getRevealedPeople = game =>
   game.people.filter(person => person.revealed);
+
+export const getRevealedItems = game =>
+  game.items.filter(item => item.revealed);
 
 export const getActionById = (game, id) => {
   return game.actions.find(action => action.id == id);

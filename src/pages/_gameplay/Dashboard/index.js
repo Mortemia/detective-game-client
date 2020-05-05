@@ -9,7 +9,8 @@ import { GameContext } from '../../../context/gameContext';
 import {
   fastTravelLocations,
   getPossibleActions,
-  getPossiblePeople,
+  getRevealedPeople,
+  getRevealedItems,
 } from '../../../utils/gameUtils';
 import { AppContext } from '../../../context/appContext';
 import { examineItem, travel, executeAction } from '../../../context/actions';
@@ -72,7 +73,7 @@ const Dashboard = () => {
         <Grid item xs={12} sm={12} md={4}>
           <PaperList
             listName='Przedmioty'
-            items={game.items}
+            items={getRevealedItems(game)}
             icon={ZoomInIcon}
             primary='name'
             navigate={handleClick('items')}
@@ -81,8 +82,8 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
           <PaperList
-            listName='Ostatnio wyświetleni'
-            items={getPossiblePeople(game)}
+            listName='Osoby'
+            items={getRevealedPeople(game)}
             primary='fullname'
             navigate={handleClick('people')}
           />

@@ -7,6 +7,7 @@ import { AppContext } from '../../../context/appContext';
 import PaperList from '../../../components/PaperList';
 import ItemCard from './ItemCard';
 import { examineItem } from '../../../context/actions';
+import { getRevealedItems } from '../../../utils/gameUtils';
 
 const Items = _ => {
   const { game, dispatch } = React.useContext(GameContext);
@@ -18,7 +19,7 @@ const Items = _ => {
   };
 
   const { id } = useParams();
-  let item = game.items.find(x => x.id === parseInt(id)) || null;
+  let item = game.items.find(x => x.id === parseInt(id) && x.revealed) || null;
 
   const handleNavigate = newItem => {
     item = newItem;
@@ -37,7 +38,7 @@ const Items = _ => {
         <PaperList
           listName='Przedmioty'
           primary='name'
-          items={game.items}
+          items={getRevealedItems(game)}
           navigate={handleNavigate}
           action={handleAction}
           icon={ZoomInIcon}
