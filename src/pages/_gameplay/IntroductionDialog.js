@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { GameContext } from '../../context/gameContext';
 import { AppContext } from '../../context/appContext';
 import Button from '@material-ui/core/Button';
@@ -14,6 +15,7 @@ import GameAPI from '../../api/GameAPI';
 const gameAPI = new GameAPI();
 
 const IntroductionDialog = _ => {
+  const history = useHistory();
   const [open, setOpen] = React.useState(true);
   const descriptionElementRef = React.useRef(null);
 
@@ -36,11 +38,14 @@ const IntroductionDialog = _ => {
   React.useEffect(() => {
     executeAction(dispatchers, game, getActionById(game, game.frst_action_id));
     appDispatch({ type: 'CLOSE_SNACKBAR', message: '' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game.frst_action_id]);
 
   const handleClick = _ => {
     gameAPI.saveDetectiveCase(game);
     setOpen(false);
+    let path = '/play';
+    history.push(path);
   };
 
   return (
