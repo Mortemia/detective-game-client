@@ -27,6 +27,7 @@ const GameplayRouter = () => {
         <Route exact path='/play/actions/:id' component={Actions} />
         <Route path='/play/actions' component={Actions} />
 
+        <Route path='/play/locations/:id' component={Locations} />
         <Route path='/play/locations' component={Locations} />
 
         <Route path='/play/finalTest' component={FinalTest} />

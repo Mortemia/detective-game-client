@@ -30,3 +30,6 @@ export const getRevealedItems = game =>
 export const getActionById = (game, id) => {
   return game.actions.find(action => action.id == id);
 };
+
+export const getLocationByName = (game, name) =>
+  game.locations.find(location => location.name === name);

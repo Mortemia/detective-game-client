@@ -11,6 +11,7 @@ import {
   getPossibleActions,
   getRevealedPeople,
   getRevealedItems,
+  getLocationByName,
 } from '../../../utils/gameUtils';
 import { AppContext } from '../../../context/appContext';
 import { examineItem, travel, executeAction } from '../../../context/actions';
@@ -41,6 +42,8 @@ const Dashboard = () => {
   };
 
   const handleClick = type => component => {
+    if (type === 'locations')
+      component = getLocationByName(game, component.name);
     let path = `/play/${type}/${component.id}`;
     history.push(path);
   };
@@ -68,6 +71,7 @@ const Dashboard = () => {
             secondary='costMP'
             icon={CommuteIcon}
             action={handleTravel}
+            navigate={handleClick('locations')}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>

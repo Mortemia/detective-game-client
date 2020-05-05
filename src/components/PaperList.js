@@ -33,7 +33,7 @@ const PaperList = ({
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={`${classes.paper} ${props.className}`}>
       <div className={classes.root}>
         <Typography component='h2' variant='h6' color='primary' gutterBottom>
           {listName}
@@ -48,6 +48,7 @@ const PaperList = ({
                 onClick={() => navigate && navigate(item)}
                 onMouseEnter={() => hover && hover(item)}
                 onMouseLeave={() => hover && hover(null)}
+                disabled={!navigate}
               >
                 <ListItemText
                   primary={item[primary]}

@@ -4,18 +4,19 @@ import { GameContext } from '../../../context/gameContext';
 
 const myConfig = {
   nodeHighlightBehavior: true,
+  height: window.screen.availHeight - 500,
+  width: window.screen.availWidth - 200,
   node: {
     color: 'lightgreen',
-    size: 120,
-    highlightStrokeColor: 'blue',
+    size: 300,
+    fontSize: 15,
   },
   link: {
-    highlightColor: 'lightblue',
     renderLabel: true,
   },
 };
 
-const LocationGraph = ({ hoveredLocation }) => {
+const LocationGraph = ({ hoveredLocation, ...props }) => {
   const { game } = React.useContext(GameContext);
 
   const getNodeColor = nodeId => {
@@ -37,11 +38,13 @@ const LocationGraph = ({ hoveredLocation }) => {
   };
 
   return (
-    <Graph
-      id='graph-id' // id is mandatory, if no id is defined rd3g will throw an error
-      data={data}
-      config={myConfig}
-    />
+    <div className={props.className}>
+      <Graph
+        id='graph-id' // id is mandatory, if no id is defined rd3g will throw an error
+        data={data}
+        config={myConfig}
+      />
+    </div>
   );
 };
 
