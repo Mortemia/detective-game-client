@@ -6,7 +6,6 @@ import Items from '../pages/_gameplay/Items';
 import Actions from '../pages/_gameplay/Actions';
 import Locations from '../pages/_gameplay/Locations';
 import FinalTest from '../pages/_gameplay/FinalTest';
-import Introduction from '../pages/_gameplay/Introduction';
 
 import { AppContext } from '../context/appContext';
 
@@ -18,7 +17,7 @@ const GameplayRouter = () => {
       {!appState.user && <Redirect to='/login' />}
       <Switch>
         <Route exact path='/play' component={Dashboard} />
-        <Route exact path='/play/intro' component={Introduction} />
+        <Route exact path='/play/:parameter' component={Dashboard} />
 
         <Route exact path='/play/items/:id' component={Items} />
         <Route path='/play/items' component={Items} />
