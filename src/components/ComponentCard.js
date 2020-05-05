@@ -17,9 +17,9 @@ const ComponentCard = ({
         title={component[title] || title}
         subheader={component[subheader]}
       />
-      <CardHeader subheader={additionalInfo || ''} />
+      {additionalInfo && <CardHeader subheader={additionalInfo} />}
       <CardContent>
-        <Typography variant='body2' color='textSecondary' component='p'>
+        <Typography variant='body2' color='textPrimary' component='p'>
           {component.description}
         </Typography>
       </CardContent>

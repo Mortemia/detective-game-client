@@ -9,11 +9,11 @@ const ItemCard = ({ item }) => {
       <ComponentCard component={item} title='name'>
         {item.examined && (
           <CardContent>
-            <Typography variant='body2' component='p'>
+            <Typography variant='body2' color='textSecondary' component='p'>
               Wyniki badania:
             </Typography>
 
-            <Typography variant='body2' color='textSecondary' component='p'>
+            <Typography variant='body2' component='p'>
               {item.examineInfo}
             </Typography>
           </CardContent>

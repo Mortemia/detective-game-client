@@ -21,7 +21,7 @@ const ActionCard = ({ action }) => {
   const components = [
     { name: 'locations', revealedText: 'Odkryte miejsca' },
     { name: 'actions', revealedText: 'Nowe akcje' },
-    { name: 'items', revealedText: 'Znalezione przedmioty' },
+    { name: 'items', revealedText: 'Nowe przedmioty' },
     { name: 'people', revealedText: 'Poznane osoby' },
   ];
 

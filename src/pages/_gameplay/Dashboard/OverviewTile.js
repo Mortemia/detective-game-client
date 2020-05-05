@@ -49,8 +49,13 @@ const OverviewTile = props => {
           {game.date}
         </Typography>
         <Typography component='h2' gutterBottom>
-          {`Punkty Ruchu: ${game.movement_points}`}
+          Punkty Ruchu: {game.movement_points}
         </Typography>
+        {game.movement_points <= 0 && (
+          <Typography component='h2' color='textSecondary' gutterBottom>
+            Zakończ dzień albo podejdź do testu końcowego!
+          </Typography>
+        )}
       </div>
     </Paper>
   );
