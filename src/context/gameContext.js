@@ -6,11 +6,19 @@ export const GameContext = createContext();
 
 const gameAPI = new GameAPI();
 
+const retrieveSave = _ => {
+  const save = localStorage.getItem('gameSave');
+  return save ? JSON.parse(save) : null;
+};
+
 const GameProvider = ({ children }) => {
-  const [game, dispatch] = useReducer(reducer, null);
+  const [game, dispatch] = useReducer(reducer, retrieveSave());
 
   React.useEffect(() => {
-    game && gameAPI.saveDetectiveCase(game);
+    if (game) {
+      gameAPI.saveDetectiveCase(game);
+      localStorage.setItem('gameSave', JSON.stringify(game));
+    }
   }, [game]);
 
   return (
