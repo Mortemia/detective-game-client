@@ -10,23 +10,25 @@ const myConfig = {
     color: 'lightgreen',
     size: 300,
     fontSize: 15,
+    highlightFontSize: 15,
   },
   link: {
     renderLabel: true,
+    fontSize: 13,
   },
 };
 
 const LocationGraph = ({ hoveredLocation, ...props }) => {
   const { game } = React.useContext(GameContext);
 
-  const getNodeColor = nodeId => {
-    if (hoveredLocation && nodeId === hoveredLocation.name) return 'blue';
-    if (nodeId === game.location) return 'red';
-  };
-
   let data = {
     nodes: game.locations.map(a => {
-      return { id: a.name, color: getNodeColor(a.name) };
+      return {
+        id: a.name,
+        color: a.name === game.location && 'red',
+        strokeColor:
+          hoveredLocation && a.name === hoveredLocation.name && 'blue',
+      };
     }),
     links: game.paths.map((a, index) => {
       return {
