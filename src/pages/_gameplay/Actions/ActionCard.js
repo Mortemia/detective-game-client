@@ -82,8 +82,11 @@ const ActionCard = ({ action }) => {
             {revealed.map((x, index) => (
               <li key={index} className={classes.revealedComponent}>
                 <Link
-                  href='javascript:void(0);'
-                  onClick={() => handleComponentClick(x, type)}
+                  href='#'
+                  onClick={e => {
+                    e.preventDefault();
+                    handleComponentClick(x, type);
+                  }}
                   variant='body2'
                 >
                   {x.name || x.fullname}
