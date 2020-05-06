@@ -33,6 +33,7 @@ const NewGame = _ => {
         ...response.data.newDetectiveCase,
         player_id: loggedUser.id,
         case_id: caseId,
+        score: -1,
       };
       dispatch({
         type: 'LOAD_GAME',

@@ -2,21 +2,24 @@ import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import DialogActions from '@material-ui/core/DialogActions';
+
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+
 import Question from './Question';
 import { GameContext } from '../../../context/gameContext';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    maxWidth: '35rem',
-    justifyContent: 'center',
-    margin: 'auto',
+  paper: {
     padding: theme.spacing(2),
   },
   content: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
+  },
+  button: {
+    margin: theme.spacing(1),
   },
 }));
 
@@ -52,7 +55,7 @@ const FinalTest = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <>
       {open ? (
         <Question
           open={open}
@@ -60,14 +63,44 @@ const FinalTest = () => {
           nextQuestion={handleNextQuestion}
         />
       ) : (
-        <Paper>
-          <div className={classes.content}>Test końcowy</div>
-          <Button color='primary' onClick={handleClick}>
-            Dalej
-          </Button>
+        <Paper className={classes.paper}>
+          <Typography component='h2' variant='h6' color='primary'>
+            Test końcowy
+          </Typography>
+          <Typography
+            variant='body2'
+            color='textPrimary'
+            component='p'
+            className={classes.content}
+          >
+            W tym miejscu znajduje się przejście do ostatniej części gry - testu
+            końcowego. Podejść do niego możesz tylko i wyłącznie RAZ!{' '}
+          </Typography>
+          <Typography
+            variant='body2'
+            color='textPrimary'
+            component='p'
+            className={classes.content}
+          >
+            Po kliknięciu przycisku DALEJ zostaną Ci zadane pytania
+            jednokrotnego wyboru. Mogą dotyczyć różnych aspektów rozwiązywanej
+            prawy, także przygotuj się dobrze. Dopiero kiedy jesteś pewien, co
+            tak naprawdę się wydarzyło, spróbuj rozwiązać test końcowy.
+          </Typography>
+          <DialogActions>
+            <Button
+              color='primary'
+              onClick={handleClick}
+              className={classes.button}
+              size='large'
+              variant='outlined'
+            >
+              Dalej
+            </Button>
+          </DialogActions>
         </Paper>
       )}
-    </div>
+    </>
   );
 };
 

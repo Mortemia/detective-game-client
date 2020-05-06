@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import CommuteIcon from '@material-ui/icons/Commute';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
@@ -15,7 +15,6 @@ import {
 } from '../../../utils/gameUtils';
 import { AppContext } from '../../../context/appContext';
 import { examineItem, travel, executeAction } from '../../../context/actions';
-import IntroductionDialog from '../IntroductionDialog';
 
 const Dashboard = () => {
   const { game, dispatch } = React.useContext(GameContext);
@@ -25,8 +24,6 @@ const Dashboard = () => {
     dispatch,
     appDispatch,
   };
-
-  const { parameter } = useParams();
 
   const handleTravel = destination => {
     travel(dispatchers, game, destination);
@@ -93,7 +90,6 @@ const Dashboard = () => {
           />
         </Grid>
       </Grid>
-      {parameter === 'intro' && <IntroductionDialog />}
     </>
   );
 };

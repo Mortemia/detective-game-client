@@ -6,7 +6,8 @@ import Items from '../pages/_gameplay/Items';
 import Actions from '../pages/_gameplay/Actions';
 import Locations from '../pages/_gameplay/Locations';
 import FinalTest from '../pages/_gameplay/FinalTest';
-import Result from '../pages/_gameplay/FinalTest/Result';
+import ResultDialog from '../pages/_gameplay/ResultDialog';
+import IntroductionDialog from '../pages/_gameplay/IntroductionDialog';
 import { AppContext } from '../context/appContext';
 
 const GameplayRouter = () => {
@@ -18,7 +19,8 @@ const GameplayRouter = () => {
       <Switch>
         <Route exact path='/play' component={Dashboard} />
 
-        <Route exact path='/play/result' component={Result} />
+        <Route exact path='/play/result' component={ResultDialog} />
+        <Route exact path='/play/intro' component={IntroductionDialog} />
 
         <Route exact path='/play/items/:id' component={Items} />
         <Route path='/play/items' component={Items} />

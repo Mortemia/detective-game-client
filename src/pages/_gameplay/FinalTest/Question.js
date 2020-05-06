@@ -15,13 +15,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: '35rem',
-    justifyContent: 'center',
     margin: 'auto',
-    padding: theme.spacing(2),
-  },
-  content: {
-    padding: theme.spacing(1),
+    width: '40rem',
   },
 }));
 
@@ -38,6 +33,7 @@ const Question = ({ question, nextQuestion, open }) => {
   const handleClick = _ => {
     const correct = question.answers.find(answer => answer.content === value)
       .correct;
+    setValue('');
     nextQuestion(correct ? 10 : 0);
   };
   return (
@@ -47,6 +43,7 @@ const Question = ({ question, nextQuestion, open }) => {
       aria-labelledby='scroll-dialog-title'
       aria-describedby='scroll-dialog-description'
       disableBackdropClick
+      className={classes.root}
     >
       <DialogTitle id='scroll-dialog-title'>Pytanie </DialogTitle>
       <DialogContent dividers>
@@ -75,7 +72,7 @@ const Question = ({ question, nextQuestion, open }) => {
         </RadioGroup>
       </DialogContent>
       <DialogActions>
-        <Button color='primary' onClick={handleClick}>
+        <Button color='primary' onClick={handleClick} disabled={!value}>
           Dalej
         </Button>
       </DialogActions>
