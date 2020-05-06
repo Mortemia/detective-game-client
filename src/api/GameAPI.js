@@ -12,6 +12,7 @@ class GameAPI {
     axios.post(apiURL + 'play/saveDetectiveCase', {
       caseId: game.case_id,
       playerId: game.player_id,
+      score: game.score,
       saveJson: game,
     });
 }
