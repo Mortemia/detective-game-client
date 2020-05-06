@@ -34,6 +34,7 @@ const NewGame = _ => {
         player_id: loggedUser.id,
         case_id: caseId,
         score: -1,
+        day: 1,
       };
       dispatch({
         type: 'LOAD_GAME',

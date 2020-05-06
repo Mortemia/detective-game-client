@@ -23,7 +23,11 @@ const useStyles = makeStyles(theme => ({
 
 const OverviewTile = props => {
   const classes = useStyles();
-  const { game } = React.useContext(GameContext);
+  const { dispatch, game } = React.useContext(GameContext);
+
+  const handleNextDayButton = _ => {
+    dispatch({ type: 'NEXT_DAY', new_day: game.day + 1, movement_points: 10 });
+  };
 
   return (
     <Paper className={classes.root}>
@@ -35,9 +39,14 @@ const OverviewTile = props => {
           gutterBottom
           className={classes.typography}
         >
-          Dzień 1
+          Dzień {game.day}
         </Typography>
-        <Button variant='contained' color='primary' className={classes.button}>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={handleNextDayButton}
+          className={classes.button}
+        >
           ZAKOŃCZ DZIEŃ
         </Button>
       </div>

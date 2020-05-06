@@ -13,6 +13,12 @@ export const reducer = (state, action) => {
         finished_game: true,
         score: action.score,
       };
+    case 'NEXT_DAY':
+      return {
+        ...state,
+        day: action.new_day,
+        movement_points: action.movement_points,
+      };
     case 'LOGOUT':
       return {
         ...state,
