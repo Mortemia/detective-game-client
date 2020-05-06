@@ -1,5 +1,8 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,7 +12,19 @@ import { AppContext } from '../../../context/appContext';
 import { actionByType } from '../../../context/actions';
 import ComponentCard from '../../../components/ComponentCard';
 
+const useStyles = makeStyles(theme => ({
+  revealedComponent: {
+    margin: theme.spacing(1),
+    marginLeft: theme.spacing(3),
+  },
+  actionIcon: {
+    marginLeft: theme.spacing(1),
+  },
+}));
+
 const ActionCard = ({ action }) => {
+  const classes = useStyles();
+
   const { appDispatch } = React.useContext(AppContext);
   const { game, dispatch } = React.useContext(GameContext);
   const history = useHistory();
@@ -19,10 +34,10 @@ const ActionCard = ({ action }) => {
   };
 
   const components = [
-    { name: 'locations', revealedText: 'Odkryte miejsca' },
-    { name: 'actions', revealedText: 'Nowe akcje' },
-    { name: 'items', revealedText: 'Nowe przedmioty' },
-    { name: 'people', revealedText: 'Poznane osoby' },
+    { type: 'locations', revealedText: 'Odkryte miejsca' },
+    { type: 'actions', revealedText: 'Nowe akcje' },
+    { type: 'items', revealedText: 'Nowe przedmioty' },
+    { type: 'people', revealedText: 'Poznane osoby' },
   ];
 
   const revealedComponents =
@@ -31,7 +46,7 @@ const ActionCard = ({ action }) => {
       (result, component) =>
         result.concat([
           action.successors.filter(
-            successor => successor.type === component.name
+            successor => successor.type === component.type
           ),
         ]),
       []
@@ -52,23 +67,40 @@ const ActionCard = ({ action }) => {
     actionByType(dispatchers, game, component, type);
   };
 
+  const handleComponentClick = (component, type) => {
+    let path = `/play/${type}/${component.id}`;
+    history.push(path);
+  };
+
   const reveleadComponentsContent = (component, index) => {
-    const { revealedText, revealed, name } = component;
+    const { revealedText, revealed, type } = component;
     return (
       !!revealed.length && (
         <CardContent key={index}>
           <Typography variant='body2' component='p'>
             {revealedText}
             {revealed.map((x, index) => (
-              <li key={index}>
-                {x.name || x.fullname}
-                {((name === 'actions' && !x.done) || name === 'items') && (
+              <li key={index} className={classes.revealedComponent}>
+                <Link
+                  href='#'
+                  onClick={() => handleComponentClick(x, type)}
+                  variant='body2'
+                >
+                  {x.name || x.fullname}
+                </Link>
+
+                {((type === 'actions' && !x.done) || type === 'items') && (
                   <IconButton
-                    color='secondary'
+                    color='primary'
                     size='small'
-                    onClick={_ => handleSuccessorClick(x, name)}
+                    onClick={_ => handleSuccessorClick(x, type)}
+                    className={classes.actionIcon}
                   >
-                    <KeyboardArrowRightIcon />
+                    {type === 'items' ? (
+                      <ZoomInIcon />
+                    ) : (
+                      <KeyboardArrowRightIcon />
+                    )}
                   </IconButton>
                 )}
               </li>
