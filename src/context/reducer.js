@@ -57,6 +57,7 @@ export const reducer = (state, action) => {
         items: state.items.map(item =>
           item.id === action.item.id ? { ...item, examined: true } : item
         ),
+        movement_points: action.updatedMovementPoints,
       };
     default:
       return state;

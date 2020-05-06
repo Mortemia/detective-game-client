@@ -62,9 +62,12 @@ const ActionCard = ({ action }) => {
         (component.revealed = getMoreInfo(revealedComponents[index]))
     );
 
-  const handleComponentClick = (component, type) => {
+  const handleComponentClick = (component, type, quickAction = false) => {
     let navigate = true;
-    if ((type === 'actions' && !component.done) || type === 'items')
+    if (
+      (type === 'actions' && !component.done) ||
+      (type === 'items' && quickAction)
+    )
       navigate = actionByType(dispatchers, game, component, type);
 
     if (navigate) {
@@ -89,7 +92,7 @@ const ActionCard = ({ action }) => {
                     handleComponentClick(x, type);
                   }}
                   variant='body2'
-                  color={x.done || type != 'actions' ? 'primary' : 'secondary'}
+                  color={x.done || type !== 'actions' ? 'primary' : 'secondary'}
                 >
                   {x.name || x.fullname}
                 </Link>
@@ -103,7 +106,7 @@ const ActionCard = ({ action }) => {
                     <IconButton
                       color='primary'
                       size='small'
-                      onClick={_ => handleComponentClick(x, type)}
+                      onClick={_ => handleComponentClick(x, type, true)}
                       className={classes.actionIcon}
                     >
                       <ZoomInIcon />

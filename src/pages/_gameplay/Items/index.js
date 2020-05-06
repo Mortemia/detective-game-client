@@ -28,9 +28,11 @@ const Items = _ => {
   };
 
   const handleAction = item => {
-    examineItem(dispatchers, item);
+    examineItem(dispatchers, game, item);
     handleNavigate(item);
   };
+
+  const checkExaminePossibility = item => !item.examined;
 
   return (
     <Grid container spacing={3}>
@@ -41,6 +43,7 @@ const Items = _ => {
           items={getRevealedItems(game)}
           navigate={handleNavigate}
           action={handleAction}
+          actionPossibility={checkExaminePossibility}
           icon={ZoomInIcon}
           tooltip='Zbadaj przedmiot kosztem PR'
         />

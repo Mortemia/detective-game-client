@@ -18,7 +18,7 @@ export const actionByType = (dispatchers, game, component, type) => {
       return executeAction(dispatchers, game, component);
     }
     case 'items': {
-      return examineItem(dispatchers, component);
+      return examineItem(dispatchers, game, component);
     }
     default: {
     }
@@ -35,12 +35,16 @@ export const travel = (dispatchers, game, destination) => {
       });
 };
 
-export const examineItem = (dispatchers, item) => {
+export const examineItem = (dispatchers, game, item) => {
   const { dispatch, appDispatch } = dispatchers;
   let success = false;
   if (!item.examined) {
     success = true;
-    dispatch({ type: 'EXAMINE', item });
+    dispatch({
+      type: 'EXAMINE',
+      item,
+      updatedMovementPoints: game.movement_points - item.exam_cost,
+    });
     appDispatch({
       type: 'OPEN_SNACKBAR',
       snackbar: snackbars.successExamine,

@@ -10,10 +10,19 @@ const ItemCard = ({ item }) => {
         {item.examined && (
           <CardContent>
             <Typography variant='body2' color='textSecondary' component='p'>
+              Badanie kosztowało {item.exam_cost} PR.
+            </Typography>
+            <Typography variant='body2' color='textSecondary' component='p'>
               Wyniki badania:
             </Typography>
 
-            <Typography variant='body2' component='p'>
+            <Typography
+              variant='body2'
+              component='p'
+              style={{
+                marginTop: '1rem',
+              }}
+            >
               {item.examineInfo}
             </Typography>
           </CardContent>
