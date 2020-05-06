@@ -21,6 +21,7 @@ const myConfig = {
 
 const LocationGraph = ({ hoveredLocation, ...props }) => {
   const { game } = React.useContext(GameContext);
+  const [higlightedLinks, setHiglightedLinks] = React.useState([]);
 
   const createLinks = () => {
     const links = [];
@@ -28,7 +29,7 @@ const LocationGraph = ({ hoveredLocation, ...props }) => {
       location => location.name
     );
 
-    game.paths.forEach(path => {
+    game.paths.forEach((path, index) => {
       if (
         revealedLocations.includes(path.location1) &&
         revealedLocations.includes(path.location2)
@@ -37,6 +38,7 @@ const LocationGraph = ({ hoveredLocation, ...props }) => {
           source: path.location1,
           target: path.location2,
           label: `${path.cost} PR`,
+          color: higlightedLinks.includes(index) && 'red',
         });
     });
     return links;
