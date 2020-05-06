@@ -42,6 +42,7 @@ const Items = _ => {
           navigate={handleNavigate}
           action={handleAction}
           icon={ZoomInIcon}
+          tooltip='Zbadaj przedmiot kosztem PR'
         />
       </Grid>
       <Grid item xs={12} sm={8} md={8}>

@@ -16,10 +16,10 @@ import { travel } from '../../../context/actions';
 
 const useStyles = makeStyles(theme => ({
   grid: {
-    maxHeight: '250px',
+    maxHeight: '270px',
   },
   locationList: {
-    maxHeight: '250px',
+    maxHeight: '270px',
   },
   graph: {
     paddingTop: '40px',
@@ -82,6 +82,7 @@ const Locations = _ => {
             actionPossibility={checkTravelPossibility}
             action={handleTravel}
             icon={CommuteIcon}
+            tooltip='Podróżuj'
           />
         </Grid>
         <Grid item xs={12} sm={8} md={8}>

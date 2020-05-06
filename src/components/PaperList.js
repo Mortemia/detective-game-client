@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -29,9 +30,16 @@ const PaperList = ({
   action,
   hover,
   actionPossibility,
+  tooltip,
   ...props
 }) => {
   const classes = useStyles();
+
+  const iconButton = item => (
+    <IconButton edge='end' onClick={() => action && action(item)}>
+      {props.icon ? <props.icon /> : <KeyboardArrowRightIcon />}
+    </IconButton>
+  );
 
   return (
     <Paper className={`${classes.paper} ${props.className}`}>
@@ -62,17 +70,18 @@ const PaperList = ({
                   />
 
                   {action && isActionAvailable && (
-                    <ListItemSecondaryAction>
-                      <IconButton
-                        edge='end'
-                        onClick={() => action && action(item)}
-                      >
-                        {props.icon ? (
-                          <props.icon />
-                        ) : (
-                          <KeyboardArrowRightIcon />
-                        )}
-                      </IconButton>
+                    <ListItemSecondaryAction
+                      style={{
+                        pointerEvents: props.icon ? 'all' : 'none',
+                      }}
+                    >
+                      {tooltip ? (
+                        <Tooltip title={tooltip} placement='top' arrow>
+                          {iconButton(item)}
+                        </Tooltip>
+                      ) : (
+                        iconButton(item)
+                      )}
                     </ListItemSecondaryAction>
                   )}
                 </ListItem>

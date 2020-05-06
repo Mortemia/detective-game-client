@@ -50,6 +50,7 @@ const Actions = _ => {
               secondary='location'
               items={getPossibleActions(game)}
               action={handleAction}
+              navigate={handleAction}
             />
           </Grid>
           <Grid item>

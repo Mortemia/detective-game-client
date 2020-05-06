@@ -57,6 +57,7 @@ const Dashboard = () => {
             items={getPossibleActions(game)}
             primary='name'
             secondary='location'
+            navigate={handleActionExcecution}
             action={handleActionExcecution}
           />
         </Grid>
@@ -69,6 +70,7 @@ const Dashboard = () => {
             icon={CommuteIcon}
             action={handleTravel}
             navigate={handleClick('locations')}
+            tooltip='Podróżuj'
           />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
@@ -79,6 +81,7 @@ const Dashboard = () => {
             primary='name'
             navigate={handleClick('items')}
             action={handleExamine}
+            tooltip='Zbadaj przedmiot kosztem PR'
           />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
