@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import Tooltip from '@material-ui/core/Tooltip';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
@@ -35,7 +36,7 @@ const ActionCard = ({ action }) => {
 
   const components = [
     { type: 'locations', revealedText: 'Odkryte miejsca' },
-    { type: 'actions', revealedText: 'Nowe akcje' },
+    { type: 'actions', revealedText: 'Odkryte akcje' },
     { type: 'items', revealedText: 'Nowe przedmioty' },
     { type: 'people', revealedText: 'Poznane osoby' },
   ];
@@ -61,15 +62,15 @@ const ActionCard = ({ action }) => {
         (component.revealed = getMoreInfo(revealedComponents[index]))
     );
 
-  const handleSuccessorClick = (component, type) => {
-    let path = `/play/${type}/${component.id}`;
-    history.push(path);
-    actionByType(dispatchers, game, component, type);
-  };
-
   const handleComponentClick = (component, type) => {
-    let path = `/play/${type}/${component.id}`;
-    history.push(path);
+    let navigate = true;
+    if ((type === 'actions' && !component.done) || type === 'items')
+      navigate = actionByType(dispatchers, game, component, type);
+
+    if (navigate) {
+      let path = `/play/${type}/${component.id}`;
+      history.push(path);
+    }
   };
 
   const reveleadComponentsContent = (component, index) => {
@@ -88,23 +89,26 @@ const ActionCard = ({ action }) => {
                     handleComponentClick(x, type);
                   }}
                   variant='body2'
+                  color={x.done || type != 'actions' ? 'primary' : 'secondary'}
                 >
                   {x.name || x.fullname}
                 </Link>
 
-                {((type === 'actions' && !x.done) || type === 'items') && (
-                  <IconButton
-                    color='primary'
-                    size='small'
-                    onClick={_ => handleSuccessorClick(x, type)}
-                    className={classes.actionIcon}
+                {type === 'items' && (
+                  <Tooltip
+                    title='Zbadaj przedmiot kosztem PR'
+                    placement='right'
+                    arrow
                   >
-                    {type === 'items' ? (
+                    <IconButton
+                      color='primary'
+                      size='small'
+                      onClick={_ => handleComponentClick(x, type)}
+                      className={classes.actionIcon}
+                    >
                       <ZoomInIcon />
-                    ) : (
-                      <KeyboardArrowRightIcon />
-                    )}
-                  </IconButton>
+                    </IconButton>
+                  </Tooltip>
                 )}
               </li>
             ))}

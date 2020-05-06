@@ -37,7 +37,9 @@ export const travel = (dispatchers, game, destination) => {
 
 export const examineItem = (dispatchers, item) => {
   const { dispatch, appDispatch } = dispatchers;
+  let success = false;
   if (!item.examined) {
+    success = true;
     dispatch({ type: 'EXAMINE', item });
     appDispatch({
       type: 'OPEN_SNACKBAR',
@@ -48,6 +50,8 @@ export const examineItem = (dispatchers, item) => {
       type: 'OPEN_SNACKBAR',
       snackbar: snackbars.errorExamine,
     });
+
+  return success;
 };
 
 export const executeAction = (dispatchers, game, action) => {
