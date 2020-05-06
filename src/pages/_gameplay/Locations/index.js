@@ -2,12 +2,17 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import CommuteIcon from '@material-ui/icons/Commute';
 import { GameContext } from '../../../context/gameContext';
 import { AppContext } from '../../../context/appContext';
 import PaperList from '../../../components/PaperList';
 import LocationGraph from './Graph';
 import LocationCard from './LocationCard';
-import { getRevealedLocations } from '../../../utils/gameUtils';
+import {
+  getRevealedLocations,
+  getPathToLocation,
+} from '../../../utils/gameUtils';
+import { travel } from '../../../context/actions';
 
 const useStyles = makeStyles(theme => ({
   grid: {
@@ -45,6 +50,24 @@ const Locations = _ => {
     setLocation(newLocation);
   };
 
+  const checkTravelPossibility = location => {
+    const path = getPathToLocation(game, game.location, location.name);
+    return !!path;
+  };
+
+  const handleTravel = location => {
+    const pathFromSource = getPathToLocation(
+      game,
+      game.location,
+      location.name
+    );
+    const destination = {
+      name: location.name,
+      cost: pathFromSource.cost,
+    };
+    travel(dispatchers, game, destination);
+  };
+
   return (
     <>
       <Grid container spacing={3} className={classes.grid}>
@@ -56,10 +79,13 @@ const Locations = _ => {
             navigate={handleNavigate}
             hover={setHoveredLocation}
             className={classes.locationList}
+            actionPossibility={checkTravelPossibility}
+            action={handleTravel}
+            icon={CommuteIcon}
           />
         </Grid>
         <Grid item xs={12} sm={8} md={8}>
-          <LocationCard location={location} />
+          {location && <LocationCard location={location} />}
         </Grid>
       </Grid>
       <LocationGraph

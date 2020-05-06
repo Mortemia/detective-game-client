@@ -28,6 +28,7 @@ const PaperList = ({
   navigate,
   action,
   hover,
+  actionPossibility,
   ...props
 }) => {
   const classes = useStyles();
@@ -41,32 +42,42 @@ const PaperList = ({
         <List>
           {items
             .sort((a, b) => a[primary].localeCompare(b[primary]))
-            .map((item, index) => (
-              <ListItem
-                button
-                key={index}
-                onClick={() => navigate && navigate(item)}
-                onMouseEnter={() => hover && hover(item)}
-                onMouseLeave={() => hover && hover(null)}
-                disabled={!navigate}
-              >
-                <ListItemText
-                  primary={item[primary]}
-                  secondary={item[secondary]}
-                />
+            .map((item, index) => {
+              let isActionAvailable = true;
+              if (actionPossibility) {
+                isActionAvailable = actionPossibility(item);
+              }
+              return (
+                <ListItem
+                  button
+                  key={index}
+                  onClick={() => navigate && navigate(item)}
+                  onMouseEnter={() => hover && hover(item)}
+                  onMouseLeave={() => hover && hover(null)}
+                  disabled={!navigate}
+                >
+                  <ListItemText
+                    primary={item[primary]}
+                    secondary={item[secondary]}
+                  />
 
-                {action && (
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      edge='end'
-                      onClick={() => action && action(item)}
-                    >
-                      {props.icon ? <props.icon /> : <KeyboardArrowRightIcon />}
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                )}
-              </ListItem>
-            ))}
+                  {action && isActionAvailable && (
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        edge='end'
+                        onClick={() => action && action(item)}
+                      >
+                        {props.icon ? (
+                          <props.icon />
+                        ) : (
+                          <KeyboardArrowRightIcon />
+                        )}
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  )}
+                </ListItem>
+              );
+            })}
         </List>
       </div>
     </Paper>

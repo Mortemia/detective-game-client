@@ -35,3 +35,15 @@ export const getActionById = (game, id) =>
 
 export const getLocationByName = (game, name) =>
   game.locations.find(location => location.name === name);
+
+export const getPathToLocation = (game, source, target) => {
+  let foundPath = null;
+  game.paths.forEach(path => {
+    if (
+      (path.location1 === source && path.location2 === target) ||
+      (path.location1 === target && path.location2 === source)
+    )
+      foundPath = path;
+  });
+  return foundPath;
+};
