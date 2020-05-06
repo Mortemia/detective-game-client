@@ -13,16 +13,12 @@ const HomeRouter = () => {
   return (
     <>
       <Switch>
+        <Route exact path='/login' component={LoginForm} />
         <Route exact path='/' component={Home} />
         <Route exact path='/howtoplay' component={HowToPlay} />
-        <Route exact path='/login' component={LoginForm} />
-        {!appState.user ? (
-          <Redirect to='/login' />
-        ) : (
-          <>
-            <Route exact path='/dashboard' component={Dashboard} />
-            <Route exact path='/dashboard/newgame' component={NewGame} />
-          </>
+        {!appState.user && <Redirect to='/login' />}
+        <Route exact path='/dashboard' component={Dashboard} />
+        <Route exact path='/dashboard/newgame' component={NewGame} />
         )}
       </Switch>
     </>
