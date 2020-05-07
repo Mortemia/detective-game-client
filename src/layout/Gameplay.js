@@ -4,7 +4,7 @@ import GameplayRouter from '../routers/GameplayRouter';
 import CustomizedSnackbars from '../components/Snackbar';
 import { AppContext } from '../context/appContext';
 import { GameContext } from '../context/gameContext';
-import Drawer from './Drawer';
+import Drawer from './GameplayDrawer';
 import GameplayBar from './GameplayBar';
 
 const Gameplay = () => {

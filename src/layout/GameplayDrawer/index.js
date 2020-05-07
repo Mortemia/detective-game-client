@@ -12,7 +12,7 @@ import {
   secondaryListItems,
   finalTestListItem,
 } from './listItems';
-import { GameContext } from '../context/gameContext';
+import { GameContext } from '../../context/gameContext';
 
 const drawerWidth = 240;
 

@@ -14,6 +14,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'auto',
   },
+  button: {
+    marginLeft: theme.spacing(2),
+  },
 }));
 
 const Banner = ({ name }) => {
@@ -32,8 +35,18 @@ const Banner = ({ name }) => {
           color='primary'
           component={Link}
           to='/dashboard/newgame'
+          className={classes.button}
         >
-          NOWA GRA
+          Nowa gra
+        </Button>
+        <Button
+          variant='contained'
+          color='primary'
+          component={Link}
+          to='/creator'
+          className={classes.button}
+        >
+          Stwórz własną sprawę
         </Button>
       </Paper>
     </div>
