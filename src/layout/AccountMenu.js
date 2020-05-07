@@ -6,6 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { AppContext } from '../context/appContext';
 import { snackbars } from '../constants/snackbars';
+import { logout } from '../context/actions';
 
 const AccountMenu = _ => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,9 +24,7 @@ const AccountMenu = _ => {
   };
 
   const handleLogout = () => {
-    appDispatch({ type: 'LOGOUT' });
-    let path = 'login';
-    history.push(path);
+    logout(appDispatch, history);
   };
 
   const menuId = 'account-menu';

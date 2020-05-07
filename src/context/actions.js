@@ -12,6 +12,13 @@ export const login = (appDispatch, data) => {
   });
 };
 
+export const logout = (appDispatch, history) => {
+  appDispatch({ type: 'LOGOUT' });
+  let path = 'login';
+  history.push(path);
+  localStorage.removeItem('user');
+};
+
 export const actionByType = (dispatchers, game, component, type) => {
   switch (type) {
     case 'actions': {
