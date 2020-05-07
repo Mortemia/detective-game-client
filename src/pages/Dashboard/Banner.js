@@ -43,7 +43,7 @@ const Banner = ({ name }) => {
           variant='contained'
           color='primary'
           component={Link}
-          to='/creator'
+          to='/creator/newCase'
           className={classes.button}
         >
           Stwórz własną sprawę
