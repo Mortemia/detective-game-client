@@ -10,7 +10,7 @@ class UserAPI {
   signIn = user => axios.post(apiURL + 'auth/signin', user);
   getActiveDetectiveCases = userId =>
     axios.get(apiURL + `user/activeDetectiveCases/${userId}`).catch(error => {
-      if (error.response.status === 401) {
+      if (error.response && error.response.status === 401) {
         window.location.href = 'http://localhost:3000/login';
       }
     });
