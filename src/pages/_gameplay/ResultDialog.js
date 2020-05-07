@@ -53,7 +53,17 @@ const ResultDialog = () => {
           tabIndex={-1}
           color='textPrimary'
         >
-          Twój wynik to: {game.score}
+          Twój wynik to: {game.score - game.stress_points} / {game.max_score}
+        </DialogContentText>
+        <DialogContentText
+          id='scroll-dialog-description'
+          ref={descriptionElementRef}
+          tabIndex={-1}
+          color='textPrimary'
+        >
+          Wstępny wynik zależy od liczby poprawnych odpowiedzi w teście.
+          Następnie odejmowana jest suma zgromadzonych punktów stresu,
+          otrzymanych za przedłużanie dnia w poprzedniej fazie gry.
         </DialogContentText>
       </DialogContent>
       <DialogActions>

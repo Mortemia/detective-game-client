@@ -30,7 +30,7 @@ export const mainListItems = (
       <ListItemIcon>
         <MapIcon />
       </ListItemIcon>
-      <ListItemText primary='Lokacje' />
+      <ListItemText primary='Miejsca' />
     </ListItem>
     <ListItem button component={Link} to='/play/people'>
       <ListItemIcon>

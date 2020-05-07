@@ -35,6 +35,7 @@ const NewGame = _ => {
         case_id: caseId,
         score: -1,
         day: 1,
+        stress_points: 0,
       };
       dispatch({
         type: 'LOAD_GAME',

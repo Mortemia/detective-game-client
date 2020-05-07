@@ -45,7 +45,6 @@ const Locations = _ => {
     game.locations.find(x => x.id === parseInt(id) && x.revealed) || null
   );
 
-  console.log(initGraph);
   setTimeout(() => setInitGraph(0), 1000);
 
   const handleNavigate = newLocation => {
@@ -77,7 +76,7 @@ const Locations = _ => {
       <Grid container spacing={3} className={classes.grid}>
         <Grid item xs={12} sm={4} md={4}>
           <PaperList
-            listName='Lokacje'
+            listName='Miejsca'
             primary='name'
             items={getRevealedLocations(game)}
             navigate={handleNavigate}

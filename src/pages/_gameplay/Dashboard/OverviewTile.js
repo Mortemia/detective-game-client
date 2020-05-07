@@ -26,7 +26,18 @@ const OverviewTile = props => {
   const { dispatch, game } = React.useContext(GameContext);
 
   const handleNextDayButton = _ => {
-    dispatch({ type: 'NEXT_DAY', new_day: game.day + 1, movement_points: 10 });
+    if (game.day < game.max_days) {
+      dispatch({
+        type: 'NEXT_DAY',
+        new_day: game.day + 1,
+        movement_points: game.mp_per_day,
+      });
+      game.movement_points < 0 &&
+        dispatch({
+          type: 'ADD_STRESS_POINTS',
+          stress_points: Math.abs(game.movement_points),
+        });
+    }
   };
 
   return (
@@ -39,7 +50,7 @@ const OverviewTile = props => {
           gutterBottom
           className={classes.typography}
         >
-          Dzień {game.day}
+          Dzień {game.day} / {game.max_days}
         </Typography>
         <Button
           variant='contained'
@@ -52,13 +63,13 @@ const OverviewTile = props => {
       </div>
       <div className={classes.innerContainer}>
         <Typography component='h2' gutterBottom>
-          {game.location}
-        </Typography>
-        <Typography component='h2' gutterBottom>
-          {game.date}
+          Obecna lokalizacja: {game.location}
         </Typography>
         <Typography component='h2' gutterBottom>
           Punkty Ruchu: {game.movement_points}
+        </Typography>
+        <Typography component='h2' gutterBottom>
+          Punkty Stresu: {game.stress_points}
         </Typography>
         {game.movement_points <= 0 && (
           <Typography component='h2' color='textSecondary' gutterBottom>

@@ -7,11 +7,12 @@ import PaperList from '../../../components/PaperList';
 import OverviewTile from './OverviewTile';
 import { GameContext } from '../../../context/gameContext';
 import {
-  fastTravelLocations,
+  getRevealedLocations,
   getPossibleActions,
   getRevealedPeople,
   getRevealedItems,
   getLocationByName,
+  getPathToLocation,
 } from '../../../utils/gameUtils';
 import { AppContext } from '../../../context/appContext';
 import { examineItem, travel, executeAction } from '../../../context/actions';
@@ -36,6 +37,11 @@ const Dashboard = () => {
 
   const handleActionExcecution = action => {
     executeAction(dispatchers, game, action) && handleClick('actions')(action);
+  };
+
+  const checkTravelPossibility = location => {
+    const path = getPathToLocation(game, game.location, location.name);
+    return !!path;
   };
 
   const handleClick = type => component => {
@@ -64,13 +70,14 @@ const Dashboard = () => {
         <Grid item xs={12} sm={12} md={4}>
           <PaperList
             listName='Miejsca'
-            items={fastTravelLocations(game)}
+            items={getRevealedLocations(game)}
             primary='name'
             secondary='costMP'
             icon={CommuteIcon}
             action={handleTravel}
             navigate={handleClick('locations')}
             tooltip='Podróżuj'
+            actionPossibility={checkTravelPossibility}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
