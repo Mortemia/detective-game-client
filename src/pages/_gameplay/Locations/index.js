@@ -39,10 +39,14 @@ const Locations = _ => {
 
   const { id } = useParams();
 
+  const [initGraph, setInitGraph] = React.useState(1);
   const [hoveredLocation, setHoveredLocation] = React.useState(null);
   const [location, setLocation] = React.useState(
     game.locations.find(x => x.id === parseInt(id) && x.revealed) || null
   );
+
+  console.log(initGraph);
+  setTimeout(() => setInitGraph(0), 1000);
 
   const handleNavigate = newLocation => {
     let path = `/play/locations/${newLocation.id}`;
@@ -91,7 +95,9 @@ const Locations = _ => {
       </Grid>
       <LocationGraph
         hoveredLocation={hoveredLocation}
+        chosenLocation={location && location.name}
         className={classes.graph}
+        init={initGraph}
       />
     </>
   );

@@ -47,3 +47,15 @@ export const getPathToLocation = (game, source, target) => {
   });
   return foundPath;
 };
+
+export const getOptimalPathToLocation = (game, source, target) => {
+  let foundPath = null;
+  game.optimalPaths.forEach(path => {
+    if (
+      (path.location1 === source && path.location2 === target) ||
+      (path.location1 === target && path.location2 === source)
+    )
+      foundPath = { links: path.optimalPath, cost: path.cost };
+  });
+  return foundPath;
+};

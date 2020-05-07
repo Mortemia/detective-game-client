@@ -2,6 +2,7 @@ import React from 'react';
 import { Graph } from 'react-d3-graph';
 import { GameContext } from '../../../context/gameContext';
 import { getRevealedLocations } from '../../../utils/gameUtils';
+import { getOptimalPathToLocation } from '../../../utils/gameUtils';
 
 const myConfig = {
   nodeHighlightBehavior: true,
@@ -19,9 +20,20 @@ const myConfig = {
   },
 };
 
-const LocationGraph = ({ hoveredLocation, ...props }) => {
+const LocationGraph = ({ hoveredLocation, chosenLocation, init, ...props }) => {
   const { game } = React.useContext(GameContext);
   const [higlightedLinks, setHiglightedLinks] = React.useState([]);
+
+  React.useEffect(() => {
+    if (init !== 1) {
+      const path = getOptimalPathToLocation(
+        game,
+        game.location,
+        chosenLocation
+      );
+      setHiglightedLinks(path ? path.links : []);
+    }
+  }, [chosenLocation, game.location]);
 
   const createLinks = () => {
     const links = [];
@@ -38,7 +50,7 @@ const LocationGraph = ({ hoveredLocation, ...props }) => {
           source: path.location1,
           target: path.location2,
           label: `${path.cost} PR`,
-          color: higlightedLinks.includes(index) && 'red',
+          color: higlightedLinks.includes(index) && 'blue',
         });
     });
     return links;
@@ -48,7 +60,9 @@ const LocationGraph = ({ hoveredLocation, ...props }) => {
     nodes: getRevealedLocations(game).map(a => {
       return {
         id: a.name,
-        color: a.name === game.location && 'red',
+        color:
+          (a.name === game.location && 'red') ||
+          (a.name === chosenLocation && 'blue'),
         strokeColor:
           hoveredLocation && a.name === hoveredLocation.name && 'blue',
       };
