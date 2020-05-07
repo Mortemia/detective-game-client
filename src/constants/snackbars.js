@@ -65,6 +65,13 @@ const errorSignUpFieldsFilledCorrectly = {
     'Błąd w rejestracji, upewnij się, że wypełniłeś poprawnie wszystkie pola',
 };
 
+const errorNewDay = {
+  visible: true,
+  severity: 'error',
+  message:
+    'Nie możesz rozpocząć nowego dnia, sprawa musi być rozwiązana już dzisiaj',
+};
+
 export const snackbars = {
   errorTravel,
   successExamine,
@@ -77,4 +84,5 @@ export const snackbars = {
   successSignUp,
   errorSignUpUserAlreadyExists,
   errorSignUpFieldsFilledCorrectly,
+  errorNewDay,
 };

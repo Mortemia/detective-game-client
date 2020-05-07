@@ -4,6 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { GameContext } from '../../../context/gameContext';
+import { AppContext } from '../../../context/appContext';
+import { snackbars } from '../../../constants/snackbars';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 const OverviewTile = props => {
   const classes = useStyles();
   const { dispatch, game } = React.useContext(GameContext);
+  const { appDispatch } = React.useContext(AppContext);
 
   const handleNextDayButton = _ => {
     if (game.day < game.max_days) {
@@ -37,6 +40,11 @@ const OverviewTile = props => {
           type: 'ADD_STRESS_POINTS',
           stress_points: Math.abs(game.movement_points),
         });
+    } else {
+      appDispatch({
+        type: 'OPEN_SNACKBAR',
+        snackbar: snackbars.errorNewDay,
+      });
     }
   };
 
