@@ -26,7 +26,16 @@ const Dashboard = () => {
     appDispatch,
   };
 
-  const handleTravel = destination => {
+  const handleTravel = location => {
+    const pathFromSource = getPathToLocation(
+      game,
+      game.location,
+      location.name
+    );
+    const destination = {
+      name: location.name,
+      cost: pathFromSource.cost,
+    };
     travel(dispatchers, game, destination);
   };
 
