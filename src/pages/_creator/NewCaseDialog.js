@@ -1,103 +1,93 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../context/appContext';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CreatorAPI from '../../api/CreatorAPI';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
+import { Typography } from '@material-ui/core';
 
 const creatorAPI = new CreatorAPI();
 
-const NewCaseDialog = _ => {
-  const history = useHistory();
-  const [open, setOpen] = React.useState(true);
-  const descriptionElementRef = React.useRef(null);
+const useStyles = makeStyles(theme => ({
+  textfield: {
+    marginBottom: theme.spacing(1),
+  },
+  typography: {
+    marginTop: theme.spacing(3),
+  },
+}));
 
-  React.useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
-      if (descriptionElement !== null) {
-        descriptionElement.focus();
-      }
-    }
-  }, [open]);
+const NewCaseDialog = _ => {
+  const classes = useStyles();
+
+  const history = useHistory();
 
   const { appDispatch } = React.useContext(AppContext);
 
-  const handleClick = _ => {
-    const detectiveCaseInfoRequest = {
-      description: 'proba',
-      name: 'proba',
-    };
-    creatorAPI.createDetectiveCaseInfo(detectiveCaseInfoRequest);
-    let path = '/creator';
-    history.push(path);
-  };
-
   return (
-    <Dialog
-      open={open}
-      scroll='paper'
-      aria-labelledby='scroll-dialog-title'
-      aria-describedby='scroll-dialog-description'
-      disableBackdropClick
-    >
-      <DialogTitle id='scroll-dialog-title'>
-        Nowa sprawa detektywistyczna
-      </DialogTitle>
-      <DialogContent dividers>
-        <Formik
-          initialValues={{
-            email: '',
-            password: '',
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              setSubmitting(false);
-              alert(JSON.stringify(values, null, 2));
-            }, 500);
-          }}
-        >
-          {({ submitForm, isSubmitting }) => (
-            <Form>
+    <Dialog open={true} scroll='paper' disableBackdropClick>
+      <DialogTitle>Nowa sprawa detektywistyczna</DialogTitle>
+      <Formik
+        initialValues={{
+          name: '',
+          description: '',
+        }}
+        onSubmit={({ name, description }, { setSubmitting }) => {
+          const detectiveCaseInfoRequest = {
+            name,
+            description,
+          };
+          creatorAPI.createDetectiveCaseInfo(detectiveCaseInfoRequest);
+          let path = '/creator';
+          history.push(path);
+        }}
+      >
+        {({ submitForm, isSubmitting }) => (
+          <Form>
+            <DialogContent dividers>
               <Field
                 component={TextField}
-                name='email'
-                type='email'
-                label='Email'
+                name='name'
+                type='text'
+                label='Nazwa sprawy'
+                fullWidth
+                className={classes.textfield}
               />
               <br />
               <Field
                 component={TextField}
-                type='password'
-                label='Password'
-                name='password'
+                name='description'
+                type='text'
+                label='Krótki opis'
+                fullWidth
+                className={classes.textfield}
               />
               {isSubmitting && <LinearProgress />}
               <br />
+
+              <Typography className={classes.typography} color='testSecondary'>
+                Nazwa sprawy i jej opis mogą zostać zmienione później.
+              </Typography>
+            </DialogContent>
+            <DialogActions>
               <Button
-                variant='contained'
                 color='primary'
                 disabled={isSubmitting}
                 onClick={submitForm}
               >
-                Submit
+                Zatwierdź
               </Button>
-            </Form>
-          )}
-        </Formik>
-      </DialogContent>
-      <DialogActions>
-        <Button color='primary' onClick={handleClick}>
-          Zatwierdź
-        </Button>
-      </DialogActions>
+            </DialogActions>
+          </Form>
+        )}
+      </Formik>
     </Dialog>
   );
 };
