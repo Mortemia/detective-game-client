@@ -8,6 +8,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CreatorAPI from '../../api/CreatorAPI';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { Formik, Form, Field } from 'formik';
+import { TextField } from 'formik-material-ui';
 
 const creatorAPI = new CreatorAPI();
 
@@ -49,12 +52,46 @@ const NewCaseDialog = _ => {
         Nowa sprawa detektywistyczna
       </DialogTitle>
       <DialogContent dividers>
-        <DialogContentText
-          id='scroll-dialog-description'
-          ref={descriptionElementRef}
-          tabIndex={-1}
-          color='textPrimary'
-        ></DialogContentText>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              setSubmitting(false);
+              alert(JSON.stringify(values, null, 2));
+            }, 500);
+          }}
+        >
+          {({ submitForm, isSubmitting }) => (
+            <Form>
+              <Field
+                component={TextField}
+                name='email'
+                type='email'
+                label='Email'
+              />
+              <br />
+              <Field
+                component={TextField}
+                type='password'
+                label='Password'
+                name='password'
+              />
+              {isSubmitting && <LinearProgress />}
+              <br />
+              <Button
+                variant='contained'
+                color='primary'
+                disabled={isSubmitting}
+                onClick={submitForm}
+              >
+                Submit
+              </Button>
+            </Form>
+          )}
+        </Formik>
       </DialogContent>
       <DialogActions>
         <Button color='primary' onClick={handleClick}>
