@@ -8,6 +8,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 const initialState = {
   snackbar: { visible: false },
   user: user || null,
+  created_case_id: localStorage.getItem('created_case_id') || null,
 };
 
 const AppProvider = ({ children }) => {

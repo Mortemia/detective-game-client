@@ -55,7 +55,6 @@ const Settings = _ => {
           { name, description, mp_per_day, days },
           { setSubmitting }
         ) => {
-          console.log(appState);
           const detectiveCaseInfoRequest = {
             id: appState.created_case_id,
             name,
@@ -76,6 +75,9 @@ const Settings = _ => {
                 label='Nazwa sprawy'
                 variant='outlined'
                 className={classes.textfield}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
               <Field
                 component={TextField}
@@ -85,6 +87,9 @@ const Settings = _ => {
                 variant='outlined'
                 fullWidth
                 className={classes.textfield}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
               <Field
                 component={TextField}
@@ -93,6 +98,10 @@ const Settings = _ => {
                 label='Punkty Ruchu na dzień'
                 variant='outlined'
                 className={classes.textfield}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                disabled={!settings}
               />
               <Field
                 component={TextField}
@@ -101,6 +110,9 @@ const Settings = _ => {
                 label='Maksymalna liczba dni'
                 variant='outlined'
                 className={classes.textfield}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
               {isSubmitting && <LinearProgress />}
               <br />

@@ -17,7 +17,9 @@ const SimpleBar = props => {
         <Button color='inherit' component={Link} to='/play'>
           ROZGRYWKA
         </Button>
-        <Button color='inherit'>KREATOR</Button>
+        <Button color='inherit' component={Link} to='/creator'>
+          KREATOR
+        </Button>
         {appState.user ? (
           <AccountMenu />
         ) : (

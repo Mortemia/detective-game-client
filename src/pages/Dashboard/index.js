@@ -54,6 +54,7 @@ const Dashboard = () => {
   };
 
   const handleCreatedCaseSelection = selectedCase => {
+    localStorage.setItem('created_case_id', selectedCase.id);
     appDispatch({
       type: 'LOAD_CREATED_CASE',
       created_case_id: selectedCase.id,
