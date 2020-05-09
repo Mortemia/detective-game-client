@@ -12,6 +12,23 @@ export const fastTravelLocations = game =>
       : result;
   }, []);
 
+export const getRevealedLocationsTravelCost = game => {
+  let a = game.optimalPaths.reduce((result, { location1, location2, cost }) => {
+    let location = game.location === location1 && location2;
+    return location &&
+      game.locations.length &&
+      game.locations.find(x => x.name === location).revealed
+      ? result.concat({
+          name: location,
+          cost,
+          costMP: `${cost} PR`,
+        })
+      : result;
+  }, []);
+  a.push({ name: game.location, costMP: 'Obecna lokalizacja' });
+  return a;
+};
+
 const getDestination = (start, a, b) =>
   a === start ? b : b === start ? a : '';
 

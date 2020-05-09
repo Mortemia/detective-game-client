@@ -12,7 +12,8 @@ import {
   getRevealedPeople,
   getRevealedItems,
   getLocationByName,
-  getPathToLocation,
+  getOptimalPathToLocation,
+  getRevealedLocationsTravelCost,
 } from '../../../utils/gameUtils';
 import { AppContext } from '../../../context/appContext';
 import { examineItem, travel, executeAction } from '../../../context/actions';
@@ -27,14 +28,9 @@ const Dashboard = () => {
   };
 
   const handleTravel = location => {
-    const pathFromSource = getPathToLocation(
-      game,
-      game.location,
-      location.name
-    );
     const destination = {
       name: location.name,
-      cost: pathFromSource.cost,
+      cost: location.cost,
     };
     travel(dispatchers, game, destination);
   };
@@ -48,10 +44,7 @@ const Dashboard = () => {
     executeAction(dispatchers, game, action) && handleClick('actions')(action);
   };
 
-  const checkTravelPossibility = location => {
-    const path = getPathToLocation(game, game.location, location.name);
-    return !!path;
-  };
+  const checkTravelPossibility = location => game.location !== location.name;
 
   const handleClick = type => component => {
     if (type === 'locations')
@@ -79,7 +72,7 @@ const Dashboard = () => {
         <Grid item xs={12} sm={12} md={4}>
           <PaperList
             listName='Miejsca'
-            items={getRevealedLocations(game)}
+            items={getRevealedLocationsTravelCost(game)}
             primary='name'
             secondary='costMP'
             icon={CommuteIcon}

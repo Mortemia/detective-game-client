@@ -9,17 +9,17 @@ import PaperList from '../../../components/PaperList';
 import LocationGraph from './Graph';
 import LocationCard from './LocationCard';
 import {
-  getRevealedLocations,
-  getPathToLocation,
+  getRevealedLocationsTravelCost,
+  getLocationByName,
 } from '../../../utils/gameUtils';
 import { travel } from '../../../context/actions';
 
 const useStyles = makeStyles(theme => ({
   grid: {
-    maxHeight: '270px',
+    maxHeight: '300px',
   },
   locationList: {
-    maxHeight: '270px',
+    maxHeight: '300px',
   },
   graph: {
     paddingTop: '40px',
@@ -48,26 +48,15 @@ const Locations = _ => {
   setTimeout(() => setInitGraph(0), 1000);
 
   const handleNavigate = newLocation => {
-    let path = `/play/locations/${newLocation.id}`;
+    const location = getLocationByName(game, newLocation.name);
+    let path = `/play/locations/${location.id}`;
     history.push(path);
-    setLocation(newLocation);
+    setLocation(location);
   };
 
-  const checkTravelPossibility = location => {
-    const path = getPathToLocation(game, game.location, location.name);
-    return !!path;
-  };
+  const checkTravelPossibility = location => game.location !== location.name;
 
-  const handleTravel = location => {
-    const pathFromSource = getPathToLocation(
-      game,
-      game.location,
-      location.name
-    );
-    const destination = {
-      name: location.name,
-      cost: pathFromSource.cost,
-    };
+  const handleTravel = destination => {
     travel(dispatchers, game, destination);
   };
 
@@ -78,7 +67,8 @@ const Locations = _ => {
           <PaperList
             listName='Miejsca'
             primary='name'
-            items={getRevealedLocations(game)}
+            items={getRevealedLocationsTravelCost(game)}
+            secondary='costMP'
             navigate={handleNavigate}
             hover={setHoveredLocation}
             className={classes.locationList}
