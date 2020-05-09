@@ -6,7 +6,7 @@ import { getRevealedLocations } from '../../../utils/gameUtils';
 const myConfig = {
   nodeHighlightBehavior: true,
   height: window.screen.availHeight - 500,
-  width: window.screen.availWidth - 200,
+  width: 1200,
   node: {
     color: 'lightgreen',
     size: 300,
