@@ -54,7 +54,6 @@ const Dashboard = () => {
   };
 
   const handleCreatedCaseSelection = selectedCase => {
-    console.log(selectedCase.id);
     appDispatch({
       type: 'LOAD_CREATED_CASE',
       created_case_id: selectedCase.id,

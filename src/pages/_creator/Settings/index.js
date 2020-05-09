@@ -30,6 +30,13 @@ const useStyles = makeStyles(theme => ({
 const Settings = _ => {
   const classes = useStyles();
   const { appState } = React.useContext(AppContext);
+  const [settings, setSettings] = React.useState(null);
+
+  React.useEffect(() => {
+    creatorAPI.getNewDetectiveCase(appState.created_case_id).then(response => {
+      setSettings(response.data.newDetectiveCase);
+    });
+  }, [appState.created_case_id]);
 
   return (
     <Paper className={classes.paper}>
@@ -37,11 +44,12 @@ const Settings = _ => {
         Ustawienia scenariusza
       </Typography>
       <Formik
+        enableReinitialize
         initialValues={{
-          name: '',
-          description: '',
-          mp_per_day: '',
-          days: '',
+          name: settings?.name || '',
+          description: settings?.description || '',
+          mp_per_day: settings?.mp_per_day || '',
+          days: settings?.max_days || '',
         }}
         onSubmit={(
           { name, description, mp_per_day, days },

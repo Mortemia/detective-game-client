@@ -13,6 +13,8 @@ class CreatorAPI {
       apiURL + 'create/updateDetectiveCaseInfo',
       detectiveCaseInfoRequest
     );
+  getNewDetectiveCase = caseId =>
+    axios.get(apiURL + 'play/getNewDetectiveCaseById/' + caseId);
 }
 
 export default CreatorAPI;
