@@ -30,6 +30,9 @@ const Locations = _ => {
     getComponentsFromAPI();
   }, [appState.created_case_id]);
 
+  const getIdByLocation = name =>
+    name && locations.find(location => location.name === name).id;
+
   const handleComponentEdit = type => component => {
     setEditedComponent({ type, component });
   };
@@ -38,12 +41,19 @@ const Locations = _ => {
     const componentPayload = {
       [type]: {
         case_id: appState.created_case_id,
-        id: component.id,
+        id: component?.id,
+        location1: getIdByLocation(component.location1),
+        location2: getIdByLocation(component.location2),
+        time: component?.time,
       },
     };
     if (type === 'location')
       creatorAPI
         .deleteLocation(componentPayload)
+        .then(() => getComponentsFromAPI());
+    else
+      creatorAPI
+        .deleteLocationConnection(componentPayload)
         .then(() => getComponentsFromAPI());
   };
 
@@ -85,7 +95,7 @@ const Locations = _ => {
             secondary='location2'
             addButton={handleAddComponent('connection')}
             navigate={handleComponentEdit('connection')}
-            action={handleComponentDelete}
+            action={handleComponentDelete('locationConnection')}
             icon={DeleteIcon}
           />
         </Grid>
