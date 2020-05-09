@@ -59,12 +59,18 @@ export const reducer = (state, action) => {
         ),
         movement_points: action.updatedMovementPoints,
       };
-    case 'ADD_STRESS_POINTS': {
+    case 'ADD_STRESS_POINTS':
       return {
         ...state,
         stress_points: state.stress_points + action.stress_points,
       };
-    }
+
+    case 'LOAD_CREATED_CASE':
+      return {
+        ...state,
+        created_case_id: action.created_case_id,
+      };
+
     default:
       return state;
   }

@@ -14,6 +14,12 @@ class UserAPI {
         window.location.href = 'http://localhost:3000/login';
       }
     });
+  getCreatedeDetectiveCases = userId =>
+    axios.get(apiURL + `user/createdDetectiveCases/${userId}`).catch(error => {
+      if (error.response && error.response.status === 401) {
+        window.location.href = 'http://localhost:3000/login';
+      }
+    });
 }
 
 export default UserAPI;

@@ -1,80 +1,82 @@
 import React from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import { AppContext } from '../../context/appContext';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import CreatorAPI from '../../api/CreatorAPI';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { Typography } from '@material-ui/core';
+import DialogContent from '@material-ui/core/DialogContent';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import CreatorAPI from '../../../api/CreatorAPI';
+import { AppContext } from '../../../context/appContext';
 
 const creatorAPI = new CreatorAPI();
 
 const useStyles = makeStyles(theme => ({
-  textfield: {
-    marginBottom: theme.spacing(1),
+  paper: {
+    textAlign: 'center',
   },
-  typography: {
-    marginTop: theme.spacing(3),
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: ' space-between',
+    height: '200px',
   },
 }));
 
-const NewCaseDialog = _ => {
+const NewLocation = _ => {
   const classes = useStyles();
-
-  const history = useHistory();
-
-  const { appDispatch } = React.useContext(AppContext);
+  const { appState } = React.useContext(AppContext);
 
   return (
-    <Dialog open={true} scroll='paper' disableBackdropClick>
-      <DialogTitle>Nowa sprawa detektywistyczna</DialogTitle>
+    <Paper className={classes.paper}>
+      <Typography component='h2' variant='h6' color='primary' gutterBottom>
+        Dodawanie nowego miejsca
+      </Typography>
       <Formik
         initialValues={{
           name: '',
           description: '',
         }}
         onSubmit={({ name, description }, { setSubmitting }) => {
-          const detectiveCaseInfoRequest = {
+          const locationPayload = {
+            id: appState.created_case_id,
             name,
             description,
           };
-          creatorAPI.createDetectiveCaseInfo(detectiveCaseInfoRequest);
-          let path = '/creator';
-          history.push(path);
+          //creatorAPI.createLocation(locationPayload);
         }}
       >
         {({ submitForm, isSubmitting }) => (
           <Form>
-            <DialogContent dividers>
+            <DialogContent className={classes.form}>
               <Field
                 component={TextField}
                 name='name'
                 type='text'
-                label='Nazwa sprawy'
-                fullWidth
+                label='Nazwa miejsca'
+                variant='outlined'
                 className={classes.textfield}
               />
-              <br />
               <Field
                 component={TextField}
                 name='description'
                 type='text'
-                label='Krótki opis'
+                label='Opis'
+                variant='outlined'
                 fullWidth
                 className={classes.textfield}
               />
               {isSubmitting && <LinearProgress />}
               <br />
 
-              <Typography className={classes.typography} color='textSecondary'>
-                Nazwa sprawy i jej opis mogą zostać zmienione później.
-              </Typography>
+              <Typography
+                className={classes.typography}
+                color='textSecondary'
+              ></Typography>
             </DialogContent>
             <DialogActions>
               <Button
@@ -88,8 +90,8 @@ const NewCaseDialog = _ => {
           </Form>
         )}
       </Formik>
-    </Dialog>
+    </Paper>
   );
 };
 
-export default NewCaseDialog;
+export default NewLocation;

@@ -21,9 +21,10 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
   const [activeCases, setActiveCases] = React.useState([]);
+  const [createdCases, setCreatedCases] = React.useState([]);
   const history = useHistory();
 
-  const { appState } = React.useContext(AppContext);
+  const { appState, appDispatch } = React.useContext(AppContext);
   const { game, dispatch } = React.useContext(GameContext);
 
   const loggedUser = appState.user;
@@ -31,9 +32,12 @@ const Dashboard = () => {
     API.getActiveDetectiveCases(loggedUser.id).then(response => {
       response && setActiveCases(response.data.detectiveCaseList);
     });
+    API.getCreatedeDetectiveCases(loggedUser.id).then(response => {
+      response && setCreatedCases(response.data.detectiveCaseList);
+    });
   }, [loggedUser.id]);
 
-  const handleCaseSelection = selectedCase => {
+  const handleActiveCaseSelection = selectedCase => {
     const saveDetectiveCaseRequest = {
       caseId: selectedCase.id,
       userId: loggedUser.id,
@@ -49,6 +53,16 @@ const Dashboard = () => {
     });
   };
 
+  const handleCreatedCaseSelection = selectedCase => {
+    console.log(selectedCase.id);
+    appDispatch({
+      type: 'LOAD_CREATED_CASE',
+      created_case_id: selectedCase.id,
+    });
+    let path = '/creator';
+    history.push(path);
+  };
+
   return (
     <>
       <div className={classes.paper}>
@@ -62,16 +76,17 @@ const Dashboard = () => {
               : 'Sprawy w toku'
           }
           primary='name'
-          secondary='modified'
+          secondary=''
           items={activeCases || []}
-          navigate={handleCaseSelection}
+          navigate={handleActiveCaseSelection}
         />
       </div>
       <div className={classes.paper}>
         <PaperList
           listName='Własne sprawy'
-          primary='primary'
-          items={casesInProgress}
+          primary='name'
+          items={createdCases || []}
+          navigate={handleCreatedCaseSelection}
         />
       </div>
     </>

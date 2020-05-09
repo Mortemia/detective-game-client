@@ -11,40 +11,57 @@ import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ExtensionIcon from '@material-ui/icons/Extension';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 export const mainListItems = (
-  <div>
-    <ListItem button component={Link} to='/creator'>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary='Dashboard' />
-    </ListItem>
-    <ListItem button component={Link} to='/creator/actions'>
-      <ListItemIcon>
-        <WatchLaterIcon />
-      </ListItemIcon>
-      <ListItemText primary='Akcje' />
-    </ListItem>
-    <ListItem button component={Link} to='/creator/locations'>
-      <ListItemIcon>
-        <MapIcon />
-      </ListItemIcon>
-      <ListItemText primary='Miejsca' />
-    </ListItem>
-    <ListItem button component={Link} to='/creator/people'>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary='Osoby' />
-    </ListItem>
-    <ListItem button component={Link} to='/creator/items'>
-      <ListItemIcon>
-        <FingerprintIcon />
-      </ListItemIcon>
-      <ListItemText primary='Przedmioty' />
-    </ListItem>
-  </div>
+  <>
+    <div>
+      <ListItem button component={Link} to='/creator'>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary='Dashboard' />
+      </ListItem>
+      <ListItem button component={Link} to='/creator/actions'>
+        <ListItemIcon>
+          <WatchLaterIcon />
+        </ListItemIcon>
+        <ListItemText primary='Akcje' />
+      </ListItem>
+      <ListItem button component={Link} to='/creator/locations'>
+        <ListItemIcon>
+          <MapIcon />
+        </ListItemIcon>
+        <ListItemText primary='Miejsca' />
+      </ListItem>
+      <ListItem button component={Link} to='/creator/people'>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary='Osoby' />
+      </ListItem>
+      <ListItem button component={Link} to='/creator/items'>
+        <ListItemIcon>
+          <FingerprintIcon />
+        </ListItemIcon>
+        <ListItemText primary='Przedmioty' />
+      </ListItem>
+      <ListItem button component={Link} to='/creator/finalTest'>
+        <ListItemIcon>
+          <ExtensionIcon />
+        </ListItemIcon>
+        <ListItemText primary='Test końcowy' />
+      </ListItem>
+    </div>
+    <div>
+      <ListItem button component={Link} to='/creator/settings'>
+        <ListItemIcon>
+          <SettingsIcon />
+        </ListItemIcon>
+        <ListItemText primary='Opcje' />
+      </ListItem>
+    </div>
+  </>
 );
 
 export const finalTestListItem = (

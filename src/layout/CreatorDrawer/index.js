@@ -93,6 +93,12 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  list: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
 }));
 
 const ComplexDrawer = ({ open, handleDrawerClose, children }) => {
@@ -115,9 +121,7 @@ const ComplexDrawer = ({ open, handleDrawerClose, children }) => {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{finalTestListItem}</List>
+        <List className={classes.list}>{mainListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

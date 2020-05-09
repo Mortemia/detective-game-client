@@ -8,6 +8,11 @@ class CreatorAPI {
       apiURL + 'create/createDetectiveCaseInfo',
       detectiveCaseInfoRequest
     );
+  updateDetectiveCaseInfo = detectiveCaseInfoRequest =>
+    axios.post(
+      apiURL + 'create/updateDetectiveCaseInfo',
+      detectiveCaseInfoRequest
+    );
 }
 
 export default CreatorAPI;
