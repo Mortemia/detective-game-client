@@ -5,12 +5,14 @@ import LocationEditor from './LocationEditor';
 import { AppContext } from '../../../context/appContext';
 import CreatorAPI from '../../../api/CreatorAPI';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ConnectionsEditor from './ConnectionsEditor';
+import LocationGraph from './Graph';
 
 const creatorAPI = new CreatorAPI();
 
 const Locations = _ => {
-  const handleAddLocation = _ => {
-    setEditedComponent(null);
+  const handleAddComponent = type => _ => {
+    setEditedComponent({ type, component: null });
   };
   const { appState } = React.useContext(AppContext);
 
@@ -53,20 +55,27 @@ const Locations = _ => {
             listName='Stworzone miejsca'
             items={locations}
             primary='name'
-            addButton={handleAddLocation}
+            addButton={handleAddComponent('location')}
             navigate={handleComponentEdit('location')}
             action={handleComponentDelete('location')}
             icon={DeleteIcon}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={8}>
-          <LocationEditor
-            location={editedComponent?.component}
-            update={location => {
-              getComponentsFromAPI();
-              setEditedComponent({ type: 'location', component: location });
-            }}
-          />
+          {editedComponent?.type === 'connection' ? (
+            <ConnectionsEditor
+              connection={editedComponent?.component}
+              locations={locations}
+            />
+          ) : (
+            <LocationEditor
+              location={editedComponent?.component}
+              update={location => {
+                getComponentsFromAPI();
+                setEditedComponent({ type: 'location', component: location });
+              }}
+            />
+          )}
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
           <PaperList
@@ -74,13 +83,16 @@ const Locations = _ => {
             items={connections}
             primary='location1'
             secondary='location2'
+            addButton={handleAddComponent('connection')}
             navigate={handleComponentEdit('connection')}
             action={handleComponentDelete}
             icon={DeleteIcon}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={8}>
-          Graph placeholder
+          {locations.length >= 1 && (
+            <LocationGraph locations={locations} connections={connections} />
+          )}
         </Grid>
       </Grid>
     </>

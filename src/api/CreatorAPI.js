@@ -24,6 +24,23 @@ class CreatorAPI {
 
   deleteLocation = locationPayload =>
     axios.delete(apiURL + 'create/deleteLocation', { data: locationPayload });
+
+  createLocationConnection = locationConnectionPayload =>
+    axios.put(
+      apiURL + 'create/createLocationConnection',
+      locationConnectionPayload
+    );
+
+  updateLocationConnection = locationConnectionPayload =>
+    axios.post(
+      apiURL + 'create/updateLocationConnection',
+      locationConnectionPayload
+    );
+
+  deleteLocationConnection = locationConnectionPayload =>
+    axios.delete(apiURL + 'create/deleteLocationConnection', {
+      data: locationConnectionPayload,
+    });
 }
 
 export default CreatorAPI;
