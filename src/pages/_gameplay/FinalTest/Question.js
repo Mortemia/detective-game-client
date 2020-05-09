@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Question = ({ question, nextQuestion, open }) => {
+const Question = ({ question, addScore, open }) => {
   const classes = useStyles();
   const { game, dispatch } = React.useContext(GameContext);
   const descriptionElementRef = React.useRef(null);
@@ -34,7 +34,7 @@ const Question = ({ question, nextQuestion, open }) => {
     const correct = question.answers.find(answer => answer.content === value)
       .correct;
     setValue('');
-    nextQuestion(correct ? 10 : 0);
+    addScore(correct ? 10 : 0);
   };
   return (
     <Dialog

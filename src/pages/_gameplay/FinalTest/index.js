@@ -23,45 +23,36 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-let score = 0;
-
 const FinalTest = () => {
   const classes = useStyles();
   const { game, dispatch } = React.useContext(GameContext);
-  const [question, setQuestion] = React.useState(null);
   const [test, setTest] = React.useState([...game.test]);
+  const [question, setQuestion] = React.useState(null);
   const [open, setOpen] = React.useState(false);
+  const [score, setScore] = React.useState(0);
   const history = useHistory();
-
-  const handleClick = _ => {
-    const firstQuestion = test.shift();
-    setQuestion(firstQuestion);
-    setOpen(true);
-  };
 
   const handleTestFinish = _ => {
     setOpen(false);
-    console.log('wynik kampanii: ' + score);
-
     dispatch({ type: 'FINISH_GAME', score });
     let path = '/play/result';
     history.push(path);
   };
 
-  const handleNextQuestion = answerScore => {
-    score += answerScore;
-    const question = test.shift();
+  React.useEffect(() => {
+    const question = test[0];
     question ? setQuestion(question) : handleTestFinish();
+  }, [test]);
+
+  const handleScore = answerScore => {
+    setScore(score + answerScore);
+    setTest(test.slice(1));
   };
 
   return (
     <>
       {open ? (
-        <Question
-          open={open}
-          question={question}
-          nextQuestion={handleNextQuestion}
-        />
+        <Question open={open} question={question} addScore={handleScore} />
       ) : (
         <Paper className={classes.paper}>
           <Typography component='h2' variant='h6' color='primary'>
@@ -90,7 +81,7 @@ const FinalTest = () => {
           <DialogActions>
             <Button
               color='primary'
-              onClick={handleClick}
+              onClick={() => setOpen(true)}
               className={classes.button}
               size='large'
               variant='outlined'
