@@ -2,6 +2,8 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -19,6 +21,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     height: '100%',
   },
+  fab: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 }));
 
 const PaperList = ({
@@ -31,6 +37,7 @@ const PaperList = ({
   hover,
   actionPossibility,
   tooltip,
+  addButton,
   ...props
 }) => {
   const classes = useStyles();
@@ -44,9 +51,25 @@ const PaperList = ({
   return (
     <Paper className={`${classes.paper} ${props.className}`}>
       <div className={classes.root}>
-        <Typography component='h2' variant='h6' color='primary' gutterBottom>
-          {listName}
-        </Typography>
+        <div className={classes.fab}>
+          <Typography component='h2' variant='h6' color='primary' gutterBottom>
+            {listName}
+          </Typography>
+          {addButton && (
+            <Fab
+              color='primary'
+              aria-label='add'
+              size='small'
+              onClick={addButton}
+              style={{
+                marginRight: '8px',
+                boxShadow: 'none',
+              }}
+            >
+              <AddIcon />
+            </Fab>
+          )}
+        </div>
         <List>
           {items
             .sort((a, b) => a[primary].localeCompare(b[primary]))

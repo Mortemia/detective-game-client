@@ -12,6 +12,8 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import CreatorAPI from '../../../api/CreatorAPI';
 import { AppContext } from '../../../context/appContext';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const creatorAPI = new CreatorAPI();
 
@@ -23,31 +25,58 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: ' space-between',
-    height: '200px',
+    //height: '200px',
   },
 }));
 
-const NewLocation = _ => {
+const NewLocation = ({ location, update }) => {
   const classes = useStyles();
   const { appState } = React.useContext(AppContext);
+  const [revealedToggle, setRevealedToggle] = React.useState(false);
+  const [startToggle, setStartToggle] = React.useState(false);
+
+  const handleRevealedToggle = () => {
+    revealedToggle ? setRevealedToggle(false) : setRevealedToggle(true);
+  };
+
+  const handleStartToggle = () => {
+    startToggle ? setStartToggle(false) : setStartToggle(true);
+  };
+
+  React.useEffect(() => {
+    setRevealedToggle(location?.revealed || false);
+    setStartToggle(location?.start || false);
+  }, [location]);
 
   return (
     <Paper className={classes.paper}>
       <Typography component='h2' variant='h6' color='primary' gutterBottom>
-        Dodawanie nowego miejsca
+        {location ? 'Edycja miejsca' : 'Dodawanie nowego miejsca'}
       </Typography>
       <Formik
+        enableReinitialize
         initialValues={{
-          name: '',
-          description: '',
+          name: location?.name || '',
+          description: location?.description || '',
         }}
         onSubmit={({ name, description }, { setSubmitting }) => {
           const locationPayload = {
-            id: appState.created_case_id,
-            name,
-            description,
+            location: {
+              case_id: appState.created_case_id,
+              id: location?.id,
+              name,
+              description,
+              revealed: revealedToggle,
+              start: startToggle,
+            },
           };
-          //creatorAPI.createLocation(locationPayload);
+
+          creatorAPI[location ? 'updateLocation' : 'createLocation'](
+            locationPayload
+          ).then(response => {
+            setSubmitting(false);
+            update(response.data.location);
+          });
         }}
       >
         {({ submitForm, isSubmitting }) => (
@@ -60,6 +89,9 @@ const NewLocation = _ => {
                 label='Nazwa miejsca'
                 variant='outlined'
                 className={classes.textfield}
+                style={{
+                  marginBottom: '24px',
+                }}
               />
               <Field
                 component={TextField}
@@ -68,8 +100,46 @@ const NewLocation = _ => {
                 label='Opis'
                 variant='outlined'
                 fullWidth
+                multiline
+                rowsMax={6}
                 className={classes.textfield}
+                style={{
+                  marginBottom: '24px',
+                }}
               />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={revealedToggle}
+                    onChange={handleRevealedToggle}
+                    name='revealed'
+                    disabled={isSubmitting}
+                  />
+                }
+                label='Miejsce znane od początku gry'
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={startToggle}
+                    onChange={handleStartToggle}
+                    name='start'
+                    disabled={isSubmitting}
+                  />
+                }
+                label='Miejsce startowe'
+              />
+
+              {/* <Field
+                component={Switch}
+                name='revealed'
+                label='Czy odkryty'
+                onChange={handleToggle}
+                checked={toggle}
+                style={{
+                  marginBottom: '24px',
+                }}
+              /> */}
               {isSubmitting && <LinearProgress />}
               <br />
 

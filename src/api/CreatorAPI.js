@@ -15,6 +15,15 @@ class CreatorAPI {
     );
   getNewDetectiveCase = caseId =>
     axios.get(apiURL + 'play/getNewDetectiveCaseById/' + caseId);
+
+  createLocation = locationPayload =>
+    axios.put(apiURL + 'create/createLocation', locationPayload);
+
+  updateLocation = locationPayload =>
+    axios.post(apiURL + 'create/updateLocation', locationPayload);
+
+  deleteLocation = locationPayload =>
+    axios.delete(apiURL + 'create/deleteLocation', { data: locationPayload });
 }
 
 export default CreatorAPI;
