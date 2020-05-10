@@ -19,16 +19,22 @@ const Creator = () => {
     setOpen(false);
   };
   return (
-    <Drawer open={open} handleDrawerClose={handleDrawerClose}>
-      <CreatorBar open={open} handleDrawerOpen={handleDrawerOpen} />
-      <CreatorRouter />
-      <CustomizedSnackbars
-        open={snackbar && snackbar.visible}
-        message={snackbar && snackbar.message}
-        severity={snackbar && snackbar.severity}
-        onClick={() => appDispatch({ type: 'CLOSE_SNACKBAR', message: '' })}
-      />
-    </Drawer>
+    <>
+      {!appState.created_case_id ? (
+        <Redirect to='/dashboard' />
+      ) : (
+        <Drawer open={open} handleDrawerClose={handleDrawerClose}>
+          <CreatorBar open={open} handleDrawerOpen={handleDrawerOpen} />
+          <CreatorRouter />
+          <CustomizedSnackbars
+            open={snackbar && snackbar.visible}
+            message={snackbar && snackbar.message}
+            severity={snackbar && snackbar.severity}
+            onClick={() => appDispatch({ type: 'CLOSE_SNACKBAR', message: '' })}
+          />
+        </Drawer>
+      )}
+    </>
   );
 };
 

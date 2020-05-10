@@ -44,9 +44,22 @@ const NewCaseDialog = _ => {
             name,
             description,
           };
-          creatorAPI.createDetectiveCaseInfo(detectiveCaseInfoRequest);
-          let path = '/creator';
-          history.push(path);
+          creatorAPI
+            .createDetectiveCaseInfo(detectiveCaseInfoRequest)
+            .then(response => {
+              appDispatch({
+                type: 'SET_CREATED_CASE',
+                created_case_id: response.data.id,
+              });
+
+              localStorage.setItem('created_case_id', response.data.id);
+              let path = '/creator';
+              history.push(path);
+            })
+            .catch(error => {
+              let path = '/dashboard';
+              history.push(path);
+            });
         }}
       >
         {({ submitForm, isSubmitting }) => (

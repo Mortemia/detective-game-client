@@ -65,7 +65,7 @@ export const reducer = (state, action) => {
         stress_points: state.stress_points + action.stress_points,
       };
 
-    case 'LOAD_CREATED_CASE':
+    case 'SET_CREATED_CASE':
       return {
         ...state,
         created_case_id: action.created_case_id,
