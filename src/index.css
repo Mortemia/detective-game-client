@@ -19,3 +19,12 @@ code {
 .MuiDialog-paperScrollPaper {
   width: 600px;
 }
+
+.orgchart-container {
+  height: 580px !important;
+  overflow: hidden;
+}
+.orgchart {
+  background-image: none !important;
+  height: 100%;
+}
