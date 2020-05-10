@@ -22,9 +22,10 @@ code {
 
 .orgchart-container {
   height: 580px !important;
-  overflow: hidden;
+  overflow: hidden !important;
+  border: none !important;
 }
 .orgchart {
   background-image: none !important;
-  height: 100%;
+  height: 100% !important;
 }
