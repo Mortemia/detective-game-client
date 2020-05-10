@@ -5,6 +5,7 @@ import NewCaseDialog from '../pages/_creator/NewCaseDialog';
 import Settings from '../pages/_creator/Settings';
 import Items from '../pages/_creator/Items';
 import Locations from '../pages/_creator/Locations';
+import People from '../pages/_creator/People';
 
 const CreatorRouter = () => {
   return (
@@ -14,9 +15,11 @@ const CreatorRouter = () => {
 
         <Route exact path='/creator/newCase' component={NewCaseDialog} />
 
-        <Route exact path='/creator/items' component={Items} />
-
         <Route exact path='/creator/locations' component={Locations} />
+
+        <Route exact path='/creator/people' component={People} />
+
+        <Route exact path='/creator/items' component={Items} />
 
         <Route exact path='/creator/settings' component={Settings} />
       </Switch>
