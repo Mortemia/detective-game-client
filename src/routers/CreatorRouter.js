@@ -6,6 +6,7 @@ import Settings from '../pages/_creator/Settings';
 import Items from '../pages/_creator/Items';
 import Locations from '../pages/_creator/Locations';
 import People from '../pages/_creator/People';
+import FinalTest from '../pages/_creator/FinalTest';
 
 const CreatorRouter = () => {
   return (
@@ -22,6 +23,8 @@ const CreatorRouter = () => {
         <Route exact path='/creator/items' component={Items} />
 
         <Route exact path='/creator/settings' component={Settings} />
+
+        <Route exact path='/creator/finalTest' component={FinalTest} />
       </Switch>
     </>
   );

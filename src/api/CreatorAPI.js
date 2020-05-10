@@ -59,6 +59,15 @@ class CreatorAPI {
 
   deletePerson = personPayload =>
     axios.delete(apiURL + 'create/deletePerson', { data: personPayload });
+
+  createQuestion = questionPayload =>
+    axios.put(apiURL + 'create/createQuestion', questionPayload);
+
+  updateQuestion = questionPayload =>
+    axios.post(apiURL + 'create/updateQuestion', questionPayload);
+
+  deleteQuestion = questionPayload =>
+    axios.delete(apiURL + 'create/deleteQuestion', { data: questionPayload });
 }
 
 export default CreatorAPI;
