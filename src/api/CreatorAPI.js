@@ -41,6 +41,15 @@ class CreatorAPI {
     axios.delete(apiURL + 'create/deleteLocationConnection', {
       data: locationConnectionPayload,
     });
+
+  createItem = itemPayload =>
+    axios.put(apiURL + 'create/createItem', itemPayload);
+
+  updateItem = itemPayload =>
+    axios.post(apiURL + 'create/updateItem', itemPayload);
+
+  deleteItem = itemPayload =>
+    axios.delete(apiURL + 'create/deleteItem', { data: itemPayload });
 }
 
 export default CreatorAPI;
