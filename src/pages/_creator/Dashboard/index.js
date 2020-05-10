@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import TreeDiagram from './TreeDiagram';
 import { AppContext } from '../../../context/appContext';
 import CreatorAPI from '../../../api/CreatorAPI';
+import ComponentsList from './ComponentsList';
 
 const creatorAPI = new CreatorAPI();
 
@@ -22,7 +23,7 @@ const Dashboard = _ => {
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={3} md={3}>
-          Components list placeholder
+          <ComponentsList data={data} />
         </Grid>
         <Grid item xs={12} sm={9} md={9}>
           {data && <TreeDiagram data={data} />}
