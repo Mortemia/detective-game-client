@@ -5,6 +5,7 @@ import Node from './Node';
 
 const TreeDiagram = ({ data }) => {
   const [tree, setTree] = React.useState();
+  const [warning, setWarning] = React.useState(null);
 
   const createTree = root => iterate(root, 'actions');
 
@@ -32,16 +33,12 @@ const TreeDiagram = ({ data }) => {
     switch (type) {
       case 'actions':
         return 'Akcja';
-        break;
       case 'items':
         return 'Przedmiot';
-        break;
       case 'locations':
         return 'Miejsce';
-        break;
       case 'people':
         return 'Osoba';
-        break;
       default:
         return;
     }
@@ -50,9 +47,15 @@ const TreeDiagram = ({ data }) => {
   React.useEffect(() => {
     if (data) {
       const rootId = data.frst_action_id;
-      const rootAction = data.actions.find(action => action.id === rootId);
-      const tree = createTree(rootAction);
-      setTree(tree);
+      if (rootId) {
+        const rootAction = data.actions.find(action => action.id === rootId);
+        const tree = createTree(rootAction);
+        setTree(tree);
+      } else {
+        setWarning(
+          'Nie można utworzyć drzewa komponentów. Prawdopodobnie nie jest ustawiona akcja startowa. '
+        );
+      }
     }
   }, [data]);
 
@@ -64,6 +67,8 @@ const TreeDiagram = ({ data }) => {
       chartClass='myChart'
       NodeTemplate={Node}
     />
+  ) : warning ? (
+    warning
   ) : (
     <LinearProgress />
   );
