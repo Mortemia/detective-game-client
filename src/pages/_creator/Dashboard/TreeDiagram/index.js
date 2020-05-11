@@ -9,13 +9,12 @@ import Node from './Node';
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),
-    overflow: 'auto',
-    height: '100%',
     overflow: 'hidden',
+    height: '100%',
   },
 }));
 
-const TreeDiagram = ({ data }) => {
+const TreeDiagram = ({ data, componentDrawer }) => {
   const classes = useStyles();
 
   const [tree, setTree] = React.useState();
@@ -31,9 +30,12 @@ const TreeDiagram = ({ data }) => {
     );
 
     const node = {
+      ...component,
       id: `${component.id}${type}`,
       name: component.name || component.fullname,
       title: translateType(type),
+      type: type,
+      componentId: component.id,
       children,
     };
 
@@ -85,6 +87,7 @@ const TreeDiagram = ({ data }) => {
           zoom={true}
           chartClass='myChart'
           NodeTemplate={Node}
+          onClickNode={node => componentDrawer(node)}
         />
       ) : warning ? (
         warning
