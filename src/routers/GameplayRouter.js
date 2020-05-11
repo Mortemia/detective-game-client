@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 import Dashboard from '../pages/_gameplay/Dashboard';
 import People from '../pages/_gameplay/People';
 import Items from '../pages/_gameplay/Items';
@@ -9,13 +9,13 @@ import FinalTest from '../pages/_gameplay/FinalTest';
 import ResultDialog from '../pages/_gameplay/ResultDialog';
 import IntroductionDialog from '../pages/_gameplay/IntroductionDialog';
 import { AppContext } from '../context/appContext';
+import Route from './AuthorizedRoute';
 
 const GameplayRouter = () => {
   const { appState } = React.useContext(AppContext);
 
   return (
     <>
-      {!appState.user && <Redirect to='/login' />}
       <Switch>
         <Route exact path='/play' component={Dashboard} />
 

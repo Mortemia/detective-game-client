@@ -1,25 +1,15 @@
-import axios from 'axios';
-import Cookie from 'js-cookie';
+import API from './API';
 
-const apiURL = 'http://localhost:5000/api/';
+class UserAPI extends API {
+  signUp = user => this.post('auth/signup', user);
 
-const token = Cookie.get('token');
-axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
-class UserAPI {
-  signUp = user => axios.post(apiURL + 'auth/signup', user);
-  signIn = user => axios.post(apiURL + 'auth/signin', user);
+  signIn = user => this.post('auth/signin', user);
+
   getActiveDetectiveCases = userId =>
-    axios.get(apiURL + `user/activeDetectiveCases/${userId}`).catch(error => {
-      if (error.response && error.response.status === 401) {
-        window.location.href = 'http://localhost:3000/login';
-      }
-    });
+    this.get(`user/activeDetectiveCases/${userId}`);
+
   getCreatedeDetectiveCases = userId =>
-    axios.get(apiURL + `user/createdDetectiveCases/${userId}`).catch(error => {
-      if (error.response && error.response.status === 401) {
-        window.location.href = 'http://localhost:3000/login';
-      }
-    });
+    this.get(`user/createdDetectiveCases/${userId}`);
 }
 
 export default UserAPI;

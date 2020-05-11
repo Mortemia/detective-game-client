@@ -1,15 +1,16 @@
-import axios from 'axios';
+import API from './API';
 
-const apiURL = 'http://localhost:5000/api/';
-
-class GameAPI {
+class GameAPI extends API {
   getDetectiveCaseSave = saveDetectiveCaseRequest =>
-    axios.post(apiURL + 'play/getDetectiveCaseSave', saveDetectiveCaseRequest);
-  getAllCases = _ => axios.get(apiURL + 'dashboard/getAllCases');
+    this.post('play/getDetectiveCaseSave', saveDetectiveCaseRequest);
+
+  getAllCases = () => this.get('dashboard/getAllCases');
+
   getNewDetectiveCase = caseId =>
-    axios.get(apiURL + 'play/getNewDetectiveCaseById/' + caseId);
+    this.get('play/getNewDetectiveCaseById/' + caseId);
+
   saveDetectiveCase = game =>
-    axios.post(apiURL + 'play/saveDetectiveCase', {
+    this.post('play/saveDetectiveCase', {
       caseId: game.case_id,
       playerId: game.player_id,
       score: game.score,

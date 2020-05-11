@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Dashboard from '../pages/_creator/Dashboard';
 import NewCaseDialog from '../pages/_creator/NewCaseDialog';
 import Settings from '../pages/_creator/Settings';
@@ -7,6 +7,7 @@ import Items from '../pages/_creator/Items';
 import Locations from '../pages/_creator/Locations';
 import People from '../pages/_creator/People';
 import FinalTest from '../pages/_creator/FinalTest';
+import Route from './AuthorizedRoute';
 
 const CreatorRouter = () => {
   return (

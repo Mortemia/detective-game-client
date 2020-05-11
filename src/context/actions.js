@@ -1,9 +1,11 @@
 import Cookie from 'js-cookie';
 import { snackbars } from '../constants/snackbars';
+import { setAuthToken } from '../api/API';
 
 export const login = (appDispatch, data) => {
   const user = data.user;
   localStorage.setItem('user', JSON.stringify(user));
+  setAuthToken();
   Cookie.set('token', data.accessToken);
   appDispatch({ type: 'LOGIN', user });
   appDispatch({

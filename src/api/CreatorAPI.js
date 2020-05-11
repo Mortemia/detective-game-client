@@ -1,73 +1,58 @@
-import axios from 'axios';
+import API from './API';
 
-const apiURL = 'http://localhost:5000/api/';
-
-class CreatorAPI {
+class CreatorAPI extends API {
   createDetectiveCaseInfo = detectiveCaseInfoRequest =>
-    axios.put(
-      apiURL + 'create/createDetectiveCaseInfo',
-      detectiveCaseInfoRequest
-    );
+    this.put('create/createDetectiveCaseInfo', detectiveCaseInfoRequest);
+
   updateDetectiveCaseInfo = detectiveCaseInfoRequest =>
-    axios.post(
-      apiURL + 'create/updateDetectiveCaseInfo',
-      detectiveCaseInfoRequest
-    );
+    this.post('create/updateDetectiveCaseInfo', detectiveCaseInfoRequest);
+
   getNewDetectiveCase = caseId =>
-    axios.get(apiURL + 'play/getNewDetectiveCaseById/' + caseId);
+    this.get('play/getNewDetectiveCaseById/' + caseId);
 
   createLocation = locationPayload =>
-    axios.put(apiURL + 'create/createLocation', locationPayload);
+    this.put('create/createLocation', locationPayload);
 
   updateLocation = locationPayload =>
-    axios.post(apiURL + 'create/updateLocation', locationPayload);
+    this.post('create/updateLocation', locationPayload);
 
   deleteLocation = locationPayload =>
-    axios.delete(apiURL + 'create/deleteLocation', { data: locationPayload });
+    this.delete('create/deleteLocation', { data: locationPayload });
 
   createLocationConnection = locationConnectionPayload =>
-    axios.put(
-      apiURL + 'create/createLocationConnection',
-      locationConnectionPayload
-    );
+    this.put('create/createLocationConnection', locationConnectionPayload);
 
   updateLocationConnection = locationConnectionPayload =>
-    axios.post(
-      apiURL + 'create/updateLocationConnection',
-      locationConnectionPayload
-    );
+    this.post('create/updateLocationConnection', locationConnectionPayload);
 
   deleteLocationConnection = locationConnectionPayload =>
-    axios.delete(apiURL + 'create/deleteLocationConnection', {
+    this.delete('create/deleteLocationConnection', {
       data: locationConnectionPayload,
     });
 
-  createItem = itemPayload =>
-    axios.put(apiURL + 'create/createItem', itemPayload);
+  createItem = itemPayload => this.put('create/createItem', itemPayload);
 
-  updateItem = itemPayload =>
-    axios.post(apiURL + 'create/updateItem', itemPayload);
+  updateItem = itemPayload => this.post('create/updateItem', itemPayload);
 
-  deleteItem = itemPayload =>
-    axios.delete(apiURL + 'create/deleteItem', { data: itemPayload });
+  deleteItem = itemPayload => this.delete('create/deleteItem', itemPayload);
 
   createPerson = personPayload =>
-    axios.put(apiURL + 'create/createPerson', personPayload);
+    this.put('create/createPerson', personPayload);
 
   updatePerson = personPayload =>
-    axios.post(apiURL + 'create/updatePerson', personPayload);
+    this.post('create/updatePerson', personPayload);
 
   deletePerson = personPayload =>
-    axios.delete(apiURL + 'create/deletePerson', { data: personPayload });
+    this.delete('create/deletePerson', personPayload);
 
   createQuestion = questionPayload =>
-    axios.put(apiURL + 'create/createQuestion', questionPayload);
+    this.put('create/createQuestion', questionPayload);
 
   updateQuestion = questionPayload =>
-    axios.post(apiURL + 'create/updateQuestion', questionPayload);
+    this.post('create/updateQuestion', questionPayload);
 
   deleteQuestion = questionPayload =>
-    axios.delete(apiURL + 'create/deleteQuestion', { data: questionPayload });
+    this.delete('create/deleteQuestion', questionPayload);
 }
 
 export default CreatorAPI;
