@@ -76,6 +76,13 @@ const Locations = _ => {
             <ConnectionsEditor
               connection={editedComponent?.component}
               locations={locations}
+              update={connection => {
+                getComponentsFromAPI();
+                setEditedComponent({
+                  type: 'connection',
+                  component: connection,
+                });
+              }}
             />
           ) : (
             <LocationEditor
