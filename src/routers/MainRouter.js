@@ -11,17 +11,15 @@ const HomeRouter = () => {
   const { appState } = React.useContext(AppContext);
 
   return (
-    <>
-      <Switch>
-        <Route exact path='/login' component={LoginForm} />
-        <Route exact path='/' component={Home} />
-        <Route exact path='/howtoplay' component={HowToPlay} />
-        {!appState.user && <Redirect to='/login' />}
-        <Route exact path='/dashboard' component={Dashboard} />
-        <Route exact path='/dashboard/newgame' component={NewGame} />
-        )}
-      </Switch>
-    </>
+    <Switch>
+      <Route exact path='/login' component={LoginForm} />
+      <Route exact path='/' component={Home} />
+      <Route exact path='/howtoplay' component={HowToPlay} />
+      {!appState.user && <Redirect to='/login' />}
+      <Route exact path='/dashboard' component={Dashboard} />
+      <Route exact path='/dashboard/newgame' component={NewGame} />
+      )}
+    </Switch>
   );
 };
 

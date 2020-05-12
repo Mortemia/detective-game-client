@@ -5,7 +5,6 @@ import { setAuthToken } from '../api/API';
 export const login = (appDispatch, data) => {
   const user = data.user;
   localStorage.setItem('user', JSON.stringify(user));
-  setAuthToken();
   Cookie.set('token', data.accessToken);
   appDispatch({ type: 'LOGIN', user });
   appDispatch({
@@ -19,6 +18,7 @@ export const logout = (appDispatch, history) => {
   let path = 'login';
   history.push(path);
   localStorage.removeItem('user');
+  Cookie.remove('token');
 };
 
 export const actionByType = (dispatchers, game, component, type) => {
