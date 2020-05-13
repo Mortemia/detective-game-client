@@ -54,10 +54,10 @@ const Dashboard = () => {
   };
 
   const handleCreatedCaseSelection = selectedCase => {
-    localStorage.setItem('created_case_id', selectedCase.id);
+    localStorage.setItem('created_case_id', selectedCase.case_id);
     appDispatch({
       type: 'SET_CREATED_CASE',
-      created_case_id: selectedCase.id,
+      created_case_id: selectedCase.case_id,
     });
     let path = '/creator';
     history.push(path);
