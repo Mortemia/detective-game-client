@@ -9,6 +9,7 @@ import ItemEditor from '../Items/ItemEditor';
 import LocationEditor from '../Locations/LocationEditor';
 import ConnectionsEditor from '../Locations/ConnectionsEditor';
 import PersonEditor from '../People/PersonEditor';
+import ActionEditor from '../Actions/ActionEditor';
 
 const creatorAPI = new CreatorAPI();
 
@@ -50,6 +51,8 @@ const Dashboard = _ => {
       handleCloseDrawer();
     };
     switch (editedComponent.component.type) {
+      case 'actions':
+        return <ActionEditor action={component} update={update} />;
       case 'items':
         return <ItemEditor item={component} update={update} />;
       case 'locations':

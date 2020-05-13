@@ -53,6 +53,15 @@ class CreatorAPI extends API {
 
   deleteQuestion = questionPayload =>
     this.delete('create/deleteQuestion', questionPayload);
+
+  createAction = actionPayload =>
+    this.put('create/createAction', actionPayload);
+
+  updateAction = actionPayload =>
+    this.post('create/updateAction', actionPayload);
+
+  deleteAction = actionPayload =>
+    this.delete('create/deleteAction', actionPayload);
 }
 
 export default CreatorAPI;
