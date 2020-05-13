@@ -9,7 +9,10 @@ import { Typography } from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
 import CreatorAPI from '../../../api/CreatorAPI';
 import { AppContext } from '../../../context/appContext';
 
@@ -31,11 +34,26 @@ const Settings = _ => {
   const classes = useStyles();
   const { appState } = React.useContext(AppContext);
   const [settings, setSettings] = React.useState(null);
+  const [actions, setActions] = React.useState([]);
+  const [initAction, setInitAction] = React.useState('');
+
+  const handleSelect = event => {
+    setInitAction(event.target.value);
+  };
+
+  const getComponentsFromAPI = _ => {
+    creatorAPI.getNewDetectiveCase(appState.created_case_id).then(response => {
+      const detectiveCase = response.data.newDetectiveCase;
+      setActions(detectiveCase.actions);
+    });
+  };
 
   React.useEffect(() => {
-    creatorAPI.getNewDetectiveCase(appState.created_case_id).then(response => {
-      setSettings(response.data.newDetectiveCase);
+    creatorAPI.getDetectiveCaseInfo(appState.created_case_id).then(response => {
+      setSettings(response.data);
+      setInitAction(response.data.frst_action_id);
     });
+    getComponentsFromAPI();
   }, [appState.created_case_id]);
 
   return (
@@ -49,20 +67,26 @@ const Settings = _ => {
           name: settings?.name || '',
           description: settings?.description || '',
           mp_per_day: settings?.mp_per_day || '',
-          days: settings?.max_days || '',
+          days: settings?.days || '',
         }}
         onSubmit={(
           { name, description, mp_per_day, days },
           { setSubmitting }
         ) => {
           const detectiveCaseInfoRequest = {
-            id: appState.created_case_id,
+            case_id: appState.created_case_id,
             name,
             description,
             mp_per_day,
-            days,
+            max_days: days,
+            frst_action_id: initAction,
+            ready: false,
           };
-          creatorAPI.updateDetectiveCaseInfo(detectiveCaseInfoRequest);
+          creatorAPI
+            .updateDetectiveCaseInfo(detectiveCaseInfoRequest)
+            .then(response => {
+              setSubmitting(false);
+            });
         }}
       >
         {({ submitForm, isSubmitting }) => (
@@ -114,6 +138,37 @@ const Settings = _ => {
                   shrink: true,
                 }}
               />
+
+              <FormControl
+                style={{
+                  marginBottom: '24px',
+                }}
+              >
+                <InputLabel
+                  id='location'
+                  style={{
+                    marginLeft: '16px',
+                  }}
+                >
+                  Akcja początkowa sprawy
+                </InputLabel>
+                <Select
+                  id='location'
+                  variant='outlined'
+                  value={initAction}
+                  disabled={isSubmitting}
+                  onChange={handleSelect}
+                >
+                  <MenuItem value=''>
+                    <em>None</em>
+                  </MenuItem>
+                  {actions.map((action, index) => (
+                    <MenuItem value={action.id} key={index}>
+                      {action.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               {isSubmitting && <LinearProgress />}
               <br />
 

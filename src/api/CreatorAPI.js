@@ -4,6 +4,9 @@ class CreatorAPI extends API {
   createDetectiveCaseInfo = detectiveCaseInfoRequest =>
     this.put('create/createDetectiveCaseInfo', detectiveCaseInfoRequest);
 
+  getDetectiveCaseInfo = caseId =>
+    this.get('create/detectiveCaseInfo/' + caseId);
+
   updateDetectiveCaseInfo = detectiveCaseInfoRequest =>
     this.post('create/updateDetectiveCaseInfo', detectiveCaseInfoRequest);
 
@@ -17,7 +20,7 @@ class CreatorAPI extends API {
     this.post('create/updateLocation', locationPayload);
 
   deleteLocation = locationPayload =>
-    this.delete('create/deleteLocation', { data: locationPayload });
+    this.delete('create/deleteLocation', locationPayload);
 
   createLocationConnection = locationConnectionPayload =>
     this.put('create/createLocationConnection', locationConnectionPayload);
