@@ -26,7 +26,7 @@ const NewGame = _ => {
   const loggedUser = appState.user;
 
   const handleCaseSelection = selectedCase => {
-    const caseId = selectedCase.id;
+    const caseId = selectedCase.case_id;
 
     gameAPI.getNewDetectiveCase(caseId).then(response => {
       const save = {

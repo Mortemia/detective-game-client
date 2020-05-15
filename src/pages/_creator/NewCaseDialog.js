@@ -49,10 +49,10 @@ const NewCaseDialog = _ => {
             .then(response => {
               appDispatch({
                 type: 'SET_CREATED_CASE',
-                created_case_id: response.data.id,
+                created_case_id: response.data.case_id,
               });
 
-              localStorage.setItem('created_case_id', response.data.id);
+              localStorage.setItem('created_case_id', response.data.case_id);
               let path = '/creator';
               history.push(path);
             })
