@@ -45,6 +45,7 @@ const ActionEditor = ({ action, update }) => {
   const getComponentsFromAPI = _ => {
     creatorAPI.getNewDetectiveCase(appState.created_case_id).then(response => {
       const detectiveCase = response.data.newDetectiveCase;
+      console.log(detectiveCase);
       setData(detectiveCase);
     });
   };
@@ -102,7 +103,7 @@ const ActionEditor = ({ action, update }) => {
   }, [action]);
 
   React.useEffect(() => {
-    if (action) {
+    if (action && data) {
       const mappedSuccessors = action.successors.map(({ type, id }) => {
         const component = getComponentByTypeAndId(type, id);
         return { type, id };
@@ -307,6 +308,13 @@ const ActionEditor = ({ action, update }) => {
                 onClick={() => addSuccessor('locations')}
               >
                 Dodaj odkrywane miejsce
+              </Button>
+              <Button
+                color='primary'
+                disabled={isSubmitting}
+                onClick={() => addSuccessor('people')}
+              >
+                Dodaj odkrywaną osobę
               </Button>
               <Button
                 color='primary'
