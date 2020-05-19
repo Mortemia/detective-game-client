@@ -43,7 +43,9 @@ const FinalTest = _ => {
             items={questions}
             primary='content'
             addButton={() => setEditedQuestion(null)}
-            navigate={question => setEditedQuestion(question)}
+            navigate={question => {
+              setEditedQuestion(question);
+            }}
             action={handleItemDelete}
             icon={DeleteIcon}
           />
@@ -51,7 +53,10 @@ const FinalTest = _ => {
         <Grid item xs={12} sm={8} md={8}>
           <QuestionEditor
             question={editedQuestion}
-            update={getComponentsFromAPI}
+            update={newQuestion => {
+              getComponentsFromAPI();
+              setEditedQuestion(newQuestion);
+            }}
           />
         </Grid>
       </Grid>
